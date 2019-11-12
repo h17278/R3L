@@ -1,0 +1,11 @@
+header{
+    display: inline-block;
+    background-color: black ;
+    position: center;
+    width:100%;
+    text-decoration: none;
+    color:white;
+    border-width: 3px;
+    border-style: double;
+    border-color: #404680;
+}
