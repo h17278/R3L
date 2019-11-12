@@ -1,4 +1,4 @@
-package hei.devweb.projetit.dao;
+package hei.devweb.projetit.dao.impl;
 
 import java.io.IOException;
 import java.io.InputStream;

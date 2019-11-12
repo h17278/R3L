@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fragments</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-static-top" th:fragment="menu(currentPage)">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home">HEIVents</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+           <ul class="nav navbar-nav">
+            <li th:class="${currentPage == 'home'} ? 'active' : ''"><a href="home">Events</a></li>
+            <li th:class="${currentPage == 'clubs'} ? 'active' : ''"><a href="clubs">Clubs list</a></li>
+           </ul>
+        </div>
+    </nav>
+
+</body>
+</html>
