@@ -30,15 +30,23 @@
     </nav>
 </div>
 -->
-<div th:each="event : ${eventList}">
-    <h1 th:text="${event.title}"></h1>
-    <h2 th:text="${event.club.name}"></h2>
-    <h3 th:text="${event.resume}"></h3>
-    <h4 th:text="${event.eventDate}"></h4>
-    <p th:text="${event.details}"></p>
+<main>
 
-</div>
+    <article id="event" th:each="event : ${eventList}">
+        <section class="EventText">
+            <h1 th:text="${event.title}"></h1>
+            <h2 th:text="${event.club.name}"></h2>
+            <!-- <h3 th:text="${event.resume}"></h3>
+            <<p th:text="${event.details}"></p> -->
 
+            <a th:href="'event?id='+${event.id}"> Voir event complet >> </a>
+            <img src="'img/clubImg'+${event.club.name}+'jpg'" alt="Image du club">
+            <h4 th:text="${event.eventDate}"></h4>
+        </section>
+
+    </article>
+
+</main>
 
 </body>
 </html>
