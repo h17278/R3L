@@ -7,14 +7,17 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse navbar-static-top" th:fragment="menu(currentPage)">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="home">HEIVents</a>
+    <nav th:fragment="menu(currentPage)">
+        <div>
+            <h1><a href="home">HEIvents</a></h1>
+            <input type="button" name="Connexion" value="Connexion" id="Connexion"/>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
-           <ul class="nav navbar-nav">
-            <li th:class="${currentPage == 'home'} ? 'active' : ''"><a href="home">Events</a></li>
-            <li th:class="${currentPage == 'clubs'} ? 'active' : ''"><a href="clubs">Clubs list</a></li>
+
+        <div>
+           <ul>
+            <li th:class="${currentPage == 'home'} ? 'active' : ''"><a href="home">Evenements</a></li>
+            <li th:class="${currentPage == 'clubs'} ? 'active' : ''"><a href="clubs">Associations</a></li>
+            <li th:class="${currentPage == 'add'} ? 'active' : ''"><a href="add">Ajout</a></li>
            </ul>
         </div>
     </nav>
