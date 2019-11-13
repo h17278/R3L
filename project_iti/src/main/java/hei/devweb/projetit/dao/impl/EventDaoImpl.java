@@ -3,6 +3,7 @@ package hei.devweb.projetit.dao.impl;
 import hei.devweb.projetit.dao.EventDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
+
 import org.mariadb.jdbc.internal.com.read.resultset.UpdatableResultSet;
 
 import java.sql.*;
@@ -41,6 +42,7 @@ public class EventDaoImpl implements EventDao {
         }
         return events;
     }
+
 
     @Override
     public Event getEvent(Integer id) {
@@ -99,4 +101,5 @@ public class EventDaoImpl implements EventDao {
         }
         throw new RuntimeException("Request Execution Problem");
     }
+    //bonjour
 }
