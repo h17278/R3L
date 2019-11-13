@@ -40,4 +40,6 @@ public class EventService {
     public Club getClub(Integer id){
         return clubDao.getClub(id);
     }
+
+    public Event addEvent(Event event) {return eventDao.addEvent(event); }
 }

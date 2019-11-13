@@ -73,4 +73,33 @@ public class EventDaoImpl implements EventDao {
         }
         return null;
     }
+
+    @Override
+    public Event addEvent(Event event){
+        String sqlQuery = "INSERT INTO event(title, club_id, event_date, resume, details) " +
+                "VALUES(?, ?, ?, ?, ?)";
+        try(Connection connection = DataSourceProvider.getDataSource().getConnection()){
+            try(PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)){
+                statement.setString(1, event.getTitle());
+                statement.setInt(2, event.getClub().getId());
+                statement.setDate(3, Date.valueOf(event.getEventDate()));
+                statement.setString(4, event.getResume());
+                statement.setString(5, event.getDetails());
+
+                statement.executeUpdate();
+
+                try (ResultSet ids = statement.getGeneratedKeys()){
+                    if(ids.next()){
+                        int eventId = ids.getInt("event_id");
+                        event.setId(eventId);
+                        return event;
+                    }
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        throw new RuntimeException("Request Execution Problem");
+    }
+    //bonjour
 }
