@@ -1,3 +1,12 @@
+CREATE TABLE `utilisateur` (
+  `utilisateur_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(50) NOT NULL,
+  `motdepasse` varchar(50) NOT NULL,
+  `mail` varchar(100) NOT NULL,
+  PRIMARY KEY (`utilisateur_id`)
+);
+
+
 CREATE TABLE `club` (
   `club_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
