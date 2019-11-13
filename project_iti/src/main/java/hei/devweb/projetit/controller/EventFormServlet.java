@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.List;
 
 @WebServlet("/addevent")
 public class EventFormServlet extends GenericServlet {
@@ -22,6 +23,8 @@ public class EventFormServlet extends GenericServlet {
         resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        List<Club> clubList = EventService.getInstance().clubList();
+        context.setVariable("clubList", clubList);
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("newevent", context, resp.getWriter());

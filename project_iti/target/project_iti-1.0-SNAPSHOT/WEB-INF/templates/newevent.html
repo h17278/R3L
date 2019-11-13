@@ -17,8 +17,14 @@
                 <input type="text" name="title" id="title" required/>
             </div>
             <div class>
-                <label for="club_id">Club ID</label>
-                <input type="number" name="club_id" id="club_id" required/>
+                <label> Association </label>
+                    <select th:field="*{clubList}" id="club_id" name="club_id">
+                        <option th:each="club : ${clubList}"
+                                th:value="${club.id}"
+                                th:text="${club.name}"
+                                >
+                                </option>
+                    </select>
             </div>
             <div>
                 <label for="event_date">Event date</label>
