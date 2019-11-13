@@ -55,6 +55,26 @@ body{
 }
 /* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
 
+article#event  figure {
+    background-image: linear-gradient(-90deg, white 0%, lightgray 70%,gray 100%);
+    display: flex;
+    justify-content: space-between;
+    margin: 0.4em 0 0;
+    padding: 0.4em;
+
+}
+#event{
+    padding: 0.2em;
+    margin: 0.7em auto;
+}
+
+article#event  figure figcaption{
+    align-items: inherit;
+    text-decoration: none;
+}
+
+
+/*
 #event img{
     height:80%;
     width:auto;
@@ -64,7 +84,7 @@ body{
 }
 
 #event section.EventText{
-    background-image: linear-gradient(-90deg, white 0%, lightgray 70%,gray 100%);        /* #eeeeee */
+    background-image: linear-gradient(-90deg, white 0%, lightgray 70%,gray 100%);
     text-align:justify;
 
     padding: 0.2em;
