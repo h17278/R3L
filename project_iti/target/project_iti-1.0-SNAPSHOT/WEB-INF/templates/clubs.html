@@ -10,9 +10,9 @@
 
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
-<div th:each="club : ${clubList}">
+<article id="Club" th:each="club : ${clubList}">
     <h1 th:text="${club.name}"></h1>
-</div>
+</article>
 
 </body>
 </html>

@@ -56,12 +56,11 @@ body{
 /* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
 
 article#event  figure {
-    background-image: linear-gradient(-90deg, white 0%, lightgray 70%,gray 100%);
+    background-image: linear-gradient(-90deg, white 0%, lightgray 50%,gray 100%);
     display: flex;
     justify-content: space-between;
     margin: 0.4em 0 0;
     padding: 0.4em;
-
 }
 #event{
     padding: 0.2em;
@@ -69,44 +68,47 @@ article#event  figure {
 }
 
 article#event  figure figcaption{
-    align-items: inherit;
+    text-align: left;
     text-decoration: none;
 }
 
-
-/*
-#event img{
-    height:80%;
-    width:auto;
-    position: relative;
-    left:-10%;
-    top:50%;
+article#Club{
+    background-image: linear-gradient(-90deg, white 0%, lightgray 50%,gray 100%);
+    margin: 0.4em 1em;
+    padding: 0.4em;
 }
 
-#event section.EventText{
-    background-image: linear-gradient(-90deg, white 0%, lightgray 70%,gray 100%);
-    text-align:justify;
 
-    padding: 0.2em;
-    margin: 0.7em auto;
-
-    max-width: 80%;
-    height: auto;
+/* -------------------------------------------- FORMULAIRE --------------------------------------------------- */
+#newEvent{
+    background-image: linear-gradient(-90deg, white 0%, lightgray 40%,gray 100%);
+    margin: 0.4em 0.8em;
+    padding: 0.4em;
+}
+#newEvent div{
+    background-color: transparent;
+}
+input[type=text], select,input[type=number],input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-#event .EventText h1, #event .EventText h2, #event .EventText h3, #event .EventText a{
-    position: relative;
-    left:30%;
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
-#event .EventText h1, #event .EventText h2{
-    margin-block-start: 0.4em;
-    margin-block-end: 0em;
-}
-#event{
-    display: block;
-}
-#event h4{
-    position: relative;
-    left:83%;
-    top:-480px;
+
+input[type=submit]:hover {
+    background-color: #45a049;
 }
