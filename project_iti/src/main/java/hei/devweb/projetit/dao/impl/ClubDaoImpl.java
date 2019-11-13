@@ -31,6 +31,7 @@ public class ClubDaoImpl implements ClubDao {
         return clubs;
     }
 
+
     @Override
     public Club getClub(Integer id) {
         String sqlQuery = "SELECT * FROM club WHERE club_id=?";

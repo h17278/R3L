@@ -13,5 +13,5 @@ CREATE TABLE `event` (
   `details` varchar(10000) DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `club_id_fk` (`club_id`),
-  CONSTRAINT `club_id_fk` FOREIGN KEY (`club_id`) REFERENCES `club` (`club_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `club_id_fk` FOREIGN KEY (`club_id`) REFERENCES `club` (`club_id`)
 );
