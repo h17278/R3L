@@ -2,13 +2,13 @@ DELETE FROM utilisateur;
 DELETE FROM club;
 DELETE FROM event;
 
-INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`) VALUES (1,'iktro','sjkhgoiheiuz','iktro@gmail.com');
-INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`) VALUES (1,'samos','dfvdfh57','samos@gmail.com');
-INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`) VALUES (1,'guerissologue','dvdifuvbb','guerissologue@gmail.com');
-
 INSERT INTO `club`(`club_id`,`name`) VALUES (1,'Saturne');
 INSERT INTO `club`(`club_id`,`name`) VALUES (2,'Raid');
 INSERT INTO `club`(`club_id`,`name`) VALUES (3,'Heir Force');
+
+INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (1,'iktro','sjkhgoiheiuz','iktro@gmail.com',true,3);
+INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (2,'samos','dfvdfh57','samos@gmail.com',false,null);
+INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (3,'guerissologue','dvdifuvbb','guerissologue@gmail.com',false,null);
 
 INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`resume`,`details`) VALUES (1,'Afterwork',1,'2019-10-12','Afterwork à la Garderie','Le meilleur bar de tous les temps accueille tout le temps la meilleure asso.');
 INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`resume`,`details`) VALUES (2,'Week-end du Raid',2,'2020-04-12','Le week-end sportif de HEI','Si vous cherchez un moyen de cracher vos poumons pendant un week-end entier mais que la tuberculose vous fait peur, cet événement semble tout indiqué pour remédier à vos soucis mentaux.');
