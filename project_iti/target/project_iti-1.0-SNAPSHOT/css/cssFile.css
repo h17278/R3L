@@ -1,3 +1,4 @@
+/* ----------------------------------------------- HEADER ------------------------------------------------------- */
 div{
     display: inline-block;
     background-color: black ;
@@ -5,15 +6,16 @@ div{
     width:100%;
     text-decoration: none;
     color:white;
-    border-width: 3px;
-    border-style: double;
-    border-color: #404680;
 }
 section div{
     text-align: center;
 }
 h1{
-    font-size: 3em;
+    font-size: 2em;
+}
+
+#HEIvents{
+    border-bottom: gray 1px solid;
 }
 h1 a{
     text-decoration: none;
@@ -21,10 +23,9 @@ h1 a{
 }
 #Connexion{
     position: absolute;
-    top:5em;
+    top:3em;
     right:1em;
 }
-
 nav div {
     display: inline-flex;
     justify-content: space-around;
@@ -33,8 +34,8 @@ nav div {
 nav div ul{
     padding: 0px;
     margin: 0px;
-}
 
+}
 nav div ul li{
     display: inline-block;
     padding: 1em;
@@ -44,4 +45,48 @@ nav div ul li a{
     text-decoration: none;
     list-style-type: none;
     color:gray;
+}
+
+/* ---------------------------------------------------- MAIN ------------------------------------------------------  */
+body{
+    margin:0px;
+    width: 100%;
+    background-color: #454545;
+}
+/* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
+
+#event img{
+    height:80%;
+    width:auto;
+    position: relative;
+    left:-10%;
+    top:50%;
+}
+
+#event section.EventText{
+    background-image: linear-gradient(-90deg, white 0%, lightgray 70%,gray 100%);        /* #eeeeee */
+    text-align:justify;
+
+    padding: 0.2em;
+    margin: 0.7em auto;
+
+    max-width: 80%;
+    height: auto;
+}
+
+#event .EventText h1, #event .EventText h2, #event .EventText h3, #event .EventText a{
+    position: relative;
+    left:30%;
+}
+#event .EventText h1, #event .EventText h2{
+    margin-block-start: 0.4em;
+    margin-block-end: 0em;
+}
+#event{
+    display: block;
+}
+#event h4{
+    position: relative;
+    left:83%;
+    top:-480px;
 }
