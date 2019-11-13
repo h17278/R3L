@@ -1,5 +1,10 @@
+DELETE FROM utilisateur;
 DELETE FROM club;
 DELETE FROM event;
+
+INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`) VALUES (1,'iktro','sjkhgoiheiuz','iktro@gmail.com');
+INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`) VALUES (1,'samos','dfvdfh57','samos@gmail.com');
+INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`) VALUES (1,'guerissologue','dvdifuvbb','guerissologue@gmail.com');
 
 INSERT INTO `club`(`club_id`,`name`) VALUES (1,'Saturne');
 INSERT INTO `club`(`club_id`,`name`) VALUES (2,'Raid');
