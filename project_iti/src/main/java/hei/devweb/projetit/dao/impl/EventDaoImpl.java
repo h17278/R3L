@@ -22,7 +22,8 @@ public class EventDaoImpl implements EventDao {
                     while(resultSet.next()){
                         Club club = new Club(
                                 resultSet.getInt("club_id"),
-                                resultSet.getString("name")
+                                resultSet.getString("name"),
+                                resultSet.getString("lien")
                         );
                         Event event = new Event(
                                 resultSet.getInt("event_id"),
@@ -54,7 +55,8 @@ public class EventDaoImpl implements EventDao {
                     if(resultSet.next()){
                         Club club = new Club(
                                 resultSet.getInt("club_id"),
-                                resultSet.getString("name")
+                                resultSet.getString("name"),
+                                resultSet.getString("lien")
                         );
                         Event event = new Event(
                                 resultSet.getInt("event_id"),

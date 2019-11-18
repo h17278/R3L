@@ -2,10 +2,13 @@ package hei.devweb.projetit.service;
 
 import hei.devweb.projetit.dao.ClubDao;
 import hei.devweb.projetit.dao.EventDao;
+import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.dao.impl.ClubDaoImpl;
 import hei.devweb.projetit.dao.impl.EventDaoImpl;
+import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
+import hei.devweb.projetit.entities.Utilisateur;
 
 import java.util.List;
 
@@ -20,8 +23,8 @@ public class EventService {
     }
 
     private EventDao eventDao = new EventDaoImpl();
+    private UtilisateurDao utilisateurDao = new UtilisateurDaoImpl();
     private ClubDao clubDao = new ClubDaoImpl();
-
     private EventService() {
     }
 
@@ -42,4 +45,6 @@ public class EventService {
     }
 
     public Event addEvent(Event event) {return eventDao.addEvent(event); }
+
+    public Utilisateur addUtilisateur(Utilisateur user){ return utilisateurDao.addUtilisateur(user); }
 }

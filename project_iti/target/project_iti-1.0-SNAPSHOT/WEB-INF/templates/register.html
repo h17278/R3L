@@ -3,52 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>S'inscrire</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
-<form id="newUser" method="post" action="adduser" accept-charset="UTF-8">
-    <div>
-        <div>
-            <label> Nouveau utilisateur </label>
-        </div>
-        <div>
-            <label for="name"> Nom </label>
-            <input type="text" name="name" id="name" required/>
-        </div>
-        <div>
-            <label for="prenom"> Prenom </label>
-            <input type="text" name="prenom" id="prenom" required/>
-        </div>
-        <div>
-                <input type="radio" id="user" name="statut" value=null
-                       checked>
-                <label for="user">Utilisateur</label>
+<main>
+    <form accept-charset="UTF-8" action="register" id="newEvent" method="post">
 
-                <input type="radio" id="president" name="statut" value="president">
-                <label for="president">Président</label>
+        <h1> Nouvel utilisateur
+        <button type="submit">
+            S'inscrire
+        </button>
+        </h1>
+        <div>
+            <label for="pseudo"> Pseudo </label>
+            <input id="pseudo" name="pseudo" required type="text"/>
+        </div>
+
+        <div>
+            <label for="mail"> Mail </label>
+            <input id="mail" name="mail" required type="text"/>
+        </div>
+
+        <div>
+            <label for="motdepasse"> Mot de passe </label>
+            <input id="motdepasse" name="motdepasse" required type="text"/>
+        </div>
+
+        <div>
+            <label for="statut"> Autorisation : </label>
+            <input checked id="statut" name="statut" type="radio" value="0">
+            <label for="president">Pas president</label>
+            <input id="president" name="statut" type="radio" value="1">
+            <label for="president">President</label>
         </div>
 
         <div>
             <label> Association </label>
             <select th:field="*{clubList}" id="club_id" name="club_id">
-                <option th:value = null th:text="Pas inscript dans une association"></option>
                 <option th:each="club : ${clubList}"
                         th:value="${club.id}"
                         th:text="${club.name}"
                 ></option>
+                <option th:value=null th:text="Ne participe pas à la vie des associations">
+                        </option>
             </select>
         </div>
-    </div>
 
-    <button type="submit">
-        <i></i>
-        S'inscrire
-    </button>
-</form>
-
+    </form>
+</main>
 </body>
+
 </html>
