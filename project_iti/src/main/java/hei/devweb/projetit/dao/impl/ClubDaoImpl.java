@@ -19,7 +19,8 @@ public class ClubDaoImpl implements ClubDao {
                     while (resultSet.next()) {
                         Club club = new Club(
                                 resultSet.getInt("club_id"),
-                                resultSet.getString("name")
+                                resultSet.getString("name"),
+                                resultSet.getString("lien")
                         );
                         clubs.add(club);
                     }
@@ -42,7 +43,8 @@ public class ClubDaoImpl implements ClubDao {
                     if (resultSet.next()) {
                         Club club = new Club(
                                 resultSet.getInt("club_id"),
-                                resultSet.getString("name")
+                                resultSet.getString("name"),
+                                resultSet.getString("lien")
                         );
                         return club;
                     }

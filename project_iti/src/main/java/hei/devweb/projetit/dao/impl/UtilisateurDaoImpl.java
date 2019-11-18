@@ -19,7 +19,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                     if(resultSet.next()){
                         Club club = new Club(
                                 resultSet.getInt("club_id"),
-                                resultSet.getString("name")
+                                resultSet.getString("name"),
+                                resultSet.getString("lien")
                         );
                         Utilisateur utilisateur = new Utilisateur(
                                 resultSet.getInt("utilisateur_id"),
