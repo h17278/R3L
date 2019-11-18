@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>S'inscrire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<nav th:replace="~{fragments::menu('home')}"></nav>
+
+<form id="newUser" method="post" action="adduser" accept-charset="UTF-8">
+    <div>
+        <div>
+            <label> Nouveau utilisateur </label>
+        </div>
+        <div>
+            <label for="name"> Nom </label>
+            <input type="text" name="name" id="name" required/>
+        </div>
+        <div>
+            <label for="prenom"> Prenom </label>
+            <input type="text" name="prenom" id="prenom" required/>
+        </div>
+        <div>
+                <input type="radio" id="user" name="statut" value=null
+                       checked>
+                <label for="user">Utilisateur</label>
+
+                <input type="radio" id="president" name="statut" value="president">
+                <label for="president">Président</label>
+        </div>
+
+        <div>
+            <label> Association </label>
+            <select th:field="*{clubList}" id="club_id" name="club_id">
+                <option th:value = null th:text="Pas inscript dans une association"></option>
+                <option th:each="club : ${clubList}"
+                        th:value="${club.id}"
+                        th:text="${club.name}"
+                ></option>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit">
+        <i></i>
+        S'inscrire
+    </button>
+</form>
+
+</body>
+</html>

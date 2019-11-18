@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav th:replace="~{fragments::menu('home')}"></nav>
+<nav th:replace="~{fragments::menu('clubs')}"></nav>
 
 <article id="Club" th:each="club : ${clubList}">
     <h1 th:text="${club.name}"></h1>

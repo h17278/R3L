@@ -46,6 +46,9 @@ nav div ul li a{
     list-style-type: none;
     color:gray;
 }
+li.active{
+    font-size:1.4em;
+}
 
 /* ---------------------------------------------------- MAIN ------------------------------------------------------  */
 body{
