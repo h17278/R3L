@@ -10,26 +10,7 @@
 <body>
 
 <nav th:replace="~{fragments::menu('home')}"></nav>
-<!--
-<div>
-    <section>
-        <div>
-            <h1><a href="">HEIvents</a></h1>
-            <a id="Connexion" href=""><input type="button" name="Connexion" value="Connexion"/></a>
-        </div>
-    </section>
 
-    <nav>
-        <div>
-            <ul>
-                <li><a href=""> Evenements</a></li>
-                <li><a href=""> Associations </a></li>
-                <li><a href=""> Ajout </a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
--->
 <main>
 
     <article id="event" th:each="event : ${eventList}">
@@ -42,18 +23,6 @@
             <h4 th:text="${event.eventDate}"></h4>
         </figure>
 
-        <!--
-        <section class="EventText">
-            <h1 th:text="${event.title}"></h1>
-            <h2 th:text="${event.club.name}"></h2>
-            <h3 th:text="${event.resume}"></h3>
-            <<p th:text="${event.details}"></p>
-
-            <a th:href="'event?id='+${event.id}"> Voir event complet >> </a>
-            <img src="'img/clubImg'+${event.club.name}+'jpg'" alt="Image du club">
-            <h4 th:text="${event.eventDate}"></h4>
-        </section>
-        -->
     </article>
 
 </main>

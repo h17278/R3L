@@ -10,14 +10,14 @@
     <nav th:fragment="menu(currentPage)">
         <div id="HEIvents">
             <h1><a href="home">HEIvents</a></h1>
-            <input type="button" name="Connexion" value="Connexion" id="Connexion"/>
+            <input href="register" type="button" name="Connexion" value="Connexion" id="Connexion"/>
         </div>
 
         <div>
            <ul>
-            <li th:class="${currentPage == 'home'} ? 'active' : ''"><a href="home">Evenements</a></li>
-            <li th:class="${currentPage == 'clubs'} ? 'active' : ''"><a href="clubs">Associations</a></li>
-            <li th:class="${currentPage == 'add'} ? 'active' : ''"><a href="addevent">Ajout</a></li>
+            <li th:class="${currentPage == 'home' ? 'active' : ''}"><a href="home">Evenements</a></li>
+            <li th:class="${currentPage == 'clubs' ? 'active' : ''}"><a href="clubs">Associations</a></li>
+            <li th:class="${currentPage == 'addevent' ? 'active' : ''}"><a href="addevent">Ajout</a></li>
            </ul>
         </div>
     </nav>
