@@ -1,6 +1,6 @@
+DELETE FROM event;
 DELETE FROM utilisateur;
 DELETE FROM club;
-DELETE FROM event;
 
 INSERT INTO `club`(`club_id`,`name`) VALUES (1,'Saturne');
 INSERT INTO `club`(`club_id`,`name`) VALUES (2,'Raid');
