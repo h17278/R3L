@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import java.util.List;
 
 @WebServlet("/register")
@@ -39,15 +38,10 @@ public class RegisterServlet extends GenericServlet {
         String motdepasse = req.getParameter("motdepasse");
         String mail = req.getParameter("mail");
         Boolean statut = Boolean.valueOf(req.getParameter("president"));
-
-        if(statut){
-            club_id = Integer.valueOf(req.getParameter("club_id"));
-        }
-
+        club_id = Integer.valueOf(req.getParameter("club_id"));
         //CREATE USER
-        Club club = EventService.getInstance().getClub(club_id);
-        Utilisateur newUser = new Utilisateur(  null, pseudo, motdepasse, mail, statut, club);
-        //Utilisateur createdUser = EventService.getInstance().addUser(newUser);
+        Utilisateur newUser = new Utilisateur(  null, pseudo, motdepasse, mail, statut, club_id);
+        Utilisateur createdUser = EventService.getInstance().addUtilisateur(newUser);
 
         // REDIRECT TO EVENTS LIST
         resp.sendRedirect("home");

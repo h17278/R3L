@@ -5,10 +5,7 @@ import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.entities.Utilisateur;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
@@ -30,7 +27,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                                 resultSet.getString("motdepasse"),
                                 resultSet.getString("mail"),
                                 resultSet.getBoolean("president"),
-                                club
+                                club.getId()
                         );
                         return utilisateur;
                     }
@@ -42,6 +39,33 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         return null;
     }
 
+    @Override
+    public Utilisateur addUtilisateur(Utilisateur user) {
+        String sqlQuery = "INSERT INTO utilisateur(pseudo, motdepasse, mail, president, club_id) " +
+                                                 "VALUES(?, ?, ?, ?, ?)";
+        try(Connection connection = DataSourceProvider.getDataSource().getConnection()){
+            try(PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)){
+                statement.setString(1, user.getPseudo() );
+                statement.setString(2, user.getMotdepasse());
+                statement.setString(3, user.getMail());
+                statement.setBoolean(4, user.getPresident());
+                statement.setInt(5, user.getClub());
+
+                statement.executeUpdate();
+
+                try (ResultSet ids = statement.getGeneratedKeys()){
+                    if(ids.next()){
+                        int userId = ids.getInt("utilisateur_id");
+                        user.setIdutilisateur(userId);
+                        return user;
+                    }
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        throw new RuntimeException("Request Execution Problem");
+    }
 
 
 }

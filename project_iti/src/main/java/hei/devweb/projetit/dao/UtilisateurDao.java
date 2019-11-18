@@ -6,4 +6,5 @@ public interface UtilisateurDao {
 
     public Utilisateur getUtilisateur(Integer id);
 
+    public Utilisateur addUtilisateur(Utilisateur user);
 }

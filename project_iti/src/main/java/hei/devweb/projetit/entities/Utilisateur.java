@@ -7,9 +7,9 @@ public class Utilisateur {
     String motdepasse;
     String mail;
     Boolean president;
-    Club idclub;
+    Integer idclub;
 
-    public Utilisateur(Integer idutilisateur, String pseudo, String motdepasse, String mail, Boolean president, Club idclub) {
+    public Utilisateur(Integer idutilisateur, String pseudo, String motdepasse, String mail, Boolean president, Integer idclub) {
         this.idutilisateur = idutilisateur;
         this.pseudo = pseudo;
         this.motdepasse = motdepasse;
@@ -58,11 +58,11 @@ public class Utilisateur {
         this.president = president;
     }
 
-    public Club getClub() {
+    public Integer getClub() {
         return idclub;
     }
 
-    public void setClub(Club idclub) {
+    public void setClub(Integer idclub) {
         this.idclub = idclub;
     }
 }
