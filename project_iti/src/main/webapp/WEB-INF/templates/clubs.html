@@ -11,7 +11,8 @@
 <nav th:replace="~{fragments::menu('clubs')}"></nav>
 
 <article id="Club" th:each="club : ${clubList}">
-    <h1 th:text="${club.name}"></h1> 
+    <h1 th:text="${club.name}"></h1>
+    <h2 th:src ="${club.lien}"></h2>
 </article>
 
 </body>
