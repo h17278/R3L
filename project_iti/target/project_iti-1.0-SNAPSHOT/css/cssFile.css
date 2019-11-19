@@ -14,18 +14,6 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'RalewayRegular';
-    src: url("../fonts/Raleway-Regular.woff2") format("woff2"),
-    url("../fonts/Raleway-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "RalewayThin";
-    src: url("/fonts/Raleway-Thin.woff2") format("woff2"),
-    url("../fonts/Raleway-Thin.ttf") format("truetype");
-}
-
 /* ----------------------------------------------- HEADER ------------------------------------------------------- */
 div {
     display: inline-block;
