@@ -1,6 +1,7 @@
 package hei.devweb.projetit.controller;
 
 import hei.devweb.projetit.entities.Club;
+import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -23,6 +24,9 @@ public class ClubServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         List<Club> clubList = EventService.getInstance().clubList();
         context.setVariable("clubList", clubList);
+
+        List<Utilisateur> userList = EventService.getInstance().utilisateurList();
+        context.setVariable("userList", userList);
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("clubs", context, resp.getWriter());
