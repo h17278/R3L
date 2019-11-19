@@ -6,6 +6,8 @@ import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.entities.Utilisateur;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
@@ -68,5 +70,30 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         throw new RuntimeException("Request Execution Problem");
     }
 
+    @Override
+    public List<Utilisateur> listUtilisateur() {
+        List<Utilisateur> users = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM utilisateur ORDER BY pseudo";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
+            try (Statement statement = connection.createStatement()) {
+                try (ResultSet resultSet = statement.executeQuery(sqlQuery)) {
+                    while (resultSet.next()) {
+                        Utilisateur user = new Utilisateur(
+                                resultSet.getInt("utilisateur_id"),
+                                resultSet.getString("pseudo"),
+                                resultSet.getString("motdepasse"),
+                                resultSet.getString("mail"),
+                                resultSet.getBoolean("president"),
+                                resultSet.getInt("club_id")
+                        );
+                        users.add(user);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
 
 }
