@@ -8,14 +8,16 @@ public class Event {
     String title;
     Club club;
     LocalDate eventDate;
+    String image_link;
     String resume;
     String details;
 
-    public Event (Integer id, String title, Club club, LocalDate eventDate, String resume, String details){
+    public Event (Integer id, String title, Club club, LocalDate eventDate, String image_link, String resume, String details){
         this.id = id;
         this.title = title;
         this.club = club;
         this.eventDate = eventDate;
+        this.image_link = image_link;
         this.resume = resume;
         this.details = details;
     }
@@ -43,4 +45,12 @@ public class Event {
     public String getDetails() { return details; }
 
     public void setDetails(String details) { this.details = details; }
+
+    public String getImage_link() {
+        return image_link;
+    }
+
+    public void setImage_link(String image_link) {
+        this.image_link = image_link;
+    }
 }
