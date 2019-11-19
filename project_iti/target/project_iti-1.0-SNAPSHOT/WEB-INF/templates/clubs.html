@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Clubs</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -12,14 +12,25 @@
 
 <article id="event" th:each="club : ${clubList}">
     <figure>
-        <img th:src ="${club.lien}" width="150" alt="image de l association">
+        <img alt="image de l association" th:src="${club.lien}" width="150">
         <figcaption>
             <h1 th:text="${club.name}"></h1>
         </figcaption>
-        <th> Administrateurs : </th> <br/>
-        <tr th:each="admin : ${userList}" th:if="${admin.getPresident() and admin.getClub() == club.id}">
-            <td th:text="${admin.getPseudo()}"></td>
-        </tr>
+        <table>
+            <tr>
+                <th> Administrateurs :</th>
+            </tr>
+            <tr th:each="admin : ${userList}" th:if="${admin.getPresident() and admin.getClub() == club.id}">
+                <td th:text="${admin.getPseudo()}"></td>
+            </tr>
+
+            <tr>
+                <th> Membres :</th>
+            </tr>
+            <tr th:each="admin : ${userList}" th:if="${!admin.getPresident() and admin.getClub() == club.id}">
+                <td th:text="${admin.getPseudo()}"></td>
+            </tr>
+        </table>
 
     </figure>
     <!-- <h1 th:text="${club.name}"></h1>
