@@ -99,34 +99,44 @@ div#right {
 
 /* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
 
-article#event figure {
+article figure {
     background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
-    display: flex;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
     margin: 0.4em 0 0;
     padding: 0.4em;
+    position: relative;
 }
 
-#event {
+article {
     margin: 0.7em auto;
 }
 
-#event figure img{
+article figure img{
     height: 180px;
     width: 180px;
 }
-article#event figure figcaption {
+article figure figcaption {
     text-align: left;
     text-decoration: none;
-    /*position: absolute;*/
+    position: relative;
     margin-left: 1em;
 }
 
-#event h4 {
-    margin-left: 1em;
+article h4 {
+    position: absolute;
+    top: -0.5em;
+    right: 1em;
 }
 
+article h2 {
+    position: absolute;
+    top : 4.5em;
+}
 
+article figure section.intro {
+    display: flex;
+}
 
 /* -------------------------------------------- FORMULAIRE --------------------------------------------------- */
 #newEvent {
