@@ -14,18 +14,6 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'RalewayRegular';
-    src: url("../fonts/Raleway-Regular.woff2") format("woff2"),
-    url("../fonts/Raleway-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "RalewayThin";
-    src: url("/fonts/Raleway-Thin.woff2") format("woff2"),
-    url("../fonts/Raleway-Thin.ttf") format("truetype");
-}
-
 /* ----------------------------------------------- HEADER ------------------------------------------------------- */
 div {
     display: inline-block;
@@ -111,6 +99,10 @@ article#event figure {
     margin: 0.7em auto;
 }
 
+#event figure img{
+    height: 150px;
+    width: 150px;
+}
 article#event figure figcaption {
     text-align: left;
     text-decoration: none;

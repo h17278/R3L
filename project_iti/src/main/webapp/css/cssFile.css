@@ -99,6 +99,10 @@ article#event figure {
     margin: 0.7em auto;
 }
 
+#event figure img{
+    height: 150px;
+    width: 150px;
+}
 article#event figure figcaption {
     text-align: left;
     text-decoration: none;

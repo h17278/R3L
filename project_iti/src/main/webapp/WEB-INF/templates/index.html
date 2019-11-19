@@ -13,17 +13,18 @@
 
 <main>
 
-    <article id="event" th:each="event : ${eventList}">
+    <article id="event" th:each="event : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'">
         <figure>
-            <img alt="Image du club" th:src="${event.club.lien}" width="150">
-            <figcaption>
-                <h1 th:text="${event.title}"></h1>
-                <h2 th:text="${event.club.name}"></h2>
+            <section>
+                <img alt="Image du club" th:src="${event.club.lien}" />
                 <section class="" th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <a> Voir le détail de cet évent </a>
                 </section>
-                <input name="answer" th:inline="javascript" th:onclick="'showDiv(' + ${event.id} + ')'" type="button" value="Voir le résumé" />
+            </section>
+            <figcaption>
+                <h1 th:text="${event.title}"></h1>
+                <h2 th:text="${event.club.name}"></h2>
                 <script th:inline="javascript">
                     function showDiv(id) {
                         if (document.getElementById('infoDiv'+id).style.display === 'none') {
