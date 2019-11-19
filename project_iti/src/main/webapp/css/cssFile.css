@@ -15,7 +15,7 @@
 }
 
 /* ----------------------------------------------- HEADER ------------------------------------------------------- */
-div {
+nav div {
     display: inline-block;
     background-color: black;
     position: center;
@@ -84,6 +84,19 @@ body {
     font-family: CaviarDreams, Verdana, sans-serif;
 }
 
+main {
+    display: flex;
+}
+
+main div {
+    width : 49%;
+    margin : 0 0.35em 0 0.35em;
+}
+
+div#right {
+    margin-top : 6em;
+}
+
 /* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
 
 article#event figure {
@@ -95,26 +108,24 @@ article#event figure {
 }
 
 #event {
-    padding: 0.2em;
     margin: 0.7em auto;
 }
 
 #event figure img{
-    height: 150px;
-    width: 150px;
+    height: 180px;
+    width: 180px;
 }
 article#event figure figcaption {
     text-align: left;
     text-decoration: none;
-    position: absolute;
-    margin-left: 11em;
+    /*position: absolute;*/
+    margin-left: 1em;
 }
 
-article#Club {
-    background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
-    margin: 0.4em 1em;
-    padding: 0.4em;
+#event h4 {
+    margin-left: 1em;
 }
+
 
 
 /* -------------------------------------------- FORMULAIRE --------------------------------------------------- */

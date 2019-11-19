@@ -13,32 +13,61 @@
 
 <main>
 
-    <article id="event" th:each="event : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'">
-        <figure>
-            <section>
-                <img alt="Image du club" th:src="${event.club.lien}" />
-                <section class="" th:id="'infoDiv' + ${event.id}" style="display:none;">
-                    <h3 th:text="${event.resume}"></h3>
-                    <a> Voir le détail de cet évent </a>
+    <div id="left">
+        <article id="event" th:each="event,stat : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'">
+            <figure th:if="${stat.odd}">
+                <section>
+                    <img alt="Image du club" th:src="${event.club.lien}" />
+                    <section class="" th:id="'infoDiv' + ${event.id}" style="display:none;">
+                        <h3 th:text="${event.resume}"></h3>
+                        <a> Voir le détail de cet évent </a>
+                    </section>
                 </section>
-            </section>
-            <figcaption>
-                <h1 th:text="${event.title}"></h1>
-                <h2 th:text="${event.club.name}"></h2>
-                <script th:inline="javascript">
-                    function showDiv(id) {
-                        if (document.getElementById('infoDiv'+id).style.display === 'none') {
-                            document.getElementById('infoDiv'+id).style.display = 'block';
-                        } else {
-                            document.getElementById('infoDiv'+id).style.display = 'none';
+                <figcaption>
+                    <h1 th:text="${event.title}"></h1>
+                    <h2 th:text="${event.club.name}"></h2>
+                    <script th:inline="javascript">
+                        function showDiv(id) {
+                            if (document.getElementById('infoDiv'+id).style.display === 'none') {
+                                document.getElementById('infoDiv'+id).style.display = 'block';
+                            } else {
+                                document.getElementById('infoDiv'+id).style.display = 'none';
+                            }
                         }
-                    }
-                </script>
-            </figcaption>
-            <h4 th:text="${event.eventDate}"></h4>
-        </figure>
+                    </script>
+                </figcaption>
+                <h4 th:text="${event.eventDate}"></h4>
+            </figure>
+        </article>
+    </div>
 
-    </article>
+    <div id="right">
+        <article id="event" th:each="event, stat : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'">
+            <figure th:if="${stat.even}">
+                <section>
+                    <img alt="Image du club" th:src="${event.club.lien}" />
+                    <section class="" th:id="'infoDiv' + ${event.id}" style="display:none;">
+                        <h3 th:text="${event.resume}"></h3>
+                        <a> Voir le détail de cet évent </a>
+                    </section>
+                </section>
+                <figcaption>
+                    <h1 th:text="${event.title}"></h1>
+                    <h2 th:text="${event.club.name}"></h2>
+                    <script th:inline="javascript">
+                        function showDiv(id) {
+                            if (document.getElementById('infoDiv'+id).style.display === 'none') {
+                                document.getElementById('infoDiv'+id).style.display = 'block';
+                            } else {
+                                document.getElementById('infoDiv'+id).style.display = 'none';
+                            }
+                        }
+                    </script>
+                </figcaption>
+                <h4 th:text="${event.eventDate}"></h4>
+            </figure>
+        </article>
+    </div>
 
 </main>
 

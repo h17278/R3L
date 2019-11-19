@@ -15,7 +15,7 @@ public class EventDaoImpl implements EventDao {
     @Override
     public List<Event> listEvents() {
         List<Event> events = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM event   JOIN club ON event.club_id = club.club_id  ORDER BY event_date";
+        String sqlQuery = "SELECT * FROM event   JOIN club ON event.club_id = club.club_id  ORDER BY event_date DESC";
         try(Connection connection = DataSourceProvider.getDataSource().getConnection()){
             try (Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlQuery)){
