@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
+<<<<<<< HEAD
 Built-By: Pierre
+=======
+Built-By: samir
+>>>>>>> 58c87d3f8f471a8717d95e95362ea21bc3a25805
 Build-Jdk: 11.0.4
 

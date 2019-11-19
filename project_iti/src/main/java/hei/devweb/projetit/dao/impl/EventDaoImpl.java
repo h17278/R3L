@@ -82,16 +82,17 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public Event addEvent(Event event){
-        String sqlQuery = "INSERT INTO event(title, club_id, event_date, image_link, resume, details) " +
-                "VALUES(?, ?, ?, ?, ?, ?)";
+        String sqlQuery = "INSERT INTO event(title, club_id, event_date, bureau, image_link, resume, details) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?)";
         try(Connection connection = DataSourceProvider.getDataSource().getConnection()){
             try(PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)){
                 statement.setString(1, event.getTitle());
                 statement.setInt(2, event.getClub().getId());
                 statement.setDate(3, Date.valueOf(event.getEventDate()));
-                statement.setString(4, event.getImage_link());
-                statement.setString(5, event.getResume());
-                statement.setString(6, event.getDetails());
+                statement.setString(4,event.getBureau());
+                statement.setString(5, event.getImage_link());
+                statement.setString(6, event.getResume());
+                statement.setString(7, event.getDetails());
 
                 statement.executeUpdate();
 
