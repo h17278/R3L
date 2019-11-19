@@ -1,31 +1,66 @@
-/* ----------------------------------------------- HEADER ------------------------------------------------------- */
-div{
-    display: inline-block;
-    background-color: black ;
-    position: center;
-    width:100%;
-    text-decoration: none;
-    color:white;
-}
-section div{
-    text-align: center;
-}
-h1{
-    font-size: 2em;
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url("../fonts/caviardreams-webfont.woff2") format("woff2"),
+    url('../fonts/caviardreams-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-#HEIvents{
+@font-face {
+    font-family: "CaviarDreams_Bold";
+    src: url("../fonts/caviardreams_bold-webfont.woff2") format("woff2"),
+    url('../fonts/caviardreams_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RalewayRegular';
+    src: url("../fonts/Raleway-Regular.woff2") format("woff2"),
+    url("../fonts/Raleway-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "RalewayThin";
+    src: url("/fonts/Raleway-Thin.woff2") format("woff2"),
+    url("../fonts/Raleway-Thin.ttf") format("truetype");
+}
+
+/* ----------------------------------------------- HEADER ------------------------------------------------------- */
+div {
+    display: inline-block;
+    background-color: black;
+    position: center;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+}
+
+section div {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    font-family: CaviarDreams_Bold, Verdana, sans-serif;
+
+}
+
+#HEIvents {
     border-bottom: gray 1px solid;
 }
-h1 a{
+
+h1 a {
     text-decoration: none;
     color: gray;
 }
-#Connexion{
+
+#Connexion {
     position: absolute;
-    top:3em;
-    right:1em;
+    top: 3em;
+    right: 1em;
 }
+
 nav div#HEIvents {
     /*display: inline-flex;*/
     /*justify-content: space-around;*/
@@ -33,66 +68,73 @@ nav div#HEIvents {
     text-align: center;
 }
 
-nav div ul{
+nav div ul {
     padding: 0px;
     margin: 0px;
 }
-nav div ul li{
+
+nav div ul li {
     display: inline-block;
     padding: 1em;
 }
 
-nav div ul li a{
+nav div ul li a {
     text-decoration: none;
     list-style-type: none;
-    color:gray;
+    color: gray;
 }
-li#active{
-    font-size:1.4em;
+
+li#active {
+    font-size: 1.4em;
 }
 
 /* ---------------------------------------------------- MAIN ------------------------------------------------------  */
-body{
-    margin:0px;
+body {
+    margin: 0px;
     width: 100%;
     background-color: #454545;
+    font-family: CaviarDreams, Verdana, sans-serif;
 }
+
 /* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
 
-article#event  figure {
-    background-image: linear-gradient(-90deg, white 0%, lightgray 50%,gray 100%);
+article#event figure {
+    background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
     display: flex;
     justify-content: space-between;
     margin: 0.4em 0 0;
     padding: 0.4em;
 }
-#event{
+
+#event {
     padding: 0.2em;
     margin: 0.7em auto;
 }
 
-article#event  figure figcaption{
+article#event figure figcaption {
     text-align: left;
     text-decoration: none;
 }
 
-article#Club{
-    background-image: linear-gradient(-90deg, white 0%, lightgray 50%,gray 100%);
+article#Club {
+    background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
     margin: 0.4em 1em;
     padding: 0.4em;
 }
 
 
 /* -------------------------------------------- FORMULAIRE --------------------------------------------------- */
-#newEvent{
-    background-image: linear-gradient(-90deg, white 0%, lightgray 40%,gray 100%);
+#newEvent {
+    background-image: linear-gradient(-90deg, white 0%, lightgray 40%, gray 100%);
     margin: 0.4em 0.8em;
     padding: 0.4em;
 }
-#newEvent div{
+
+#newEvent div {
     background-color: transparent;
 }
-input[type=text], select,input[type=number],input[type=date] {
+
+input[type=text], select, input[type=number], input[type=date] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

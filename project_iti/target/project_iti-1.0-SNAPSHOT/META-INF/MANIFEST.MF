@@ -1,21 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-<<<<<<< HEAD
-Built-By: lecom
-=======
-<<<<<<< HEAD
-Built-By: Gautier Roberval
-=======
-<<<<<<< HEAD
-Built-By: samir
-=======
-<<<<<<< HEAD
-Built-By: lecom
-=======
 Built-By: Pierre
->>>>>>> 1a5c65b269ee1644021cfa18304b94d74a9b351d
->>>>>>> 58aa14ee9fd47d1ca1f28ab358ed333f7d988abf
->>>>>>> 4f9ff6705ccd103e5e78c8de33f15e2166277dce
->>>>>>> 7e6aa53c31968f058af0e27b7d8228c5c85d78f0
 Build-Jdk: 11.0.4
 
