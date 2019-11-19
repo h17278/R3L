@@ -12,7 +12,7 @@
 
 <article id="Club" th:each="club : ${clubList}">
     <h1 th:text="${club.name}"></h1>
-    <h2 th:src ="${club.lien}"></h2>
+    <img th:src ="${club.lien}" width="150"/>
 </article>
 
 </body>
