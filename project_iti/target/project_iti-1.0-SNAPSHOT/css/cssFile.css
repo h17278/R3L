@@ -106,6 +106,8 @@ article#event figure {
 article#event figure figcaption {
     text-align: left;
     text-decoration: none;
+    position: absolute;
+    margin-left: 11em;
 }
 
 article#Club {
