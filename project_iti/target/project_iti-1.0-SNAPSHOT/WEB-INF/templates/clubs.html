@@ -10,9 +10,20 @@
 
 <nav th:replace="~{fragments::menu('clubs')}"></nav>
 
-<article id="Club" th:each="club : ${clubList}">
-    <h1 th:text="${club.name}"></h1>
-    <img th:src ="${club.lien}" width="150"/>
+<article id="event" th:each="club : ${clubList}">
+    <figure>
+        <img th:src ="${club.lien}" width="150" alt="image de l association">
+        <figcaption>
+            <h1 th:text="${club.name}"></h1>
+        </figcaption>
+        <th> Administrateurs : </th> <br/>
+        <tr th:each="admin : ${userList}" th:if="${admin.getPresident() and admin.getClub() == club.id}">
+            <td th:text="${admin.getPseudo()}"></td>
+        </tr>
+
+    </figure>
+    <!-- <h1 th:text="${club.name}"></h1>
+    <img th:src ="${club.lien}" width="150"/> -->
 </article>
 
 </body>

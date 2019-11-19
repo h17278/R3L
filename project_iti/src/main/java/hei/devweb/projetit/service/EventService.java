@@ -47,4 +47,6 @@ public class EventService {
     public Event addEvent(Event event) {return eventDao.addEvent(event); }
 
     public Utilisateur addUtilisateur(Utilisateur user){ return utilisateurDao.addUtilisateur(user); }
+
+    public List<Utilisateur> utilisateurList(){return utilisateurDao.listUtilisateur();}
 }
