@@ -3,7 +3,7 @@
 <head>
     <title> HEIvents </title>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
 </head>
 
@@ -15,10 +15,24 @@
 
     <article id="event" th:each="event : ${eventList}">
         <figure>
-            <img th:src ="${event.club.lien}" width="150" alt="Image du club">
+            <img alt="Image du club" th:src="${event.club.lien}" width="150">
             <figcaption>
                 <h1 th:text="${event.title}"></h1>
                 <h2 th:text="${event.club.name}"></h2>
+                <section class="" th:id="'infoDiv' + ${event.id}" style="display:none;">
+                    <h3 th:text="${event.resume}"></h3>
+                    <a> Voir le détail de cet évent </a>
+                </section>
+                <input name="answer" th:inline="javascript" th:onclick="'showDiv(' + ${event.id} + ')'" type="button" value="Voir le résumé" />
+                <script th:inline="javascript">
+                    function showDiv(id) {
+                        if (document.getElementById('infoDiv'+id).style.display === 'none') {
+                            document.getElementById('infoDiv'+id).style.display = 'block';
+                        } else {
+                            document.getElementById('infoDiv'+id).style.display = 'none';
+                        }
+                    }
+                </script>
             </figcaption>
             <h4 th:text="${event.eventDate}"></h4>
         </figure>

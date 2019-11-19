@@ -33,3 +33,11 @@ function maFonctionTestDetail() {
         }
     }
 }
+function ShowDiv() {
+    if(document.getElementById('infoDiv').style.display === "none"){
+        document.getElementById('infoDiv').style.display = "block";
+    }
+    else{
+        document.getElementById('infoDiv').style.display = "none";
+    }
+}
