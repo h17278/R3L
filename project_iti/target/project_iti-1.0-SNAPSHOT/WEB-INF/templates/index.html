@@ -50,21 +50,20 @@
                         <h3 th:text="${event.resume}"></h3>
                         <a> Voir le détail de cet évent </a>
                     </section>
-                    <figcaption>
-                        <h1 th:text="${event.title}"></h1>
-                        <h2 th:text="${event.club.name}"></h2>
-                        <script th:inline="javascript">
-                            function showDiv(id) {
-                                if (document.getElementById('infoDiv'+id).style.display === 'none') {
-                                    document.getElementById('infoDiv'+id).style.display = 'block';
-                                } else {
-                                    document.getElementById('infoDiv'+id).style.display = 'none';
-                                }
-                            }
-                        </script>
-                    </figcaption>
                 </section>
-
+                <figcaption>
+                    <h1 th:text="${event.title}"></h1>
+                    <h2 th:text="${event.club.name}"></h2>
+                    <script th:inline="javascript">
+                        function showDiv(id) {
+                            if (document.getElementById('infoDiv'+id).style.display === 'none') {
+                                document.getElementById('infoDiv'+id).style.display = 'block';
+                            } else {
+                                document.getElementById('infoDiv'+id).style.display = 'none';
+                            }
+                        }
+                    </script>
+                </figcaption>
                 <h4 th:text="${event.eventDate}"></h4>
             </figure>
         </article>
