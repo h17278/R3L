@@ -8,15 +8,17 @@ public class Event {
     String title;
     Club club;
     LocalDate eventDate;
+    String bureau;
     String image_link;
     String resume;
     String details;
 
-    public Event (Integer id, String title, Club club, LocalDate eventDate, String image_link, String resume, String details){
+    public Event (Integer id, String title, Club club, LocalDate eventDate, String bureau, String image_link, String resume, String details){
         this.id = id;
         this.title = title;
         this.club = club;
         this.eventDate = eventDate;
+        this.bureau = bureau;
         this.image_link = image_link;
         this.resume = resume;
         this.details = details;
@@ -37,6 +39,14 @@ public class Event {
     public LocalDate getEventDate() { return eventDate; }
 
     public void setEventDate(LocalDate eventDate) { this.eventDate = eventDate; }
+
+    public String getBureau() {
+        return bureau;
+    }
+
+    public void setBureau(String bureau) {
+        this.bureau = bureau;
+    }
 
     public String getResume() { return resume; }
 

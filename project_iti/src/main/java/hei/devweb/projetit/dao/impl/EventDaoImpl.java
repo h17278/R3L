@@ -30,6 +30,7 @@ public class EventDaoImpl implements EventDao {
                                 resultSet.getString("title"),
                                 club,
                                 resultSet.getDate("event_date").toLocalDate(),
+                                resultSet.getString("bureau"),
                                 resultSet.getString("image_link"),
                                 resultSet.getString("resume"),
                                 resultSet.getString("details")
@@ -64,6 +65,7 @@ public class EventDaoImpl implements EventDao {
                                 resultSet.getString("title"),
                                 club,
                                 resultSet.getDate("event_date").toLocalDate(),
+                                resultSet.getString("bureau"),
                                 resultSet.getString("image_link"),
                                 resultSet.getString("resume"),
                                 resultSet.getString("details")

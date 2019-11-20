@@ -36,13 +36,14 @@ public class EventFormServlet extends GenericServlet {
         String title = req.getParameter("title");
         Integer club_id = Integer.valueOf(req.getParameter("club_id"));
         LocalDate event_date = LocalDate.parse(req.getParameter("event_date"));
+        String bureau = req.getParameter("bureau");
         String image_link = req.getParameter("image_link");
         String resume = req.getParameter("resume");
         String details = req.getParameter("details");
 
         // CREATE EVENT
         Club club = EventService.getInstance().getClub(club_id);
-        Event newEvent = new Event(null, title, club, event_date, image_link, resume, details);
+        Event newEvent = new Event(null, title, club, event_date, bureau, image_link, resume, details);
         Event createdEvent = EventService.getInstance().addEvent(newEvent);
 
         // REDIRECT TO EVENTS LIST
