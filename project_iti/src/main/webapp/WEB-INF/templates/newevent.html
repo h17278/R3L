@@ -5,6 +5,7 @@
     <title>New Event</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
+    <!--
     <script>
         function maFonctionTestResume() {
             var x = null;
@@ -13,8 +14,8 @@
             if (x == "") {
                 alert("Le champ de saisi n'est pas rempli");
             } else {
-                if (isNaN(x) || x < 0 || x > 100) {
-                    alert("Le nombre entrée n'est pas correct, veuillez saisir de nouveau description avec moins de 100 caractères ")
+                if (isNaN(x) || x > 100) {
+                    alert("Votre évent est enregistré")
                 }
             }
         }
@@ -27,13 +28,13 @@
             if (x == "") {
                 alert("Le champ de saisi n'est pas rempli");
             } else {
-                if (isNaN(x) || x < 0 || x > 10000) {
-                    alert("Le nombre entrée n'est pas correct, veuillez saisir de nouveau description avec moins de 100 caractères ")
+                if (isNaN(x) || x > 10000) {
+                    alert("Votre évent est enregistré")
                 }
             }
         }
 
-    </script>
+    </script> -->
 </head>
 
 <body>
@@ -74,9 +75,22 @@
                 <label for="details">Détails de l'évènement (maximum 10 000 caractères)</label>
                 <input  type="text" name="details" id="details" maxlength="10000" required/>
             </div>
+            <div>
+                Bureau qui gère l'évènement
+                <input type="radio" name="bureau" value="BES" required> BES
+                <input type="radio" name="bureau" value="BDA"> BDA
+                <input type="radio" name="bureau" value="BET"> BET
+                <input type="radio" name="bureau" value="CAP"> Cap Solidaire
+                <input type="radio" name="bureau" value="BDS"> BDS <br>
+            </div>
         </div>
 
+<<<<<<< HEAD
         <button onclick="maFonctionTestResume();maFonctionTestDetail()" type="submit">
+=======
+
+        <button onclick="maFonctionTestResume()" type="submit">
+>>>>>>> 027e739d0025a24fd9a2ca076de49bc072b26492
             Add event
         </button>
     </form>
