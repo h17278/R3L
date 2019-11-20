@@ -49,6 +49,12 @@ h1 a {
     right: 1em;
 }
 
+#Inscription{
+    position : absolute;
+    top: 3em;
+    right: 1em;
+}
+
 nav div#HEIvents {
     /*display: inline-flex;*/
     /*justify-content: space-around;*/
