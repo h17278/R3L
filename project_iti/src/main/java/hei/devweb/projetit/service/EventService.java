@@ -25,7 +25,7 @@ public class EventService {
     private EventDao eventDao = new EventDaoImpl();
     private UtilisateurDao utilisateurDao = new UtilisateurDaoImpl();
     private ClubDao clubDao = new ClubDaoImpl();
-    private EventService() {
+    public EventService() {
     }
 
     public List<Event> eventList() {
