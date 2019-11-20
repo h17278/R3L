@@ -45,8 +45,20 @@ h1 a {
 
 #Connexion {
     position: absolute;
+<<<<<<< HEAD
     top: 3em;
     right: 1em;
+=======
+    top: 0.8em;
+    right: 1em;
+    width:82px;
+    height:82px;
+    background:#fafafa;
+    box-shadow:2px 2px 8px #aaa;
+    font:bold 13px Arial;
+    border-radius:50%;
+    color:#555;
+>>>>>>> 16ae51436d9911a2149aa2e9d86eaa65e6995c02
 }
 
 nav div#HEIvents {

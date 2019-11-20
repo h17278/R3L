@@ -13,11 +13,7 @@
 <main>
     <form accept-charset="UTF-8" action="register" id="newEvent" method="post">
 
-        <h1> Nouvel utilisateur
-        <button type="submit">
-            S'inscrire
-        </button>
-        </h1>
+        <h1> Nouvel utilisateur </h1>
         <div>
             <label for="pseudo"> Pseudo </label>
             <input id="pseudo" name="pseudo" required type="text"/>
@@ -34,14 +30,6 @@
         </div>
 
         <div>
-            <label for="statut"> Autorisation : </label>
-            <input checked id="statut" name="statut" type="radio" value="0">
-            <label for="president">Pas president</label>
-            <input id="president" name="statut" type="radio" value="1">
-            <label for="president">President</label>
-        </div>
-
-        <div>
             <label> Association </label>
             <select th:field="*{clubList}" id="club_id" name="club_id">
                 <option th:each="club : ${clubList}"
@@ -53,6 +41,16 @@
                 </option>
             </select>
         </div>
+
+        <div>
+            <label for="statut"> Autorisation : </label>
+            <input checked id="statut" name="statut" type="radio" value="0">
+            <label for="president">Pas president</label>
+            <input id="president" name="statut" type="radio" value="1">
+            <label for="president">President</label>
+        </div>
+
+        <button type="submit">S'inscrire</button>
 
     </form>
 </main>
