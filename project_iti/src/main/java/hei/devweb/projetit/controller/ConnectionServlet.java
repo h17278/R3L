@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -31,23 +32,29 @@ public class ConnectionServlet extends GenericServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         String pseudo = req.getParameter("pseudo");
         String mdp = req.getParameter("mdp");
-
+        boolean flag = true;
+        PrintWriter out = resp.getWriter();
         List<Utilisateur> userList = EventService.getInstance().utilisateurList();
-        for (int i = 0; i < userList.size(); i++){
-            if (pseudo == userList.get(i).getPseudo() && mdp == userList.get(i).getMotdepasse()) {
-
-                req.getSession().setAttribute("pseudo",pseudo);
+        for (Utilisateur utilisateur : userList) {
+            if (pseudo.equals(utilisateur.getPseudo()) && mdp.equals(utilisateur.getMotdepasse())) {
+                flag = false;
+                req.getSession().setAttribute("pseudo", pseudo);
                 System.out.println("j'ai recup" + pseudo);
-                req.getSession().setAttribute("president",userList.get(i).getPresident());
-                req.getSession().setAttribute("club",userList.get(i).getClub());
+                req.getSession().setAttribute("president", utilisateur.getPresident());
+                req.getSession().setAttribute("club", utilisateur.getClub());
 
                 resp.sendRedirect("home");
             }
         }
 
+        if(flag){
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('User or password incorrect');");
+            out.println("</script>");
+        }
     }
 }
