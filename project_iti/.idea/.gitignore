@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# Default ignored files
+/workspace.xml
+=======
 /workspace.xml
 
 # Created by https://www.gitignore.io/api/intellij
@@ -98,3 +102,4 @@ target/project_iti-1.0-SNAPSHOT/META-INF
 project_iti/target/project_iti-1.0-SNAPSHOT/META-INF/MANIFEST.MF
 project_iti/target/project_iti-1.0-SNAPSHOT/META-INF
 project_iti/target/project_iti-1.0-SNAPSHOT/META-INF/
+>>>>>>> 0459a1dee3ca87ff4b502ab32e9aca74a9da5c9b

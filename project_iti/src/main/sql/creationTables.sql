@@ -26,7 +26,7 @@ CREATE TABLE `event` (
 CREATE TABLE `utilisateur` (
   `utilisateur_id` int(11) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(50) NOT NULL,
-  `motdepasse` varchar(50) NOT NULL,
+  `motdepasse` varchar(500) NOT NULL,
   `mail` varchar(100) NOT NULL,
   `president` tinyint(1) NOT NULL,
   `club_id` int(11) NULL,
