@@ -96,4 +96,18 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         return users;
     }
 
+    @Override
+    public void setPassword(String pseudo, String newPassword) {
+        String sqlQuery = "UPDATE utilisateur SET motdepasse = ? WHERE pseudo = ?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
+                statement.setString(1, newPassword);
+                statement.setString (2, pseudo);
+
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -11,4 +11,6 @@ public interface UtilisateurDao {
     public Utilisateur addUtilisateur(Utilisateur user);
 
     public List<Utilisateur> listUtilisateur();
+
+    public void setPassword (String pseudo, String newPassword);
 }

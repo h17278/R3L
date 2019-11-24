@@ -109,5 +109,4 @@ public class EventDaoImpl implements EventDao {
         }
         throw new RuntimeException("Request Execution Problem");
     }
-    //bonjour
 }
