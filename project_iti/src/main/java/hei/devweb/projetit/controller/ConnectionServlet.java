@@ -46,7 +46,6 @@ public class ConnectionServlet extends GenericServlet {
                 System.out.println("j'ai recup" + pseudo);
                 req.getSession().setAttribute("president", utilisateur.getPresident());
                 req.getSession().setAttribute("club", utilisateur.getClub());
-
                 resp.sendRedirect("home");
             }
         }
