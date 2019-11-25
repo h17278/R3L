@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -40,11 +41,24 @@ public class RegisterServlet extends GenericServlet {
         Boolean statut = Boolean.valueOf(req.getParameter("president"));
         club_id = Integer.valueOf(req.getParameter("club_id"));
         String mdpHash = PasswordUtils.genererMotDePasse(motdepasse);
-        //CREATE USER
-        Utilisateur newUser = new Utilisateur(  null, pseudo, mdpHash, mail, statut, club_id);
-        Utilisateur createdUser = EventService.getInstance().addUtilisateur(newUser);
 
-        // REDIRECT TO EVENTS LIST
-        resp.sendRedirect("connection");
+        List<Utilisateur> userList = EventService.getInstance().utilisateurList();
+        boolean flag = true;
+        PrintWriter out = resp.getWriter();
+
+
+        if(flag) {
+            //CREATE USER
+            Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, statut, club_id);
+            Utilisateur createdUser = EventService.getInstance().addUtilisateur(newUser);
+            // REDIRECT TO EVENTS LIST
+            resp.sendRedirect("connection");
+        } else{
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Pseudo déjà utilisé');");
+            out.println("</script>");
+        }
+
+
     }
 }
