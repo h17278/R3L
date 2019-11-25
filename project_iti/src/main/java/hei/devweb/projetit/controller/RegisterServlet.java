@@ -46,6 +46,11 @@ public class RegisterServlet extends GenericServlet {
         boolean flag = true;
         PrintWriter out = resp.getWriter();
 
+        for(Utilisateur user : userList){
+            if(pseudo.equals(user.getPseudo())){
+                flag = false;
+            }
+        }
 
         if(flag) {
             //CREATE USER
