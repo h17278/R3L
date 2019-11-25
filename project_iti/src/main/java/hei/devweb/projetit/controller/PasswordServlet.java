@@ -40,14 +40,16 @@ public class PasswordServlet extends GenericServlet{
                 flag = false;
                 req.getSession().setAttribute("pseudo", pseudo);
                 req.getSession().setAttribute("mdp2", mdp2);
-
+                /*
                 EventService.getInstance().getUtilisateur(pseudo);
                 EventService.getInstance().
 
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Votre mot de passe a bien été mis à jour');");
                 out.println("</script>");
+            */
             }
+            
         }
 
         if(flag){
