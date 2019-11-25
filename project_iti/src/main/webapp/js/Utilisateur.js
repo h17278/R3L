@@ -1,12 +1,12 @@
 var listUtilisateurs  = function() {
     let utilisateursRequest = new XMLHttpRequest();
-    utilisateursRequest.open("GET", "userlist", true);
+    utilisateursRequest.open("GET", "user/list", true);
     utilisateursRequest.responseType = "json";
 
     utilisateursRequest.onload = function () {
         let utilisateurs = this.response;
         for(const utilisateur of utilisateurs){
-            add
+
         }
 
     }

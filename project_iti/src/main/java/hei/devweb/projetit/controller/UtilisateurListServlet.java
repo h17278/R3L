@@ -12,7 +12,7 @@ import hei.devweb.projetit.service.UserService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/userlist")
+@WebServlet("/user/list")
 public class UtilisateurListServlet extends GenericServlet {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 

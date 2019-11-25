@@ -49,7 +49,7 @@ public class PasswordServlet extends GenericServlet{
                 out.println("</script>");
             */
             }
-            
+
         }
 
         if(flag){
