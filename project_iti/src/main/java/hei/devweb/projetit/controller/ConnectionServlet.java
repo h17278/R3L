@@ -1,7 +1,6 @@
 package hei.devweb.projetit.controller;
 
 
-import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
 import org.thymeleaf.TemplateEngine;
@@ -20,7 +19,7 @@ import java.util.List;
 public class ConnectionServlet extends GenericServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
@@ -33,14 +32,14 @@ public class ConnectionServlet extends GenericServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
         String pseudo = req.getParameter("pseudo");
         String mdp = req.getParameter("mdp");
         boolean flag = true;
         PrintWriter out = resp.getWriter();
         List<Utilisateur> userList = EventService.getInstance().utilisateurList();
+
         for (Utilisateur utilisateur : userList) {
-            if (pseudo.equals(utilisateur.getPseudo()) && mdp.equals(utilisateur.getMotdepasse())) {
+            if (pseudo.equals(utilisateur.getPseudo()) && PasswordUtils.validerMotDePasse(mdp,utilisateur.getMotdepasse())) {
                 flag = false;
                 req.getSession().setAttribute("pseudo", pseudo);
                 System.out.println("j'ai recup" + pseudo);

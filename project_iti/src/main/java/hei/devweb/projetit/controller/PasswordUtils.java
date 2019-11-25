@@ -1,4 +1,4 @@
-package hei.devweb.projetit.utils;
+package hei.devweb.projetit.controller;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -11,7 +11,7 @@ public class PasswordUtils {
     private static final int MEMOIRE = 65536;
     private static final int PARALLELISME = 1;
 
-    private static Argon2 instancierArgon2() {
+    public static Argon2 instancierArgon2() {
         return Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2i, LONGUEUR_SEL, LONGUEUR_HASH);
     }
 
@@ -21,5 +21,9 @@ public class PasswordUtils {
 
     public static boolean validerMotDePasse(String motDePasse, String hashCorrect) {
         return instancierArgon2().verify(hashCorrect, motDePasse);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(genererMotDePasse("mdp"));
     }
 }
