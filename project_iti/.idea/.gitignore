@@ -95,3 +95,6 @@ fabric.properties
 
 
 target/project_iti-1.0-SNAPSHOT/META-INF
+project_iti/target/project_iti-1.0-SNAPSHOT/META-INF/MANIFEST.MF
+project_iti/target/project_iti-1.0-SNAPSHOT/META-INF
+project_iti/target/project_iti-1.0-SNAPSHOT/META-INF/
