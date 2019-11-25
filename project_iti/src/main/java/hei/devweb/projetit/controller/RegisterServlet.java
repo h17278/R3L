@@ -1,8 +1,8 @@
 package hei.devweb.projetit.controller;
 
 
+import de.mkammerer.argon2.Argon2;
 import hei.devweb.projetit.entities.Club;
-import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
 import org.thymeleaf.TemplateEngine;
@@ -39,11 +39,12 @@ public class RegisterServlet extends GenericServlet {
         String mail = req.getParameter("mail");
         Boolean statut = Boolean.valueOf(req.getParameter("president"));
         club_id = Integer.valueOf(req.getParameter("club_id"));
+        String mdpHash = PasswordUtils.genererMotDePasse(motdepasse);
         //CREATE USER
-        Utilisateur newUser = new Utilisateur(  null, pseudo, motdepasse, mail, statut, club_id);
+        Utilisateur newUser = new Utilisateur(  null, pseudo, mdpHash, mail, statut, club_id);
         Utilisateur createdUser = EventService.getInstance().addUtilisateur(newUser);
 
         // REDIRECT TO EVENTS LIST
-        resp.sendRedirect("home");
+        resp.sendRedirect("connection");
     }
 }
