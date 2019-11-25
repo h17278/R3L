@@ -1,27 +1,35 @@
 package hei.devweb.projetit.exception;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AuthentificationFilter {
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
+@WebFilter("/mettreURLPrive/*")
+public class AuthentificationFilter implements Filter {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) req;
         String identifiant = (String)
-                httpRequest.getSession().getAttribute("utilisateurConnecte");
+                httpRequest.getSession().getAttribute("pseudo");
         if (identifiant == null || "".equals(identifiant)) {
-            System.out.println(
-                    "Il faut être connecté pour accéder à cette page !");
-            HttpServletResponse httpResponse =
-                    (HttpServletResponse) response;
-            httpResponse.sendRedirect("../home");
+            System.out.println("Il faut être connecté pour accéder à cette page !");
+            HttpServletResponse httpResponse = (HttpServletResponse) resp;
+            httpResponse.sendRedirect("home");
             return;
         }
-        chain.doFilter(request, response);
+        chain.doFilter(req, resp);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

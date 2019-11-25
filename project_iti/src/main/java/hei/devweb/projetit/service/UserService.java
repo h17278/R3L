@@ -25,6 +25,33 @@ public class UserService {
         return utilisateurDao.listUtilisateur();
     }
 
+<<<<<<< HEAD
     public void setPassword(String pseudo, String newPassword) { utilisateurDao.setPassword(pseudo, newPassword); }
+=======
+    public Utilisateur getUser(Integer userid){
+        if(userid == null){
+            throw new IllegalArgumentException("Utilisateur  id est nul");
+        }
+        return utilisateurDaoImpl.getUtilisateur(userid);
+    }
+
+    public Utilisateur addUtilisateur(Utilisateur utilisateur){
+        if(utilisateur == null){
+            throw new IllegalArgumentException("Pas d'utilisateurs");
+        }
+        if (utilisateur.getPseudo() == null || "".equals(utilisateur.getPseudo())) {
+            throw new IllegalArgumentException("Pseudo utilisateur null.");
+        }
+        if (utilisateur.getMail() == null || "".equals(utilisateur.getMail())) {
+            throw new IllegalArgumentException("Mail utilisateur null.");
+        }
+        if (utilisateur.getMotdepasse() == null || "".equals(utilisateur.getMotdepasse())) {
+            throw new IllegalArgumentException("Mot de passe utilisateur null.");
+        }
+
+        return utilisateurDaoImpl.addUtilisateur(utilisateur);
+
+    }
+>>>>>>> 29bc6967fea0c336aa429ff3eb209b77ab5bec86
 
 }

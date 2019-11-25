@@ -103,7 +103,6 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
                 statement.setString(1, newPassword);
                 statement.setString (2, pseudo);
-
                 statement.executeUpdate();
             }
         } catch (SQLException e) {

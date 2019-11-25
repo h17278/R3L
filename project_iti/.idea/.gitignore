@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 # Default ignored files
+<<<<<<< HEAD
 /workspace.xml
 =======
 /workspace.xml
@@ -102,3 +102,6 @@ target/project_iti-1.0-SNAPSHOT/META-INF
 project_iti/target/project_iti-1.0-SNAPSHOT/META-INF/MANIFEST.MF
 project_iti/target/project_iti-1.0-SNAPSHOT/META-INF
 project_iti/target/project_iti-1.0-SNAPSHOT/META-INF/
+=======
+/workspace.xml
+>>>>>>> 29bc6967fea0c336aa429ff3eb209b77ab5bec86
