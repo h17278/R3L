@@ -51,7 +51,6 @@ public class RegisterServlet extends GenericServlet {
                 flag = false;
             }
         }
-
         if(flag) {
             //CREATE USER
             Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, statut, club_id);
@@ -63,7 +62,5 @@ public class RegisterServlet extends GenericServlet {
             out.println("alert('Pseudo déjà utilisé');");
             out.println("</script>");
         }
-
-
     }
 }
