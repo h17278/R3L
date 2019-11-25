@@ -3,5 +3,4 @@ var listUtilisateurs  = function() {
     utilisateursRequest.open("GET", "userlist", true);
     utilisateursRequest.responseType = "json";
 
-
 }
