@@ -3,6 +3,7 @@ package hei.devweb.projetit.controller;
 
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
+import hei.devweb.projetit.service.UserService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -41,8 +42,7 @@ public class PasswordServlet extends GenericServlet{
                 req.getSession().setAttribute("pseudo", pseudo);
                 req.getSession().setAttribute("mdp2", mdp2);
 
-                EventService.getInstance().getUtilisateur(pseudo);
-                EventService.getInstance().
+                UserService.getInstance().setPassword(pseudo, mdp2);
 
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Votre mot de passe a bien été mis à jour');");

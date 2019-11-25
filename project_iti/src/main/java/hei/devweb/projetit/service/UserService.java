@@ -19,10 +19,12 @@ public class UserService {
     private UserService(){
     }
 
-    private UtilisateurDaoImpl utilisateurDaoImpl = new UtilisateurDaoImpl();
+    private UtilisateurDao utilisateurDao = new UtilisateurDaoImpl();
 
     public List<Utilisateur> listUtilisateur(){
-        return utilisateurDaoImpl.listUtilisateur();
+        return utilisateurDao.listUtilisateur();
     }
+
+    public void setPassword(String pseudo, String newPassword) { utilisateurDao.setPassword(pseudo, newPassword); }
 
 }
