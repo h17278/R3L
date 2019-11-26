@@ -39,7 +39,6 @@ public class PasswordServlet extends GenericServlet{
         PrintWriter out = resp.getWriter();
         List<Utilisateur> userList = EventService.getInstance().utilisateurList();
         for (Utilisateur utilisateur : userList) {
-<<<<<<< HEAD
             if (pseudo.equals(utilisateur.getPseudo())) {
                 flag1 = false;
                 if (mdp.equals(mdp2)) {
@@ -54,19 +53,7 @@ public class PasswordServlet extends GenericServlet{
                     out.println("alert('Votre mot de passe a bien été mis à jour');");
                     out.println("</script>");
                 }
-=======
-            if (pseudo.equals(utilisateur.getPseudo()) && mdp.equals(utilisateur.getMotdepasse())) {
-                flag = false;
-                req.getSession().setAttribute("pseudo", pseudo);
-                req.getSession().setAttribute("mdp2", mdp2);
-
-                UserService.getInstance().setPassword(pseudo, mdp2);
-
-
-
->>>>>>> ad6c4f5df1f9badbef7d3b10ff04900c5547b4eb
             }
-
         }
         if(flag1){
             out.println("<script type=\"text/javascript\">");
