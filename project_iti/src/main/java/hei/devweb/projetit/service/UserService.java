@@ -19,20 +19,20 @@ public class UserService {
     private UserService(){
     }
 
+
     private UtilisateurDao utilisateurDao = new UtilisateurDaoImpl();
 
     public List<Utilisateur> listUtilisateur(){
         return utilisateurDao.listUtilisateur();
     }
 
-<<<<<<< HEAD
     public void setPassword(String pseudo, String newPassword) { utilisateurDao.setPassword(pseudo, newPassword); }
-=======
+
     public Utilisateur getUser(Integer userid){
         if(userid == null){
             throw new IllegalArgumentException("Utilisateur  id est nul");
         }
-        return utilisateurDaoImpl.getUtilisateur(userid);
+        return utilisateurDao.getUtilisateur(userid);
     }
 
     public Utilisateur addUtilisateur(Utilisateur utilisateur){
@@ -49,9 +49,8 @@ public class UserService {
             throw new IllegalArgumentException("Mot de passe utilisateur null.");
         }
 
-        return utilisateurDaoImpl.addUtilisateur(utilisateur);
+        return utilisateurDao.addUtilisateur(utilisateur);
 
     }
->>>>>>> 29bc6967fea0c336aa429ff3eb209b77ab5bec86
 
 }

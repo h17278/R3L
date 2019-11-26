@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Intellij
 .idea/
 *.iml
@@ -6,3 +7,7 @@
 # Maven
 log/
 target/
+=======
+# Default ignored files
+/workspace.xml
+>>>>>>> ad6c4f5df1f9badbef7d3b10ff04900c5547b4eb
