@@ -38,6 +38,8 @@ public class ConnectionServlet extends GenericServlet {
         PrintWriter out = resp.getWriter();
         List<Utilisateur> userList = EventService.getInstance().utilisateurList();
 
+        req.getSession().invalidate();
+
         for (Utilisateur utilisateur : userList) {
             if (pseudo.equals(utilisateur.getPseudo()) && PasswordUtils.validerMotDePasse(mdp,utilisateur.getMotdepasse())) {
                 flag = false;
@@ -55,4 +57,5 @@ public class ConnectionServlet extends GenericServlet {
             out.println("</script>");
         }
     }
+
 }
