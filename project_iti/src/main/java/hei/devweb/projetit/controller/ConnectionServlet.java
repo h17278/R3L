@@ -54,6 +54,7 @@ public class ConnectionServlet extends GenericServlet {
         if(flag){
             out.println("<script type=\"text/javascript\">");
             out.println("alert('User or password incorrect');");
+            out.println("window.location.href = 'connection';");
             out.println("</script>");
         }
     }

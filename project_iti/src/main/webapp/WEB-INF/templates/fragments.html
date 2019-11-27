@@ -10,24 +10,6 @@
     <nav th:fragment="menu(currentPage)">
         <div id="HEIvents">
             <h1><a href="home">HEIvents</a></h1>
-            <!-- <script type="text/javascript">
-                window.onload = function ()
-                {
-                    var pseudo = '<%=Session["pseudo"]%>';
-                    console.log(pseudo);
-                    if (pseudo != null && pseudo != '') {
-                        document.getElementById('Connexion').style.display = 'block';
-                        document.getElementById('Deconnexion').style.display = 'none';
-                        console.log('pas de pseudo');
-                    } else {
-                        document.getElementById('Connexion').style.display = 'none';
-                        document.getElementById('Deconnexion').style.display = 'block';
-                        console.log('il y a pseudo');
-                    }
-                    console.log('fin de prog');
-                }
-            </script>
-            -->
             <!-- SI CONNECTE -->
             <div id="Deconnexion" th:if="${!session.isEmpty()}"><input type="button"  name="Deconnexion" value="Deconnexion"  onclick="location.href='deconnection';"/></div>
             <!-- SI PAS CONNECTE -->

@@ -15,4 +15,15 @@
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
 
+	<filter>
+		<filter-name>AdminFilter</filter-name>
+		<filter-class>hei.devweb.projetit.exception.AdminFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>AdminFilter</filter-name>
+		<url-pattern>/addevent</url-pattern>
+		<!-- METTRE ICI LES URL EN RELATIVE -->
+	</filter-mapping>
+
 </web-app>

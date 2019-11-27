@@ -51,6 +51,7 @@ public class PasswordServlet extends GenericServlet{
 
                     out.println("<script type=\"text/javascript\">");
                     out.println("alert('Votre mot de passe a bien été mis à jour');");
+                    out.println("window.location.href = 'home';");
                     out.println("</script>");
                 }
             }
@@ -63,7 +64,8 @@ public class PasswordServlet extends GenericServlet{
 
         if(flag2){
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('Passwords don't match');");
+            out.println("alert('Vos mots de passe ne sont pas en accord');");
+            out.println("window.location.href = 'password';");
             out.println("</script>");
         }
     }

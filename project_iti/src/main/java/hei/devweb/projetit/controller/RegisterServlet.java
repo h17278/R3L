@@ -60,6 +60,7 @@ public class RegisterServlet extends GenericServlet {
         } else{
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Pseudo déjà utilisé');");
+            out.println("window.location.href = 'register';");
             out.println("</script>");
         }
     }
