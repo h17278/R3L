@@ -13,6 +13,10 @@ var listUtilisateurs  = function() {
 
 };
 
+
+
+
+
 var adduserToUserService = function (utilisateur) {
     let userLiElement = document.createElement("li");
     userLiElement.setAttribute("class", "list-group-item d-flex justify-content-between");
