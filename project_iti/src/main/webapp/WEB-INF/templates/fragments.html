@@ -10,7 +10,28 @@
     <nav th:fragment="menu(currentPage)">
         <div id="HEIvents">
             <h1><a href="home">HEIvents</a></h1>
-            <input type="button" name="Connexion" value="Connexion" id="Connexion" onclick="location.href='connection';"/>
+            <!-- <script type="text/javascript">
+                window.onload = function ()
+                {
+                    var pseudo = '<%=Session["pseudo"]%>';
+                    console.log(pseudo);
+                    if (pseudo != null && pseudo != '') {
+                        document.getElementById('Connexion').style.display = 'block';
+                        document.getElementById('Deconnexion').style.display = 'none';
+                        console.log('pas de pseudo');
+                    } else {
+                        document.getElementById('Connexion').style.display = 'none';
+                        document.getElementById('Deconnexion').style.display = 'block';
+                        console.log('il y a pseudo');
+                    }
+                    console.log('fin de prog');
+                }
+            </script>
+            -->
+            <!-- SI CONNECTE -->
+            <div id="Deconnexion"><input type="button" name="Deconnexion" value="Deconnexion"  onclick="location.href='deconnection';"/></div>
+            <!-- SI PAS CONNECTE -->
+            <div id="Connexion"><input type="button" name="Connexion" value="Connexion"  onclick="location.href='connection';"/></div>
         </div>
 
         <div id="NavBar">
