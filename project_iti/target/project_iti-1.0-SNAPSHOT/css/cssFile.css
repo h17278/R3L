@@ -43,7 +43,7 @@ h1 a {
     color: gray;
 }
 
-#Connexion {
+#Connexion input, #Deconnexion input{
     position: absolute;
     top: 0.8em;
     right: 1em;
@@ -55,6 +55,7 @@ h1 a {
     border-radius:50%;
     color:#555;
 }
+
 
 nav div#HEIvents {
     /*display: inline-flex;*/

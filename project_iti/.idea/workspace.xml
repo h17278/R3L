@@ -6,10 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5e91fcb-1a72-49c7-ae15-d3c9d9814c4b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hei/devweb/projetit/controller/UtilisateurController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hei/devweb/projetit/controller/UtilisateurController.java" afterDir="false" />
+    <list default="true" id="3df28458-e436-4c72-ab49-3b5b77e4213a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/hei/devweb/projetit/controller/DeconnectionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hei/devweb/projetit/controller/DeconnectionServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/fragments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/cssFile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/cssFile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hei/devweb/projetit/controller/DeconnectionServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hei/devweb/projetit/controller/DeconnectionServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/project_iti-1.0-SNAPSHOT/WEB-INF/classes/hei/devweb/projetit/controller/DeconnectionServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/project_iti-1.0-SNAPSHOT/WEB-INF/classes/hei/devweb/projetit/controller/DeconnectionServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/project_iti-1.0-SNAPSHOT/css/cssFile.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/project_iti-1.0-SNAPSHOT/css/cssFile.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +50,8 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -160,7 +165,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
