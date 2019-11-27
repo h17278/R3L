@@ -1,29 +1,24 @@
-var listUtilisateurs  = function() {
-    let utilisateursRequest = new XMLHttpRequest();
-    utilisateursRequest.open("GET", "user/list", true);
-    utilisateursRequest.responseType = "json";
 
-    utilisateursRequest.onload = function () {
-        let utilisateurs = this.response;
-        for(const utilisateur of utilisateurs){
-
-        }
-
-    }
-
+let listParams = {
+    idutilisateur: 1,
+    pseudo: undefined,
+    motdepasse: undefined,
+    mail: undefined,
+    president: undefined,
+    idclub: undefined,
 };
 
+let listUsers = function () {
+    let usersRequest = new XMLHttpRequest();
+    let url = "ws/users" + listParams.idutilisateur;
 
+    usersRequest.open("GET", url, true);
+    usersRequest.responseType = "json";
 
+    usersRequest.onload = function () {
+        let users = this.response;
+        refreshTable(users);
+    };
 
-
-var adduserToUserService = function (utilisateur) {
-    let userLiElement = document.createElement("li");
-    userLiElement.setAttribute("class", "list-group-item d-flex justify-content-between");
-    userLiElement.id="fighter"+fighter.id;
-
-    userLiElement.appendChild(createSummary(fighter));
-    userLiElement.appendChild(createActionsElement(fighter));
-
-    document.getElementById("halloffame").appendChild(fighterLiElement);
+    usersRequest.send();
 };
