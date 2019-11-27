@@ -7,12 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3df28458-e436-4c72-ab49-3b5b77e4213a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hei/devweb/projetit/controller/DeconnectionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hei/devweb/projetit/controller/DeconnectionServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/fragments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/cssFile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/cssFile.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/hei/devweb/projetit/controller/DeconnectionServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hei/devweb/projetit/controller/DeconnectionServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/project_iti-1.0-SNAPSHOT/WEB-INF/classes/hei/devweb/projetit/controller/DeconnectionServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/project_iti-1.0-SNAPSHOT/WEB-INF/classes/hei/devweb/projetit/controller/DeconnectionServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/project_iti-1.0-SNAPSHOT/css/cssFile.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/project_iti-1.0-SNAPSHOT/css/cssFile.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

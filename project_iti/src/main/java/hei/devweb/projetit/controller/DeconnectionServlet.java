@@ -21,18 +21,9 @@ public class DeconnectionServlet extends GenericServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("deconnection", context, resp.getWriter());
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
+        System.out.println(req.getSession().getAttribute("pseudo"));
         req.getSession().invalidate();
-
+        System.out.println(req.getSession().getAttribute("pseudo"));
         resp.sendRedirect("home");
     }
 
