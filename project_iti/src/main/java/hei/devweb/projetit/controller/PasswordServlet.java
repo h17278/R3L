@@ -33,26 +33,37 @@ public class PasswordServlet extends GenericServlet{
         String pseudo = req.getParameter("pseudo");
         String mdp2 = req.getParameter("mdp2");
         String mdp = req.getParameter("mdp");
-        boolean flag = true;
+        String newmdp;
+        boolean flag2 = true;
+        boolean flag1 = true;
         PrintWriter out = resp.getWriter();
         List<Utilisateur> userList = EventService.getInstance().utilisateurList();
         for (Utilisateur utilisateur : userList) {
-            if (pseudo.equals(utilisateur.getPseudo()) && mdp.equals(utilisateur.getMotdepasse())) {
-                flag = false;
-                req.getSession().setAttribute("pseudo", pseudo);
-                req.getSession().setAttribute("mdp2", mdp2);
+            if (pseudo.equals(utilisateur.getPseudo())) {
+                flag1 = false;
+                if (mdp.equals(mdp2)) {
+                    flag2 = false;
+                    req.getSession().setAttribute("pseudo", pseudo);
+                    req.getSession().setAttribute("mdp2", mdp2);
 
-                UserService.getInstance().setPassword(pseudo, mdp2);
+                    newmdp = PasswordUtils.genererMotDePasse(mdp2);
+                    UserService.getInstance().setPassword(pseudo, newmdp);
 
-
-
+                    out.println("<script type=\"text/javascript\">");
+                    out.println("alert('Votre mot de passe a bien été mis à jour');");
+                    out.println("</script>");
+                }
             }
-
+        }
+        if(flag1){
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('User incorrect');");
+            out.println("</script>");
         }
 
-        if(flag){
+        if(flag2){
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('User or password incorrect');");
+            out.println("alert('Passwords don't match');");
             out.println("</script>");
         }
     }
