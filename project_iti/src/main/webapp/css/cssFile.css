@@ -58,8 +58,6 @@ h1 a {
 
 
 nav div#HEIvents {
-    /*display: inline-flex;*/
-    /*justify-content: space-around;*/
     display: inline-block;
     text-align: center;
 }
@@ -109,8 +107,6 @@ div#right {
 
 article figure {
     background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
-    /*display: flex;*/
-    /*justify-content: space-between;*/
     margin: 0.4em 0 0;
     padding: 0.4em;
     position: relative;
