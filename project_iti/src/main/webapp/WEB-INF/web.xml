@@ -23,6 +23,8 @@
 	<filter-mapping>
 		<filter-name>AdminFilter</filter-name>
 		<url-pattern>/addevent</url-pattern>
+		<url-pattern>/modifEvent</url-pattern>
+		<url-pattern>/DeleteEvent</url-pattern>
 		<!-- METTRE ICI LES URL EN RELATIVE -->
 	</filter-mapping>
 
