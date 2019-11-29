@@ -4,35 +4,33 @@
     <title> Event </title>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
+    <link href="css/Event.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
-<div id="infos">
+<div>
     <article>
-        <figure>
-            <section class="texte">
+        <section >
+            <figure>
                 <img alt="Image du club" th:src="${event.club.lien}"/>
                 <figcaption>
                     <h1 th:text="${event.title}"></h1>
+                    <h2 th:text="${event.club.name}"></h2>
+                    <h3 th:text="${event.resume}"></h3>
+                    <h3 th:text="${event.bureau}"></h3>
                 </figcaption>
-                <h2 th:text="${event.club.name}"></h2>
-                <h3 th:text="${event.resume}"></h3>
-                <h3 th:text="${event.bureau}"></h3>
-                <h4 th:text="${event.details}"></h4>
-
-
-                <h4 th:text="${event.eventDate}"></h4>
+            </figure>
+            <p id ="details" th:text="${event.details}"></p>
+            <h4 id="date" th:text="${event.eventDate}"></h4>
 
             <div id="formulaire">
                 <form class = "newinfos" name="modifEvent" action="modifEvent"><button class="bouton" type="submit" name="modifEvent" th:value="${event.id}">Modifier l'événement</button></form>
                 <form class = "newinfos" name="DeleteEvent" action="DeleteEvent"><button class="bouton" type="submit" name="DeleteEvent" th:value="${event.id}">Supprimer l'événement</button></form>
             </div>
 
-            </section>
-        </figure>
+        </section>
     </article>
 
 </div>

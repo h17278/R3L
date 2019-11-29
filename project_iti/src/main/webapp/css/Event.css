@@ -31,7 +31,6 @@ section div {
 h1 {
     font-size: 2em;
     font-family: CaviarDreams_Bold, Verdana, sans-serif;
-
 }
 
 #HEIvents {
@@ -90,6 +89,11 @@ body {
     font-family: CaviarDreams, Verdana, sans-serif;
 }
 
+p {
+    font-family: CaviarDreams, Verdana, sans-serif;
+    font-weight: bold;
+}
+
 main {
     display: flex;
 }
@@ -103,84 +107,7 @@ div#right {
     margin-top : 6em;
 }
 
-/* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
-
-article figure {
-    background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
-    margin: 0.4em 0 0;
-    padding: 0.4em;
-    position: relative;
-}
-
-article {
-    margin: 0.7em auto;
-}
-
-article figure img{
-    height: 180px;
-    width: 180px;
-}
-article figure figcaption {
-    text-align: left;
-    text-decoration: none;
-    position: relative;
-    margin-left: 1em;
-}
-
-article h4 {
-    position: absolute;
-    top: -0.5em;
-    right: 1em;
-}
-
-article h2 {
-    position: absolute;
-    top : 4.5em;
-}
-
-article figure section.intro {
-    display: flex;
-}
-
-/* -------------------------------------------- FORMULAIRE --------------------------------------------------- */
-#newEvent {
-    background-image: linear-gradient(-90deg, white 0%, lightgray 40%, gray 100%);
-    margin: 0.4em 0.8em;
-    padding: 0.4em;
-}
-
-#newEvent div {
-    background-color: transparent;
-}
-
-input[type=text], select, input[type=number], input[type=date] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-
-
 /* -------------------------------------------BOUTONS---------------------------------------------------- */
-
 
 .bouton {
     padding: 8px 10px;
@@ -196,7 +123,49 @@ input[type=submit]:hover {
     box-shadow:0px 0px 4px 2px rgba(0, 0, 0, 0.4);
 }
 
+/* ------------------------------------------- ARTICLE ---------------------------------------------------- */
 
+article section {
+    background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
+    margin: 0.4em 0 0;
+    padding: 0.4em;
+    position: relative;
+}
 
+article {
+    margin: 0.7em auto;
+    width: 70%;
+}
 
+article figure img{
+    height: 250px;
+    width: 250px;
+}
 
+#date {
+    position: absolute;
+    top: -0.5em;
+    right: 1em;
+}
+
+#details {
+    text-align: justify;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+figure {
+    display: flex;
+    margin : 0em;
+}
+
+figure img {
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+}
+
+figcaption {
+    text-align: center;
+    width: 65%;
+}
