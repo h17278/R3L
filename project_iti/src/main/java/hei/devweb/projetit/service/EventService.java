@@ -10,6 +10,7 @@ import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.entities.Utilisateur;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class EventService {
@@ -49,4 +50,6 @@ public class EventService {
     public Utilisateur addUtilisateur(Utilisateur user){ return utilisateurDao.addUtilisateur(user); }
 
     public List<Utilisateur> utilisateurList(){return utilisateurDao.listUtilisateur();}
+
+    public void deleteEvent(Integer eventID) { eventDao.deleteEvent(eventID);}
 }
