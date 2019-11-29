@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 @WebFilter(filterName = "AdminFilter", urlPatterns = "/AdminFilter")
 public class AdminFilter implements Filter {
@@ -14,6 +15,7 @@ public class AdminFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         HttpServletRequest httpRequest = (HttpServletRequest) req;
         String pseudo = (String) httpRequest.getSession().getAttribute("pseudo");
 
