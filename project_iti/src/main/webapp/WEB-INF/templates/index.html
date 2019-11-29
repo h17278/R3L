@@ -38,7 +38,10 @@
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}"></h3>
+
                     <form name="DeleteEvent" action="DeleteEvent"><button type="submit" name="DeleteEvent" th:value="${event.id}">Supprimer l'événement</button></form>
+                    <form name="modifEvent" action="modifEvent"><button type="submit" name="modifEvent" th:value="${event.id}">Modifier l'événement</button></form>
+
                     <a> Voir le détail de cet évent </a>
                 </section>
             </figure>
@@ -70,7 +73,10 @@
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}"></h3>
+
                     <form name="DeleteEvent" action="DeleteEvent"><button type="submit" name="DeleteEvent" th:value="${event.id}">Supprimer l'événement</button></form>
+                    <form name="modifEvent" action="modifEvent"><button type="submit" name="modifEvent" th:value="${event.id}">Modifier l'événement</button></form>
+
                     <a href="event"> Voir le détail de cet évent </a>
                 </section>
             </figure>
