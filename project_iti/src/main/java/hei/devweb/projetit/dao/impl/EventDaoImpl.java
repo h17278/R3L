@@ -105,7 +105,7 @@ public class EventDaoImpl implements EventDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new RuntimeException("Request Execution Problem");
+        return null;
     }
 
     @Override

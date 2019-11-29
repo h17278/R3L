@@ -1,5 +1,6 @@
 package hei.devweb.projetit.controller;
 
+import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.service.EventService;
 import org.thymeleaf.TemplateEngine;
@@ -21,9 +22,15 @@ public class EventServlet extends GenericServlet {
         resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        Integer id = Integer.parseInt(req.getParameter("id"));
-        Event event = EventService.getInstance().getEvent(id);
-        context.setVariable("event", event);
+        List<Club> clubList = EventService.getInstance().clubList();
+        context.setVariable("clubList", clubList);
+        System.out.println(req.getQueryString());
+        String id = req.getQueryString();
+        String trueId = "";
+        for(int i = 6;i<id.length();i++){
+            trueId = trueId + id.charAt(i);
+        }
+        context.setVariable("event",EventService.getInstance().getEvent(Integer.valueOf(trueId)));
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("event", context, resp.getWriter());
