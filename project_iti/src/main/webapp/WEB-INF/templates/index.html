@@ -5,17 +5,24 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
+    <script src="js/searchBar.js" type="application/javascript"></script>
 </head>
 
 <body>
 
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
+<div id="SearchBar">
+    <input type="search" id="searchEventTest" onkeyup="searchEventTest()" placeholder="Rechercher un événement..." >
+</div>
+
 <main>
 
     <div id="left">
-        <article th:each="event,state : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'">
-            <figure th:if="${state.odd}">
+        <article th:each="event,state : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'"
+                 th:id="'rank-'+${state.count}" class="event left"
+                 th:if="${state.odd}">
+            <figure>
                 <section class="intro">
                     <img alt="Image du club" th:src="${event.club.lien}"/>
                     <figcaption>
@@ -37,7 +44,7 @@
 
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
-                    <h3 th:text="${event.bureau}"></h3>
+                    <h3 th:text="${event.bureau}" class="bureau"></h3>
                     <a> Voir le détail de cet évent </a>
                 </section>
             </figure>
@@ -45,8 +52,10 @@
     </div>
 
     <div id="right">
-        <article th:each="event, stat : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'">
-            <figure th:if="${stat.even}">
+        <article th:each="event, stat : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'"
+                 th:id="'rank-'+${stat.count}" class="event right"
+                 th:if="${stat.even}">
+            <figure>
                 <section class="intro">
                     <img alt="Image du club" th:src="${event.club.lien}"/>
                     <figcaption>
@@ -68,7 +77,7 @@
 
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
-                    <h3 th:text="${event.bureau}"></h3>
+                    <h3 th:text="${event.bureau}" class="bureau"></h3>
                     <a href="event"> Voir le détail de cet évent </a>
                 </section>
             </figure>

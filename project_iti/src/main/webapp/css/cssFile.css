@@ -58,6 +58,8 @@ h1 a {
 
 
 nav div#HEIvents {
+    /*display: inline-flex;*/
+    /*justify-content: space-around;*/
     display: inline-block;
     text-align: center;
 }
@@ -82,16 +84,55 @@ li#active {
     font-size: 1.4em;
 }
 
-/* ---------------------------------------------------- MAIN ------------------------------------------------------  */
+#SearchBar {
+    position: absolute;
+    right: 7em;
+    top: 2.5em;
+
+}
+
+#SearchBar input {
+    background-color: #4c4c4c;
+    color: darkorange;
+    border: none;
+    font-size: 1.1em;
+    padding-left: 0.7em;
+    font-family: CaviarDreams_Bold, Verdana, sans-serif;
+    border-radius: 50px;
+    width: 6.57em;
+    transition: width 1s ease, opacity 0.5s ease 0.5s;
+}
+
+#SearchBar input:focus {
+    outline: none;
+    width: 15em;
+
+}
+
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+
+    /* ---------------------------------------------------- MAIN ------------------------------------------------------  */
 body {
     margin: 0px;
     width: 100%;
     background-color: #454545;
     font-family: CaviarDreams, Verdana, sans-serif;
+    background-image: url('../img/art_deco_vintage_wallpaper.jpg');
+    background-repeat: repeat;
+    /*background-size: cover;*/
 }
 
 main {
     display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: auto;
 }
 
 main div {
@@ -105,11 +146,15 @@ div#right {
 
 /* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
 
-article figure {
+article section {
     background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
+}
+
+article figure {
     margin: 0.4em 0 0;
     padding: 0.4em;
     position: relative;
+    background-color: #f2ce76;
 }
 
 article {
@@ -141,6 +186,7 @@ article h2 {
 article figure section.intro {
     display: flex;
 }
+
 
 /* -------------------------------------------- FORMULAIRE --------------------------------------------------- */
 #newEvent {
