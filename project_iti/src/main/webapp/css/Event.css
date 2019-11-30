@@ -1,0 +1,171 @@
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url("../fonts/caviardreams-webfont.woff2") format("woff2"),
+    url('../fonts/caviardreams-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "CaviarDreams_Bold";
+    src: url("../fonts/caviardreams_bold-webfont.woff2") format("woff2"),
+    url('../fonts/caviardreams_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ----------------------------------------------- HEADER ------------------------------------------------------- */
+nav div {
+    display: inline-block;
+    background-color: black;
+    position: center;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+}
+
+section div {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    font-family: CaviarDreams_Bold, Verdana, sans-serif;
+}
+
+#HEIvents {
+    border-bottom: gray 1px solid;
+}
+
+h1 a {
+    text-decoration: none;
+    color: gray;
+}
+
+#Connexion input, #Deconnexion input{
+    position: absolute;
+    top: 0.8em;
+    right: 1em;
+    width:82px;
+    height:82px;
+    background:#fafafa;
+    box-shadow:2px 2px 8px #aaa;
+    font:bold 13px Arial;
+    border-radius:50%;
+    color:#555;
+}
+
+
+nav div#HEIvents {
+    display: inline-block;
+    text-align: center;
+}
+
+nav div ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+nav div ul li {
+    display: inline-block;
+    padding: 1em;
+}
+
+nav div ul li a {
+    text-decoration: none;
+    list-style-type: none;
+    color: gray;
+}
+
+li#active {
+    font-size: 1.4em;
+}
+
+/* ---------------------------------------------------- MAIN ------------------------------------------------------  */
+body {
+    margin: 0px;
+    width: 100%;
+    background-color: #454545;
+    font-family: CaviarDreams, Verdana, sans-serif;
+}
+
+p {
+    font-family: CaviarDreams, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+}
+
+main div {
+    width : 49%;
+    margin : 0 0.35em 0 0.35em;
+}
+
+div#right {
+    margin-top : 6em;
+}
+
+/* -------------------------------------------BOUTONS---------------------------------------------------- */
+
+.bouton {
+    padding: 8px 10px;
+    margin: 3px 4px;
+    display: inline-block;
+    color: #0A0000;
+    font-size: 15px;
+    cursor: pointer;
+    background: #F2E9E9;
+    background: linear-gradient(top, #F2E9E9 0%, #d9d0d0 100%);
+    border: 2px solid #00060c;
+    border-radius: 5px;
+    box-shadow:0px 0px 4px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------------- ARTICLE ---------------------------------------------------- */
+
+article section {
+    background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
+    margin: 0.4em 0 0;
+    padding: 0.4em;
+    position: relative;
+}
+
+article {
+    margin: 0.7em auto;
+    width: 70%;
+}
+
+article figure img{
+    height: 250px;
+    width: 250px;
+}
+
+#date {
+    position: absolute;
+    top: -0.5em;
+    right: 1em;
+}
+
+#details {
+    text-align: justify;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+figure {
+    display: flex;
+    margin : 0em;
+}
+
+figure img {
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+}
+
+figcaption {
+    text-align: center;
+    width: 65%;
+}

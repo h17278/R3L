@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Clubs</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
+    <link href="css/Associations.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -14,26 +14,27 @@
     <figure>
         <img alt="image de l association" th:src="${club.lien}" width="150">
         <figcaption>
-            <h1 th:text="${club.name}"></h1>
-        </figcaption>
-        <table>
-            <tr>
-                <th> Administrateurs :</th>
-            </tr>
-            <tr th:each="admin : ${userList}" th:if="${admin.getPresident() and admin.getClub() == club.id}">
-                <td th:text="${admin.getPseudo()}"></td>
-            </tr>
+            <h1 class = "titre_assos" th:text="${club.name}"></h1>
+            <table>
+                <tr>
+                    <th> Administrateurs :</th>
+                </tr>
+                <tr th:each="admin : ${userList}" th:if="${admin.getPresident() and admin.getClub() == club.id}">
+                    <td th:text="${admin.getPseudo()}"></td>
+                </tr>
 
-            <tr>
-                <th> Membres :</th>
-            </tr>
-            <tr th:each="admin : ${userList}" th:if="${!admin.getPresident() and admin.getClub() == club.id}">
-                <td th:text="${admin.getPseudo()}"></td>
-            </tr>
-        </table>
+                <tr>
+                    <th> Membres :</th>
+                </tr>
+                <tr th:each="admin : ${userList}" th:if="${!admin.getPresident() and admin.getClub() == club.id}">
+                    <td th:text="${admin.getPseudo()}"></td>
+                </tr>
+            </table>
+        </figcaption>
 
     </figure>
 </article>
+
 
 </body>
 </html>

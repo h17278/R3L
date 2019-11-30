@@ -45,7 +45,7 @@
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}" class="bureau"></h3>
-                    <a> Voir le détail de cet évent </a>
+                    <form name="event" action="event"><button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button></form>
                 </section>
             </figure>
         </article>
@@ -78,7 +78,7 @@
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}" class="bureau"></h3>
-                    <a href="event"> Voir le détail de cet évent </a>
+                    <form name="event" action="event"><button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button></form>
                 </section>
             </figure>
         </article>

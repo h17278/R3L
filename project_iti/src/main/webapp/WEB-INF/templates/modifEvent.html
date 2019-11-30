@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Event</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<nav th:replace="~{fragments::menu('addevent')}"></nav>
+
+<form id="newEvent" method="post" action="modifEvent" accept-charset="UTF-8">
+    <div>
+        <div>
+            <input type="number" name="id" id="id" th:value="${event.id}" style="display: none"/>
+            <label for="title">Titre de l'événement</label>
+            <input type="text" name="title" id="title" th:value="${event.title}" required/>
+        </div>
+        <div class>
+            <label> Association </label>
+            <select th:field="*{clubList}" id="club_id" name="club_id" >
+                <option th:value="${event.getClub().getId()}" th:text="${event.getClub().name}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="event_date">Date de l'événement</label>
+            <input type="date" name="event_date" id="event_date" th:value="${event.getEventDate()}"} required/>
+        </div>
+        <div>
+            <label for="image_link">Mettre l'URL de l'image de l'événement</label>
+            <input type="text" name="image_link" id="image_link" maxlenght="1000" th:value="${event.image_link}" required/>
+        </div>
+    </div>
+    <div>
+        <div>
+            <label for="resume">Courte description de l'événement (maximum 100 caractères)</label>
+            <input type="text" name="resume" id="resume" maxlength="100" th:value="${event.resume}" required/>
+        </div>
+        <div>
+            <label for="details">Détails de l'événement (maximum 10 000 caractères)</label>
+            <input  type="text" name="details" id="details" maxlength="10000" th:value="${event.details}" required/>
+        </div>
+        <div>
+            Bureau qui gère l'événement
+            <input type="radio" name="bureau" th:value="${event.bureau}" th:text="${event.bureau}" checked="checked" required>
+        </div>
+    </div>
+    <button onclick="maFonctionTestResume()" type="submit">
+        Add event
+    </button>
+</form>
+</body>
+</html>
