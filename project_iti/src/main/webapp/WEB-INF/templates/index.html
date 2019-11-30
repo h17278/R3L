@@ -42,6 +42,10 @@
 
                 <h4 th:text="${event.eventDate}"></h4>
 
+                <!--
+                <img src="../../img/background%20leger.jpg" alt="separator"/>
+                -->
+
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}" class="bureau"></h3>

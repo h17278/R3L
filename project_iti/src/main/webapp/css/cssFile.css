@@ -84,31 +84,31 @@ li#active {
     font-size: 1.4em;
 }
 
+/* SearchBar */
+
 #SearchBar {
     position: absolute;
     right: 7em;
     top: 2.5em;
 
 }
-
 #SearchBar input {
     background-color: #4c4c4c;
-    color: darkorange;
+    color: #aa9168;
     border: none;
     font-size: 1.1em;
     padding-left: 0.7em;
     font-family: CaviarDreams_Bold, Verdana, sans-serif;
     border-radius: 50px;
     width: 6.57em;
-    transition: width 1s ease, opacity 0.5s ease 0.5s;
+    opacity: 80%;
+    transition: width 1s ease, opacity 0.5s;
 }
-
 #SearchBar input:focus {
     outline: none;
     width: 15em;
-
+    opacity: 100%;
 }
-
 input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
 input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
 input[type="search"]::-webkit-search-decoration,
@@ -123,9 +123,8 @@ body {
     width: 100%;
     background-color: #454545;
     font-family: CaviarDreams, Verdana, sans-serif;
-    background-image: url('../img/art_deco_vintage_wallpaper.jpg');
+    background-image: url('../img/background leger infinite.jpg');
     background-repeat: repeat;
-    /*background-size: cover;*/
 }
 
 main {
@@ -144,10 +143,28 @@ div#right {
     margin-top : 6em;
 }
 
+/* ScrollBar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #292929;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #aa9168;
+    /*border-radius: 30px;*/
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 /* --------------------------------------------------- ARTICLE EVENTS -----------------------------------------------------    */
 
 article figure {
-    background-image: linear-gradient(-90deg, white 0%, lightgray 50%, gray 100%);
+    background-image: linear-gradient(-90deg, #f6f3ca 0%, #aa9168 100%);
     margin: 0.4em 0 0;
     padding: 0.4em;
     position: relative;
@@ -157,7 +174,7 @@ article {
     margin: 0.7em auto;
 }
 
-article figure img{
+article figure section img{
     height: 180px;
     width: 180px;
 }
@@ -182,6 +199,7 @@ article h2 {
 article figure section.intro {
     display: flex;
 }
+
 
 
 /* -------------------------------------------- FORMULAIRE --------------------------------------------------- */
