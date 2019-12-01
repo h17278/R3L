@@ -4,10 +4,7 @@ package hei.devweb.projetit.controller;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.UserService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -21,12 +18,19 @@ public class UserController {
         return UserService.getInstance().listUtilisateur();
     }
 
-/*
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Utilisateur getUtilisateur(
-            @PathParam("id") Integer userId){
-        return UserService.getInstance().getUser(userId);
+
+    @DELETE
+    @Path("/{userId}")
+    public void deleteCity(
+            @PathParam("userId") String userId) {
+        UserService.getInstance().deleteUser(userId);
     }
-*/
+
+    @PATCH
+    @Path("/{userId}")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void updateUser(
+            @PathParam("userId") String userId) {
+        UserService.getInstance().updateUser(userId);
+    }
 }

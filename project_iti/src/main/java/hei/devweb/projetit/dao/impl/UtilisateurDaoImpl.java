@@ -4,12 +4,17 @@ import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.service.UserService;
 
+import java.lang.invoke.SerializedLambda;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
+
+    private List<Utilisateur> users;
 
     @Override
     public Utilisateur getUtilisateur(Integer id) {
@@ -109,4 +114,37 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void deleteUtilisateur(String id) {
+        String sqlQuery = "DELETE FROM utilisateur WHERE utilisateur_id=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
+                statement.setString(1, id);
+                System.out.println(sqlQuery);
+                statement.executeUpdate();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void isPres(String id) {
+        String sqlQuery = "UPDATE utilisateur SET president = ? WHERE utilisateur_id=? ";
+
+        Boolean pres = UserService.getInstance().getUser(Integer.parseInt(id)).getPresident();
+        System.out.println("is Pres ? : " + pres);
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
+                statement.setBoolean(1,!pres);
+                statement.setString(2, id);
+                statement.executeUpdate();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

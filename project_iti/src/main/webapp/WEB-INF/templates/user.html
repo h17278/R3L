@@ -13,22 +13,19 @@
 <nav th:replace="~{fragments::menu('user')}"></nav>
 
 <main>
-
+<div>
     <table id="listUsers">
-        <tr>
+        <thead>
             <th>Pseudo</th>
             <th>Mail</th>
             <th>President</th>
             <th> Club </th>
-        </tr>
-        <!--
-        <tr id="user-1">
-            <td> Premier pseudo </td>
-            <td> Premier mail </td> etc.
-        </tr>
-        -->
-    </table>
+        </thead>
+        <tbody id="listUsersBody">
 
+        </tbody>
+    </table>
+</div>
 
 </main>
 

@@ -53,4 +53,21 @@ public class UserService {
 
     }
 
+    public void deleteUser(String userId) {
+        if (userId == null) {
+            throw new IllegalArgumentException("A city code must be provided in order to delete a city.");
+        }
+        /*
+        if (!utilisateurDao.existsUtilisateur(userId)) {
+            throw new CityNotFoundException(String.format("The city with code %s does not exist and can not be deleted.", cityCode));
+        } */
+        utilisateurDao.deleteUtilisateur(userId);
+    }
+
+    public void updateUser(String id){
+        utilisateurDao.isPres(id);
+    }
+
+
+
 }
