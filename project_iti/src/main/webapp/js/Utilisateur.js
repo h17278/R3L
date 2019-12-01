@@ -72,7 +72,7 @@ let gerenerateLine = function(users){
 };
 
 let deleteUser = function (user) {
-    if (confirm("Are you sure you want to delete " + user.pseudo + ") ?")) {
+    if (confirm("Are you sure you want to delete " + user.pseudo + " ?")) {
         let deleteRequest = new XMLHttpRequest();
         deleteRequest.open("DELETE", "ws/users/" + user.idutilisateur, true);
 
