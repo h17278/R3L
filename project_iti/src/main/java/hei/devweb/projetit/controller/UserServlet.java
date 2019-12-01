@@ -21,9 +21,6 @@ public class UserServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
-        List<Utilisateur> userList = EventService.getInstance().utilisateurList();
-        context.setVariable("userList", userList);
-
         templateEngine.process("user", context, resp.getWriter());
     }
 }
