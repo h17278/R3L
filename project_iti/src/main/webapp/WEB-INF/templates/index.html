@@ -10,6 +10,28 @@
 
 <body>
 
+
+<script>
+    document.getElementsByTagName("body")[0].onscroll = function() {navPosition()};
+
+    function navPosition() {
+        if(window.scrollY > 115) {
+            console.log("Scroll limit");
+            document.getElementById("NavBar").style.position = 'fixed';
+            document.getElementById("NavBar").style.display = '';
+            document.getElementById("NavBar").style.top = '0';
+            document.getElementById("NavBar").style.left = '0';
+            document.getElementById("NavBar").style.zIndex = '1';
+
+        } else {
+            document.getElementById("NavBar").style.position = '';
+            document.getElementById("NavBar").style.display = 'block';
+        }
+
+    }
+</script>
+
+
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
 <div id="SearchBar">
@@ -42,13 +64,10 @@
 
                 <h4 th:text="${event.eventDate}"></h4>
 
-                <!--
-                <img src="../../img/background%20leger.jpg" alt="separator"/>
-                -->
-
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}" class="bureau"></h3>
+                    <img src="img/button.png" class="buttonImage" alt="button"/>
                     <form name="event" action="event"><button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button></form>
                 </section>
             </figure>
@@ -82,6 +101,7 @@
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}" class="bureau"></h3>
+                    <img src="img/line.png" class="buttonImage" alt="button"/>
                     <form name="event" action="event"><button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button></form>
                 </section>
             </figure>

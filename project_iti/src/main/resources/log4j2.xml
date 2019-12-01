@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration strict="true">
+
+    <appenders>
+        <appender type="Console" name="CONSOLE">
+            <layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </appender>
+        <appender type="File" name="FILE" fileName="target/test.log">
+            <layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </appender>
+    </appenders>
+
+    <loggers>
+        <logger name="hei.devops" level="warn">
+            <appenderRef ref="CONSOLE"/>
+        </logger>
+        <root level="error">
+            <appenderRef ref="FILE"/>
+            <appenderRef ref="CONSOLE"/>
+        </root>
+    </loggers>
+
+</configuration>
