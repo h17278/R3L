@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Utilisateurs</title>
+    <title> HEIvents </title>
+    <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
+    <script src="js/Utilisateur.js" type="application/javascript"></script>
 </head>
+
 <body>
 
 <nav th:replace="~{fragments::menu('user')}"></nav>
 
 <main>
 
-    <h3>Liste des utilisateurs</h3>
+    <table id="listUsers">
+        <thead>
+            <th>Pseudo</th>
+            <th>Mail</th>
+            <th>President</th>
+            <th> Club </th>
+        </thead>
+        <tbody id="listUsersBody">
 
+        </tbody>
+    </table>
 
 </main>
 

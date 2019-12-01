@@ -14,7 +14,7 @@
             <div id="Deconnexion" th:if="${!session.isEmpty()}"><input type="button"  name="Deconnexion" value="Deconnexion"  onclick="location.href='deconnection';"/></div>
             <!-- SI PAS CONNECTE -->
             <div id="Connexion" th:if="${session.isEmpty()}"><input type="button" name="Connexion" value="Connexion" onclick="location.href='connection';"/></div>
-            <span th:if="${!session.isEmpty()}" th:text="'Bonjour, ' + ${session.pseudo}"></span>
+            <p  th:if="${!session.isEmpty()}">Bonjour, <span th:text="${session.pseudo}" id="userName"></span></p>
         </div>
 
 

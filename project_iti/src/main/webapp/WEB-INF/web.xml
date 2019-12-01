@@ -25,6 +25,7 @@
 		<url-pattern>/addevent</url-pattern>
 		<url-pattern>/modifEvent</url-pattern>
 		<url-pattern>/DeleteEvent</url-pattern>
+		<url-pattern>/user</url-pattern>
 		<!-- METTRE ICI LES URL EN RELATIVE -->
 	</filter-mapping>
 

@@ -304,4 +304,10 @@ input[type=submit]:hover {
 }
 
 
+/* ----------------------------------------- TABLE  ------------------------------------------------------- */
+
+table#listUsers{
+    background-color: whitesmoke;
+}
+
 
