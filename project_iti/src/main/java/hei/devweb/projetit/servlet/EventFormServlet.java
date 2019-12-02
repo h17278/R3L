@@ -1,4 +1,4 @@
-package hei.devweb.projetit.controller;
+package hei.devweb.projetit.servlet;
 
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;

@@ -1,7 +1,7 @@
-package hei.devweb.projetit.controller;
+package hei.devweb.projetit.servlet;
 
 
-import de.mkammerer.argon2.Argon2;
+import hei.devweb.projetit.controller.PasswordUtils;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;

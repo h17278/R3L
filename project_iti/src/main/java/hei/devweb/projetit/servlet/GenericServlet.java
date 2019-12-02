@@ -1,4 +1,4 @@
-package hei.devweb.projetit.controller;
+package hei.devweb.projetit.servlet;
 
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
