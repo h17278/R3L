@@ -38,7 +38,6 @@ public class RegisterServlet extends GenericServlet {
         String pseudo = req.getParameter("pseudo");
         String motdepasse = req.getParameter("motdepasse");
         String mail = req.getParameter("mail");
-        Boolean statut = Boolean.valueOf(req.getParameter("president"));
         club_id = Integer.valueOf(req.getParameter("club_id"));
         String mdpHash = PasswordUtils.genererMotDePasse(motdepasse);
 
@@ -53,7 +52,7 @@ public class RegisterServlet extends GenericServlet {
         }
         if(flag) {
             //CREATE USER
-            Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, statut, club_id);
+            Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, false, club_id);
             Utilisateur createdUser = EventService.getInstance().addUtilisateur(newUser);
             // REDIRECT TO EVENTS LIST
             resp.sendRedirect("connection");

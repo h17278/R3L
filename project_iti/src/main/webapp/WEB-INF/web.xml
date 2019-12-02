@@ -29,4 +29,15 @@
 		<!-- METTRE ICI LES URL EN RELATIVE -->
 	</filter-mapping>
 
+	<filter>
+		<filter-name>ConnexionFilter</filter-name>
+		<filter-class>hei.devweb.projetit.exception.ConnexionFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ConnexionFilter</filter-name>
+		<url-pattern>/event</url-pattern>
+		<!-- METTRE ICI LES URL EN RELATIVE -->
+	</filter-mapping>
+
 </web-app>
