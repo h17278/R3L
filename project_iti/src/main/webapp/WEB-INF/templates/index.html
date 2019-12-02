@@ -74,7 +74,7 @@
                     </figcaption>
                 </section>
 
-                <h4 th:text="${event.eventDate}"></h4>
+                <h4 th:text="${#temporals.format(event.eventDate, 'd MMMM yyyy')}"></h4>
 
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
@@ -108,7 +108,7 @@
                     </figcaption>
                 </section>
 
-                <h4 th:text="${event.eventDate}"></h4>
+                <h4 th:text="${#temporals.format(event.eventDate, 'd MMMM yyyy')}"></h4>
 
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>

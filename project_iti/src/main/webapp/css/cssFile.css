@@ -303,10 +303,9 @@ input[type=submit]:hover {
     background-color: transparent;
 }
 
-
 /* ----------------------------------------- TABLE  ------------------------------------------------------- */
 
-table#listUsers{
+table#listUsers, table#listClubs{
     background-color: whitesmoke;
 }
 

@@ -1,7 +1,7 @@
-package hei.devweb.projetit.controller;
+package hei.devweb.projetit.servlet;
 
 
-import de.mkammerer.argon2.Argon2;
+import hei.devweb.projetit.controller.PasswordUtils;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
@@ -38,7 +38,7 @@ public class RegisterServlet extends GenericServlet {
         String pseudo = req.getParameter("pseudo");
         String motdepasse = req.getParameter("motdepasse");
         String mail = req.getParameter("mail");
-        Boolean statut = Boolean.valueOf(req.getParameter("president"));
+        Boolean president = Boolean.parseBoolean(req.getParameter("status"));
         club_id = Integer.valueOf(req.getParameter("club_id"));
         String mdpHash = PasswordUtils.genererMotDePasse(motdepasse);
 
@@ -53,10 +53,15 @@ public class RegisterServlet extends GenericServlet {
         }
         if(flag) {
             //CREATE USER
-            Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, statut, club_id);
+            Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, president, club_id);
             Utilisateur createdUser = EventService.getInstance().addUtilisateur(newUser);
             // REDIRECT TO EVENTS LIST
-            resp.sendRedirect("connection");
+            System.out.println(req.getSession().getAttributeNames());
+            if (req.getSession().getAttribute("pseudo") != null) {
+                resp.sendRedirect("user");
+            } else{
+                resp.sendRedirect("connection");
+            }
         } else{
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Pseudo déjà utilisé');");

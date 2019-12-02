@@ -20,6 +20,7 @@
                 <label> Association </label>
                 <select th:field="*{clubList}" id="club_id" name="club_id">
                     <option th:each="club : ${clubList}"
+                            th:if="${club.id == session.club}"
                             th:value="${club.id}"
                             th:text="${club.name}"
                     >

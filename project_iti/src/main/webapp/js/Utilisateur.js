@@ -101,7 +101,42 @@ let updateUser = function (user) {
     saveRequest.send();
 };
 
+let listClubs = function () {
+    let usersRequest = new XMLHttpRequest();
+
+    usersRequest.open("GET", "ws/clubs", true);
+    usersRequest.responseType = "json";
+
+    usersRequest.onload = function () {
+        let clubs = this.response;
+        console.log(clubs);
+        refreshClubTable(clubs);
+    };
+
+    usersRequest.send();
+};
+let createClubLine = function(club){
+    let lineElement = document.createElement("tr");
+
+    lineElement.id = "club-" + club.id;
+
+    lineElement.appendChild(createCell(club.id));
+    lineElement.appendChild(createCell(club.name));
+
+    return lineElement;
+};
+
+let refreshClubTable = function (clubs) {
+    let tableElement = document.getElementById("listClubsBody");
+    var newTableElement = tableElement.cloneNode(false);
+    for (const club of clubs) {
+        newTableElement.appendChild(createClubLine(club));
+    }
+    tableElement.parentNode.replaceChild(newTableElement, tableElement);
+};
+
 
 window.onload = function(){
     listUsers();
+    listClubs();
 };

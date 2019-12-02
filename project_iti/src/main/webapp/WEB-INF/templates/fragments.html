@@ -25,14 +25,14 @@
                    <img src="img/dot.png" alt="dot"/>
                </li>
                <li th:id="${currentPage == 'home' ? 'active' : ''}" id="refTest"><a href="home">Evenements</a></li>
-               <li>
+               <li th:if="${session.president}">
                    <img src="img/dot.png" alt="dot"/>
                </li>
-               <li th:id="${currentPage == 'addevent' ? 'active' : ''}"><a href="addevent">Ajout</a></li>
-               <li>
+               <li th:if="${session.president}" th:id="${currentPage == 'addevent' ? 'active' : ''}"><a href="addevent">Ajout</a></li>
+               <li th:if="${session.president}">
                    <img src="img/dot.png" alt="dot"/>
                </li>
-               <li th:id="${currentPage == 'user' ? 'active' : ''}"><a href="user">Utilisateur</a></li>
+               <li th:if="${session.president}" th:id="${currentPage == 'user' ? 'active' : ''}"><a href="user">Utilisateur</a></li>
            </ul>
         </div>
 
