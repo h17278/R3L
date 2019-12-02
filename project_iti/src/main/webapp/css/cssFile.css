@@ -144,7 +144,7 @@ input[type="search"]::-webkit-search-results-decoration,
 
 /* ---------------------------------------------------- MAIN ------------------------------------------------------  */
 body {
-    margin: 0px;
+    margin: 0;
     width: 100%;
     background-color: #454545;
     font-family: CaviarDreams, Verdana, sans-serif;
