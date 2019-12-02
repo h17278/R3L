@@ -52,9 +52,9 @@ public class ModifEventServlet extends GenericServlet {
 
         // CREATE EVENT
         Club club = EventService.getInstance().getClub(club_id);
-        EventService.getInstance().deleteEvent(eventId);
-        Event newEvent = new Event(null, title, club, event_date, bureau, image_link, resume, details);
-        Event createdEvent = EventService.getInstance().addEvent(newEvent);
+
+        Event updatedEvent = new Event(eventId, title, club, event_date, bureau, image_link, resume, details);
+        EventService.getInstance().updateEvent(updatedEvent);
 
         // REDIRECT TO EVENTS LIST
         resp.sendRedirect("home");

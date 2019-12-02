@@ -16,7 +16,8 @@ public class AdminFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        HttpServletRequest httpRequest = (HttpServletRequest) req;
+        HttpServletRequest httpRequest;
+        httpRequest = (HttpServletRequest) req;
         String pseudo = (String) httpRequest.getSession().getAttribute("pseudo");
 
         Boolean president = (Boolean) httpRequest.getSession().getAttribute("president");
@@ -27,20 +28,19 @@ public class AdminFilter implements Filter {
 
         if(pseudo == null){
             System.out.println("Il faut être connecté pour accéder à cette page !");
-            HttpServletResponse httpResponse = (HttpServletResponse) resp;
+
 
             System.out.println("passe par le if president");
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('Il faut être connecté et président pour accéder à cette page !');");
+            out.println("alert('Il faut se connecter et être président pour accéder à cette page !');");
             out.println("window.location.href = 'connection';");
             out.println("</script>");
 
             return;
         }
 
-        if (!president && president != null)  {
+        if (!president)  {
                 System.out.println("Il faut être connecté et président pour accéder à cette page !");
-                HttpServletResponse httpResponse = (HttpServletResponse) resp;
 
                 System.out.println("passe par le if president");
                 out.println("<script type=\"text/javascript\">");

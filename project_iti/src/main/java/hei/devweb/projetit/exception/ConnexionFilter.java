@@ -30,8 +30,8 @@ public class ConnexionFilter implements Filter {
             HttpServletResponse httpResponse = (HttpServletResponse) resp;
 
             System.out.println("passe par le if president");
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Il faut être connecté à cette page !');");
+            out.println("<script type=\"text/javascript\" charset=\"utf-8\">");
+            out.println("alert('Il faut se connecter pour visualiser cette page !');");
             out.println("window.location.href = 'connection';");
             out.println("</script>");
 

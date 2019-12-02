@@ -86,7 +86,7 @@ public class EventDaoImpl implements EventDao {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, event.getTitle());
                 statement.setInt(2, event.getClub().getId());
-                statement.setDate(3, Date.valueOf(event.getEventDate()));
+                statement.setDate(3,Date.valueOf(event.getEventDate()));
                 statement.setString(4, event.getBureau());
                 statement.setString(5, event.getImage_link());
                 statement.setString(6, event.getResume());
@@ -120,5 +120,26 @@ public class EventDaoImpl implements EventDao {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Event updateEvent(Event event) {
+        String sqlQuery = "UPDATE event SET title = ? , event_date = ?, image_link = ?, resume = ?, details = ?  WHERE event_id=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
+                statement.setString(1,event.getTitle());
+                statement.setDate(2,Date.valueOf(event.getEventDate()));
+                statement.setString(3,event.getImage_link());
+                statement.setString(4, event.getResume());
+                statement.setString(5, event.getDetails() );
+                statement.setInt(6, event.getId());
+
+                statement.executeUpdate();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return event;
     }
 }
