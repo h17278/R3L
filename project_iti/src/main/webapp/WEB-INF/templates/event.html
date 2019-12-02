@@ -25,7 +25,7 @@
             <p id ="details" th:text="${event.details}"></p>
             <h4 id="date" th:text="${event.eventDate}"></h4>
 
-            <div id="formulaire">
+            <div id="formulaire" th:if="${session.president}">
                 <form class = "newinfos" name="modifEvent" action="modifEvent"><button class="bouton" type="submit" name="modifEvent" th:value="${event.id}">Modifier l'événement</button></form>
                 <form class = "newinfos" name="DeleteEvent" action="DeleteEvent"><button class="bouton" type="submit" name="DeleteEvent" th:value="${event.id}">Supprimer l'événement</button></form>
             </div>
