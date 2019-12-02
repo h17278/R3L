@@ -19,7 +19,7 @@
             console.log("Scroll limit");
             let nav = document.getElementsByTagName("nav")[0];
             let navBarList = nav.getElementsByTagName("div");
-            if (navBarList.length < 4) {
+            if (navBarList.length < 3) {
                 let newNavBar = document.getElementById("NavBar").cloneNode(true);
                 nav.appendChild(newNavBar);
                 document.getElementById("NavBar").style.position = 'fixed';
@@ -32,7 +32,7 @@
             let nav = document.getElementsByTagName("nav")[0];
             let navBarList = nav.getElementsByTagName("div");
             let i = navBarList.length -1;
-            if (navBarList.length > 3) {
+            if (navBarList.length > 2) {
                 navBarList[i].remove();
             }
             document.getElementById("NavBar").style.position = '';
@@ -47,7 +47,7 @@
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
 <div id="SearchBar">
-    <input type="search" id="searchEventTest" onkeyup="searchEventTest()" placeholder="Rechercher un événement..." >
+    <input type="search" id="searchEvent" onkeyup="searchEvent()" placeholder="Rechercher un événement..." >
 </div>
 
 <main>
@@ -79,8 +79,11 @@
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}" class="bureau"></h3>
-                    <img src="img/button.png" class="buttonImage" alt="button"/>
-                    <form name="event" action="event"><button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button></form>
+                    <form name="event" action="event">
+                        <button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button>
+                        <img src="img/line.png" class="buttonImage" alt="button"/>
+                    </form>
+
                 </section>
             </figure>
         </article>
@@ -113,8 +116,10 @@
                 <section th:id="'infoDiv' + ${event.id}" style="display:none;">
                     <h3 th:text="${event.resume}"></h3>
                     <h3 th:text="${event.bureau}" class="bureau"></h3>
-                    <img src="img/line.png" class="buttonImage" alt="button"/>
-                    <form name="event" action="event"><button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button></form>
+                    <form name="event" action="event">
+                        <button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button>
+                        <img src="img/line.png" class="buttonImage" alt="button"/>
+                    </form>
                 </section>
             </figure>
         </article>

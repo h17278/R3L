@@ -1,5 +1,5 @@
 
-function searchEventTest() {
+function searchEvent() {
     let articleList = [];
     for (let j=0; j<document.getElementsByTagName('article').length; j++) {
         articleList.push(document.getElementById('rank-' + (j+1).toString()));
