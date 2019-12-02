@@ -12,7 +12,9 @@
 
 
 <script>
-    document.getElementsByTagName("body")[0].onscroll = function() {navPosition()};
+    document.getElementsByTagName("body")[0].onscroll = function () {
+        navPosition()
+    };
 
     function navPosition() {
         if (window.scrollY > 115) {
@@ -31,15 +33,13 @@
         } else {
             let nav = document.getElementsByTagName("nav")[0];
             let navBarList = nav.getElementsByTagName("div");
-            let i = navBarList.length -1;
+            let i = navBarList.length - 1;
             if (navBarList.length > 2) {
                 navBarList[i].remove();
             }
             document.getElementById("NavBar").style.position = '';
             document.getElementById("NavBar").style.display = 'block';
-
         }
-
     }
 </script>
 
@@ -47,7 +47,7 @@
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
 <div id="SearchBar">
-    <input type="search" id="searchEvent" onkeyup="searchEvent()" placeholder="Rechercher un événement..." >
+    <input type="search" id="searchEvent" onkeyup="searchEvent()" placeholder="Rechercher un événement...">
 </div>
 
 <main>
@@ -76,15 +76,13 @@
 
                 <h4 th:text="${#temporals.format(event.eventDate, 'd MMMM yyyy')}"></h4>
 
-                <section th:id="'infoDiv' + ${event.id}" style="display:none;">
-                    <h3 th:text="${event.resume}"></h3>
-                    <h3 th:text="${event.bureau}" class="bureau"></h3>
-                    <form name="event" action="event">
-                        <button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button>
-                        <img src="img/line.png" class="buttonImage" alt="button"/>
-                    </form>
+                <h3 th:text="${event.resume}"></h3>
+                <h3 th:text="${event.bureau}" class="bureau"></h3>
+                <form name="event" action="event">
+                    <button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button>
+                    <img src="img/line.png" class="buttonImage" alt="button"/>
+                </form>
 
-                </section>
             </figure>
         </article>
     </div>
@@ -112,15 +110,12 @@
                 </section>
 
                 <h4 th:text="${#temporals.format(event.eventDate, 'd MMMM yyyy')}"></h4>
-
-                <section th:id="'infoDiv' + ${event.id}" style="display:none;">
-                    <h3 th:text="${event.resume}"></h3>
-                    <h3 th:text="${event.bureau}" class="bureau"></h3>
-                    <form name="event" action="event">
-                        <button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button>
-                        <img src="img/line.png" class="buttonImage" alt="button"/>
-                    </form>
-                </section>
+                <h3 th:text="${event.resume}"></h3>
+                <h3 th:text="${event.bureau}" class="bureau"></h3>
+                <form name="event" action="event">
+                    <button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button>
+                    <img src="img/line.png" class="buttonImage" alt="button"/>
+                </form>
             </figure>
         </article>
     </div>
