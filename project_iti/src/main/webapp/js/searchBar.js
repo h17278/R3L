@@ -8,8 +8,8 @@ function searchEvent() {
 
     let result = [];
     let side="left";
-    let input = document.getElementById("searchEventTest").value.toLowerCase();
-    console.log("searchEventTest="+input);
+    let input = document.getElementById("searchEvent").value.toLowerCase();
+    console.log("searchEvent="+input);
     for (let i=0; i<articleList.length; i++) {
         let article = articleList[i];
         let h1 = document.querySelector("article#rank-"+(i+1)+" h1").innerText.toLowerCase();
