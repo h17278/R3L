@@ -26,7 +26,7 @@ let createLine = function(user){
     lineElement.appendChild(createCell(user.club));
 
     let updateButton = document.createElement("button");
-    updateButton.title = "Update this user";
+    updateButton.title = "Changer les autorisations de cette utilisateur";
     updateButton.innerText = "Changer autorisation";
     updateButton.onclick = function () {
         updateUser(user);
@@ -34,7 +34,7 @@ let createLine = function(user){
     lineElement.appendChild(updateButton);
 
     let deleteButton = document.createElement("button");
-    deleteButton.title = "Delete this user";
+    deleteButton.title = "Supprimer "+user.pseudo;
     deleteButton.innerText = "Supprimer";
     deleteButton.onclick = function () {
         deleteUser(user);
@@ -71,15 +71,23 @@ let gerenerateLine = function(users){
 };
 
 let deleteUser = function (user) {
-    if (confirm("Are you sure you want to delete " + user.pseudo + " ?")) {
-        let deleteRequest = new XMLHttpRequest();
-        deleteRequest.open("DELETE", "ws/users/" + user.idutilisateur, true);
+    let userName = document.getElementById("userName").innerText;
+    console.log("pseudo de l utilisateur : " + userName);
+    console.log("pseudo utilisateur à supprimer : " + user.pseudo);
+    if(userName !== user.pseudo) {
+        if (confirm("Are you sure you want to delete " + user.pseudo + " ?")) {
+            let deleteRequest = new XMLHttpRequest();
+            deleteRequest.open("DELETE", "ws/users/" + user.idutilisateur, true);
 
-        deleteRequest.onload = function () {
-            listUsers();
-        };
+            deleteRequest.onload = function () {
+                listUsers();
+            };
 
-        deleteRequest.send();
+            deleteRequest.send();
+        }
+    }
+    else{
+        alert("Vous ne pouvez pas supprimer vous supprimer");
     }
 };
 
