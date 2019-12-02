@@ -18,12 +18,18 @@ let createLine = function(user){
     lineElement.id = "user-" + user.idutilisateur;
     lineElement.appendChild(createCell(user.pseudo));
     lineElement.appendChild(createCell(user.mail));
+
+
     if(user.president === true) {
-        lineElement.appendChild(createCell("président"));
+        lineElement.appendChild(createCell("Président"));
     } else {
         lineElement.appendChild(createCell("Membre"));
     }
-    lineElement.appendChild(createCell(user.club));
+
+    let nameClub = document.getElementById("name-" + user.club).innerText;
+    console.log(nameClub);
+    lineElement.appendChild(createCell(nameClub));
+    //lineElement.appendChild(createCell(user.club));
 
     let updateButton = document.createElement("button");
     updateButton.title = "Changer les autorisations de cette utilisateur";
@@ -121,7 +127,9 @@ let createClubLine = function(club){
     lineElement.id = "club-" + club.id;
 
     lineElement.appendChild(createCell(club.id));
-    lineElement.appendChild(createCell(club.name));
+    cellName = createCell(club.name);
+    cellName.id = "name-" + club.id ;
+    lineElement.appendChild(cellName);
 
     return lineElement;
 };
@@ -132,11 +140,12 @@ let refreshClubTable = function (clubs) {
     for (const club of clubs) {
         newTableElement.appendChild(createClubLine(club));
     }
+
     tableElement.parentNode.replaceChild(newTableElement, tableElement);
 };
 
 
 window.onload = function(){
-    listUsers();
     listClubs();
+    listUsers();
 };
