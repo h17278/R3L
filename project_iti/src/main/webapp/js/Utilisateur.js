@@ -1,4 +1,3 @@
-
 let listUsers = function () {
     let usersRequest = new XMLHttpRequest();
 

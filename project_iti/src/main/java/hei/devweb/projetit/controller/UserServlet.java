@@ -1,7 +1,5 @@
 package hei.devweb.projetit.controller;
 
-import hei.devweb.projetit.entities.Utilisateur;
-import hei.devweb.projetit.service.EventService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -10,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+
 
 @WebServlet("/user")
 public class UserServlet extends GenericServlet {
