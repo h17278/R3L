@@ -34,6 +34,10 @@ public class RegisterServlet extends GenericServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
+
         Integer club_id = null;
         String pseudo = req.getParameter("pseudo");
         String motdepasse = req.getParameter("motdepasse");
@@ -63,7 +67,7 @@ public class RegisterServlet extends GenericServlet {
                 resp.sendRedirect("connection");
             }
         } else{
-            out.println("<script type=\"text/javascript\">");
+            out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
             out.println("alert('Pseudo déjà utilisé');");
             out.println("window.location.href = 'register';");
             out.println("</script>");

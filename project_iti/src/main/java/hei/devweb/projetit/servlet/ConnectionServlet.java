@@ -32,6 +32,10 @@ public class ConnectionServlet extends GenericServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
+
         String pseudo = req.getParameter("pseudo");
         String mdp = req.getParameter("mdp");
         boolean flag = true;
@@ -52,7 +56,7 @@ public class ConnectionServlet extends GenericServlet {
         }
 
         if(flag){
-            out.println("<script type=\"text/javascript\">");
+            out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
             out.println("alert('User or password incorrect');");
             out.println("window.location.href = 'connection';");
             out.println("</script>");
