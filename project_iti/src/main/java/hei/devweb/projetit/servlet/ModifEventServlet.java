@@ -40,6 +40,8 @@ public class ModifEventServlet extends GenericServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
         // GET PARAMETERS
         Integer eventId = Integer.valueOf(req.getParameter("id"));
         String title = req.getParameter("title");

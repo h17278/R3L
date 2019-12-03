@@ -32,6 +32,10 @@ public class EventFormServlet extends GenericServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
+
         // GET PARAMETERS
         String title = req.getParameter("title");
         Integer club_id = Integer.valueOf(req.getParameter("club_id"));
