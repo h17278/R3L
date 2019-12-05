@@ -6,10 +6,17 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="css/Associations.css" rel="stylesheet" type="text/css"/>
     <link href="css/MainFile.css" rel="stylesheet" type="text/css"/>
+    <script src="js/searchBar.js" type="application/javascript" charset="UTF-8"></script>
+    <script src="js/navBarPosition.js" type="application/javascript" charset="UTF-8"></script>
 </head>
-<body>
+
+<body onscroll="navPosition()">
 
 <nav th:replace="~{fragments::menu('clubs')}"></nav>
+
+<div id="SearchBar">
+    <input type="search" id="searchEvent" onkeyup="searchEvent()" placeholder="Rechercher une association...">
+</div>
 
 <article id="event" th:each="club : ${clubList}">
     <figure>
