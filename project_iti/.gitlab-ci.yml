@@ -1,0 +1,8 @@
+stages:
+ - test
+
+test-job:
+ image: maven:3.3-jdk-8
+ stage: test
+ script:
+  - mvn test
