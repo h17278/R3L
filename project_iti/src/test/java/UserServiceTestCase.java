@@ -2,9 +2,15 @@ import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.dao.impl.DataSourceProvider;
 import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.service.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,8 +21,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTestCase {
+
     private UtilisateurDao userDao = new UtilisateurDaoImpl();
+
+    @Mock
+    private UtilisateurDao userDaoMock;
+
+    @InjectMocks
+    private UserService userService;
 
 
     @Before
@@ -96,6 +110,18 @@ public class UserServiceTestCase {
             }
         }
     }
+
+    @Test
+    public void shouldDeleteUser() {
+        //GIVEN
+        Integer userid = 4;
+        //WHEN
+        userService.deleteUser(userid);
+        //THEN
+        Mockito.verify(userDaoMock,Mockito.times(1)).deleteUtilisateur(userid);
+    }
+
+
 
     @Test
     public void shouldUpdateUtilisateur() throws Exception{
