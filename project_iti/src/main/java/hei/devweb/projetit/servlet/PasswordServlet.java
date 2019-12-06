@@ -60,7 +60,7 @@ public class PasswordServlet extends GenericServlet{
         }
         if(flag1){
             out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
-            out.println("alert('User incorrect');");
+            out.println("alert('Pseudo incorrect');");
             out.println("</script>");
         }
 

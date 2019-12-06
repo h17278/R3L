@@ -7,11 +7,12 @@
     <link href="css/MainFile.css" rel="stylesheet" type="text/css"/>
     <link href="css/Articles.css" rel="stylesheet" type="text/css"/>
     <script src="js/searchBar.js" type="application/javascript" charset="UTF-8"></script>
+    <script src="js/navBarPosition.js" type="application/javascript" charset="UTF-8"></script>
 </head>
 
-<body>
+<body onscroll="navPosition()">
 
-
+<!--
 <script>
     document.getElementsByTagName("body")[0].onscroll = function () {
         navPosition()
@@ -43,7 +44,7 @@
         }
     }
 </script>
-
+-->
 
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
@@ -62,7 +63,7 @@
                     <img alt="Image du club" th:src="${event.club.lien}"/>
                     <figcaption>
                         <h1 th:text="${event.title}"></h1>
-                        <h2 th:text="${event.club.name}"></h2>
+                        <a href="clubs"><h2 th:text="${event.club.name}"></h2></a>
                         <script th:inline="javascript">
                             function showDiv(id) {
                                 if (document.getElementById('infoDiv' + id).style.display === 'none') {
@@ -98,7 +99,7 @@
                     <img alt="Image du club" th:src="${event.club.lien}"/>
                     <figcaption>
                         <h1 th:text="${event.title}"></h1>
-                        <h2 th:text="${event.club.name}"></h2>
+                        <a href="clubs"><h2 th:text="${event.club.name}"></h2></a>
                         <script th:inline="javascript">
                             function showDiv(id) {
                                 if (document.getElementById('infoDiv' + id).style.display === 'none') {

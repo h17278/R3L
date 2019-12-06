@@ -3,12 +3,17 @@ package hei.devweb.projetit.dao.impl;
 import hei.devweb.projetit.dao.EventDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
+import hei.devweb.projetit.exception.EventNotFoundException;
+import org.apache.logging.log4j.LogManager;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class EventDaoImpl implements EventDao {
+
+    static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     @Override
     public List<Event> listEvents() {
@@ -71,6 +76,8 @@ public class EventDaoImpl implements EventDao {
                         return event;
                     }
                 }
+            } catch(EventNotFoundException EventNF){
+                LOGGER.error("Event Not Found Exception" + id +" in updateEvent");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,10 +120,13 @@ public class EventDaoImpl implements EventDao {
         String sqlQuery = "DELETE FROM event WHERE event_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
-                statement.setInt(1,id);
-
+                statement.setInt(1, id);
                 statement.executeUpdate();
+
+            } catch(EventNotFoundException EventNF){
+                LOGGER.error("Event Not Found Exception" + id +" in updateEvent");
             }
+
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,6 +145,8 @@ public class EventDaoImpl implements EventDao {
                 statement.setInt(6, event.getId());
 
                 statement.executeUpdate();
+            } catch(EventNotFoundException EventNF){
+                LOGGER.error("Event Not Found Exception" + event.getId() +" in updateEvent");
             }
         }catch (SQLException e) {
             e.printStackTrace();

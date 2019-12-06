@@ -1,4 +1,4 @@
-package hei.devweb.projetit.exception;
+package hei.devweb.projetit.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
