@@ -100,6 +100,17 @@ public class EventServiceTestCase {
         );
     }
 
+    @Test
+    public void shouldGetClub(){
+        //WHEN
+        Club club = clubDao.getClub(1);
+        //THEN
+        assertThat(club).isNotNull();
+        assertThat(club.getId()).isEqualTo(1);
+        assertThat(club.getName()).isEqualTo("Saturne");
+        assertThat(club.getLien()).isEqualTo("lien1");
+    }
+
 
 
     @After

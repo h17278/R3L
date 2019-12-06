@@ -5,6 +5,7 @@ import hei.devweb.projetit.controller.PasswordUtils;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
+import hei.devweb.projetit.service.UserService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -46,7 +47,7 @@ public class RegisterServlet extends GenericServlet {
         club_id = Integer.valueOf(req.getParameter("club_id"));
         String mdpHash = PasswordUtils.genererMotDePasse(motdepasse);
 
-        List<Utilisateur> userList = EventService.getInstance().utilisateurList();
+        List<Utilisateur> userList = UserService.getInstance().listUtilisateur();
         boolean flag = true;
         PrintWriter out = resp.getWriter();
 
@@ -58,7 +59,7 @@ public class RegisterServlet extends GenericServlet {
         if(flag) {
             //CREATE USER
             Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, president, club_id);
-            Utilisateur createdUser = EventService.getInstance().addUtilisateur(newUser);
+            Utilisateur createdUser = UserService.getInstance().addUtilisateur(newUser);
             // REDIRECT TO EVENTS LIST
             System.out.println(req.getSession().getAttributeNames());
             if (req.getSession().getAttribute("pseudo") != null) {

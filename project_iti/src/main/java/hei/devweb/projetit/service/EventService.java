@@ -47,10 +47,6 @@ public class EventService {
 
     public Event addEvent(Event event) {return eventDao.addEvent(event); }
 
-    public Utilisateur addUtilisateur(Utilisateur user){ return utilisateurDao.addUtilisateur(user); }
-
-    public List<Utilisateur> utilisateurList(){return utilisateurDao.listUtilisateur();}
-
     public void deleteEvent(Integer eventID) { eventDao.deleteEvent(eventID);}
 
     public Event updateEvent(Event event){ return eventDao.updateEvent(event);}

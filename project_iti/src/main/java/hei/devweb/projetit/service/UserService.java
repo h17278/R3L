@@ -35,6 +35,7 @@ public class UserService {
         return utilisateurDao.getUtilisateur(userid);
     }
 
+
     public Utilisateur addUtilisateur(Utilisateur utilisateur){
         if(utilisateur == null){
             throw new IllegalArgumentException("Pas d'utilisateurs");
