@@ -1,11 +1,7 @@
-import hei.devweb.projetit.dao.ClubDao;
-import hei.devweb.projetit.dao.EventDao;
-import hei.devweb.projetit.dao.impl.ClubDaoImpl;
+import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.dao.impl.DataSourceProvider;
-import hei.devweb.projetit.dao.impl.EventDaoImpl;
-import hei.devweb.projetit.entities.Club;
-import hei.devweb.projetit.entities.Event;
-import hei.devweb.projetit.service.EventService;
+import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
+import hei.devweb.projetit.entities.Utilisateur;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,17 +10,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-public class EventServiceTestCase {
+public class UserServiceTestCase {
+    private UtilisateurDao userDao = new UtilisateurDaoImpl();
 
-    private EventDao eventDao = new EventDaoImpl();
-    private ClubDao clubDao = new ClubDaoImpl();
 
     @Before
     public void initDb() throws Exception {
@@ -33,113 +26,104 @@ public class EventServiceTestCase {
             stmt.executeUpdate("DELETE FROM event");
             stmt.executeUpdate("DELETE FROM utilisateur");
             stmt.executeUpdate("DELETE FROM club");
-            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (1,'Saturne','lien1')");
-            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (2,'Raid','lien2')");
-            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (3,'Heir Force','lien3')");
+
+            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (1,'Saturne','https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/p960x960/21640916_1657174690980107_4056707557393442670_o.jpg?_nc_cat=107&_nc_oc=AQmtFvKo2bu8Io52YWo6M506DGoIHquWAc0QOJJFRcvA4xzPlsV8xEssGCyyKuhlXdU&_nc_ht=scontent-cdg2-1.xx&oh=6de1c7ed2fb6440eabdbcc11b4a0045e&oe=5E47FE05')");
+            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (2,'Raid','http://www.jogging-plus.com/wp-content/uploads/2018/08/raid-hei.jpg')");
+            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (3,'Heir Force','https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/21686919_122546058488971_8361198402224485343_o.jpg?_nc_cat=104&_nc_oc=AQlijV4NX_-GdyvppSP7SjcShi4EDHqRTwCPvmMISFuqGXx6ALsn-dcvZbodbulvUFU&_nc_ht=scontent-cdg2-1.xx&oh=84393db2015cddfab0feb9e7fbd1c1b6&oe=5E44D55B')");
 
             stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (1,'iktro','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','iktro@gmail.com',true,3)");
-            stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (2,'gautrob','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','gautrob@gmail.com',true,2)");
-            stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (3,'hugo','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','hugo@gmail.com',true,1)");
+            stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (2,'samos','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','samos@gmail.com',false,2)");
+            stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (3,'guerissologue','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','guerissologue@gmail.com',false,1)");
 
-            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (1,'Afterwork Saturne',1,'2019-10-12','BDA','url1','Afterwork à la Garderie','details1')");
-            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (2,'Week-end du Raid',2,'2020-04-12','BDS','url2','Le week-end sportif de HEI','details2')");
-            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (3,'Lancer d avions en papier',3,'2019-12-25','BES','url3','Concours de lancer pour petits et grands','details3')");
+            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (1,'Afterwork Saturne',1,'2019-10-12','BDA','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/42987700_2112958885401683_6930811866838990848_o.jpg?_nc_cat=105&_nc_oc=AQkGiI5Uk2ChVoYVqvzu--yf8IL3vxr4sPnJhnEVxVcOnxxNC9vzv-7EdSTvmrK3iCM&_nc_ht=scontent-cdg2-1.xx&oh=f35f4bbae9554cc5b1f42ee6bedb7638&oe=5E3FA931','Afterwork à la Garderie','Le meilleur bar de tous les temps accueille tout le temps la meilleure asso.')");
+            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (2,'Week-end du Raid',2,'2020-04-12','BDS','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/51378834_1150566275067972_6644111332268310528_o.png?_nc_cat=105&_nc_oc=AQm-q8_r0tnAKlNCQxm7qe0qWYgsVq7dTC-n5ZBZnohZsWISIhMhzFk2jY_w5ZUlKxM&_nc_ht=scontent-cdg2-1.xx&oh=761768ff234b3fc6dd62c183a66259e4&oe=5E434D60','Le week-end sportif de HEI','Si vous cherchez un moyen de cracher vos poumons pendant un week-end entier mais que la tuberculose vous fait peur, cet événement semble tout indiqué pour remédier à vos soucis mentaux.')");
+            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (3,'Lancer d avions en papier',3,'2019-12-25','BES','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/s960x960/50550859_411825099561064_3927988599986847744_o.jpg?_nc_cat=105&_nc_oc=AQkDarwe7PF9BMoBJ0PXP_7czv5ODRmJrQDIwuIMOEiCpA3qbLAOiuBKhvq5fVp1aCM&_nc_ht=scontent-cdg2-1.xx&oh=db51266e08f774051c80e94e705941cf&oe=5E86AE0D','Concours de lancer pour petits et grands','Je sais pas ce qui vous a pris de cliquer là-dessus, cet event est à chier, et je pèse mes mots.')");
         }
     }
 
     @Test
-    public void shouldEventList() {
-        //WHEN
-        List<Event> events = eventDao.listEvents();
-        //THEN
-        assertThat(events).hasSize(3);
-        assertThat(events).extracting(
-                Event::getId,
-                Event::getTitle,
-                e -> e.getClub().getId(),
-                Event::getEventDate,
-                Event::getBureau,
-                Event::getImage_link,
-                Event::getResume,
-                Event::getDetails).containsExactlyInAnyOrder(
-                tuple(1, "Afterwork Saturne", 1, LocalDate.of(2019, Month.OCTOBER, 12), "BDA", "url1", "Afterwork à la Garderie", "details1"),
-                tuple(2, "Week-end du Raid", 2, LocalDate.of(2020, Month.APRIL, 12), "BDS", "url2", "Le week-end sportif de HEI", "details2"),
-                tuple(3, "Lancer d avions en papier", 3, LocalDate.of(2019, Month.DECEMBER, 25), "BES", "url3", "Concours de lancer pour petits et grands", "details3")
+    public void shouldGetUser() {
+        // WHEN
+        Utilisateur utilisateur = userDao.getUtilisateur(1);
+        // THEN
+        assertThat(utilisateur).isNotNull();
+        assertThat(utilisateur.getIdutilisateur()).isEqualTo(1);
+        assertThat(utilisateur.getPseudo()).isEqualTo("iktro");
+        assertThat(utilisateur.getMotdepasse()).isEqualTo("$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ");
+        assertThat(utilisateur.getMail()).isEqualTo("iktro@gmail.com");
+        assertThat(utilisateur.getPresident()).isEqualTo(true);
+        assertThat(utilisateur.getClub()).isEqualTo(3);
+    }
+
+    @Test
+    public void shouldListUser() {
+        // WHEN
+        List<Utilisateur> users = userDao.listUtilisateur();
+        // THEN
+        assertThat(users).hasSize(3);
+        assertThat(users).extracting(
+                Utilisateur::getIdutilisateur,
+                Utilisateur::getPseudo,
+                Utilisateur::getMotdepasse,
+                Utilisateur::getMail,
+                Utilisateur::getPresident,
+                Utilisateur::getClub).containsOnly(
+                tuple(1,"iktro","$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ","iktro@gmail.com",true,3),
+                tuple(2,"samos","$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ","samos@gmail.com",false,2),
+                tuple(3,"guerissologue","$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ","guerissologue@gmail.com",false,1)
         );
     }
 
     @Test
-    public void shouldGetEvent() {
-        //WHEN
-        Event event = eventDao.getEvent(1);
-        //THEN
-        assertThat(event).isNotNull();
-        assertThat(event.getId()).isEqualTo(1);
-        assertThat(event.getTitle()).isEqualTo("Afterwork Saturne");
-        assertThat(event.getClub().getId()).isEqualTo(1);
-        assertThat(event.getEventDate()).isEqualTo(LocalDate.of(2019, Month.OCTOBER, 12));
-        assertThat(event.getBureau()).isEqualTo("BDA");
-        assertThat(event.getImage_link()).isEqualTo("url1");
-        assertThat(event.getResume()).isEqualTo("Afterwork à la Garderie");
-        assertThat(event.getDetails()).isEqualTo("details1");
-    }
-
-    @Test
-    public void shouldClubList() {
-        //WHEN
-        List<Club> clubs = clubDao.listClubs();
-        //THEN
-        assertThat(clubs).hasSize(3);
-        assertThat(clubs).extracting(
-                Club::getId,
-                Club::getName,
-                Club::getLien).containsExactlyInAnyOrder(
-                tuple(1,"Saturne","lien1"),
-                tuple(2,"Raid","lien2"),
-                tuple(3,"Heir Force","lien3")
-        );
-    }
-
-    @Test
-    public void shouldGetClub(){
-        //WHEN
-        Club club = clubDao.getClub(1);
-        //THEN
-        assertThat(club).isNotNull();
-        assertThat(club.getId()).isEqualTo(1);
-        assertThat(club.getName()).isEqualTo("Saturne");
-        assertThat(club.getLien()).isEqualTo("lien1");
-    }
-
-    @Test
-    public void shouldAddEvent() throws Exception {
+    public void shouldAddUser() throws Exception {
         //GIVEN
-        Club club = EventService.getInstance().getClub(2);
-        Event eventToCreate = new Event(null, "Afterwork Raid", club, LocalDate.of(2020, Month.FEBRUARY, 12), "BDS", "url4", "Afterwork à la garderie", "details4");
+        Utilisateur userToCreate = new Utilisateur(null,"pseudo_test","mdp_test","mail@mail.com",true,1);
         //WHEN
-        Event eventCreated = eventDao.addEvent(eventToCreate);
-        //THEN
+        Utilisateur userCreated = userDao.addUtilisateur(userToCreate);
+        // THEN
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM event WHERE event_id = ?")) {
-            stmt.setInt(1, eventCreated.getId());
+             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM utilisateur WHERE utilisateur_id = ?")) {
+            stmt.setInt(1, userCreated.getIdutilisateur());
             try (ResultSet rs = stmt.executeQuery()) {
                 assertThat(rs.next()).isTrue();
-                assertThat(rs.getInt("event_id")).isEqualTo(eventCreated.getId());
-                assertThat(rs.getString("title")).isEqualTo("Afterwork Raid");
-                assertThat(rs.getInt("club_id")).isEqualTo(2);
-                assertThat(rs.getDate("event_date").toLocalDate()).isEqualTo(LocalDate.of(2020, Month.FEBRUARY, 12));
-                assertThat(rs.getString("bureau")).isEqualTo("BDS");
-                assertThat(rs.getString("image_link")).isEqualTo("url4");
-                assertThat(rs.getString("resume")).isEqualTo("Afterwork à la garderie");
-                assertThat(rs.getString("details")).isEqualTo("details4");
+                assertThat(rs.getInt("utilisateur_id")).isEqualTo(userCreated.getIdutilisateur());
+                assertThat(rs.getString("pseudo")).isEqualTo("pseudo_test");
+                assertThat(rs.getString("motdepasse")).isEqualTo("mdp_test");
+                assertThat(rs.getString("mail")).isEqualTo("mail@mail.com");
+                assertThat(rs.getBoolean("president")).isEqualTo(true);
+                assertThat(rs.getInt("club_id")).isEqualTo(1);
                 assertThat(rs.next()).isFalse();
             }
         }
     }
 
+    @Test
+    public void shouldUpdateUtilisateur() throws Exception{
+        //GIVEN
+        Utilisateur user1 = new Utilisateur(1,"pseudo_test","mdp_test","mail@mail.com",true,1);
+        Utilisateur user2 = new Utilisateur(2,"pseudo","mdp","mail@gmail.fr",true,5);
 
+        //WHEN
+        userDao.addUtilisateur(user1);
+        userDao.addUtilisateur(user2);
+        userDao.isPres(2);
 
-
+        //THEN
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM utilisateur WHERE utilisateur_id = ?")) {
+            stmt.setInt(2, user2.getIdutilisateur());
+            try (ResultSet rs = stmt.executeQuery()) {
+                assertThat(rs.next()).isTrue();
+                assertThat(rs.getInt("utilisateur_id")).isEqualTo(user2.getIdutilisateur());
+                assertThat(rs.getString("pseudo")).isEqualTo("pseudo");
+                assertThat(rs.getString("motdepasse")).isEqualTo("mdp");
+                assertThat(rs.getString("mail")).isEqualTo("mail@gmail.fr");
+                assertThat(rs.getBoolean("president")).isEqualTo(true);
+                assertThat(rs.getInt("club_id")).isEqualTo(5);
+                assertThat(rs.next()).isFalse();
+            }
+        }
+    }
 
 
     @After

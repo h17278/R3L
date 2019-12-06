@@ -35,6 +35,7 @@ public class UserService {
         return utilisateurDao.getUtilisateur(userid);
     }
 
+
     public Utilisateur addUtilisateur(Utilisateur utilisateur){
         if(utilisateur == null){
             throw new IllegalArgumentException("Pas d'utilisateurs");
@@ -53,7 +54,7 @@ public class UserService {
 
     }
 
-    public void deleteUser(String userId) {
+    public void deleteUser(Integer userId) {
         if (userId == null) {
             throw new IllegalArgumentException("A city code must be provided in order to delete a city.");
         }
@@ -64,7 +65,7 @@ public class UserService {
         utilisateurDao.deleteUtilisateur(userId);
     }
 
-    public void updateUser(String id){
+    public void updateUser(Integer id){
         utilisateurDao.isPres(id);
     }
 

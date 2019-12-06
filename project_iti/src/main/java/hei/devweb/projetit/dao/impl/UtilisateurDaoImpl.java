@@ -131,14 +131,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     }
 
     @Override
-    public void deleteUtilisateur(String id) {
-        LOGGER.debug("method deleteUtilisateur called");
+    public void deleteUtilisateur(Integer id) {
+            LOGGER.debug("method deleteUtilisateur called");
         String sqlQuery = "DELETE FROM utilisateur WHERE utilisateur_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
-                statement.setString(1, id);
+                statement.setInt(1, id);
                 System.out.println(sqlQuery);
-                LOGGER.info("Deleting user from database id=" + id + " | pseudo=" + getUtilisateur(Integer.valueOf(id)).getPseudo());
+                LOGGER.info("Deleting user from database id=" + id + " | pseudo=" + getUtilisateur(id).getPseudo());
                 statement.executeUpdate();
             } catch (UtilisateurNotFoundException UtilNotFound) {
                 LOGGER.error("User not found exception for " + id + " in deleteUtilisateur");
@@ -149,21 +149,21 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     }
 
     @Override
-    public void isPres(String id) {
-        LOGGER.debug("method isPres called");
-        String sqlQuery = "UPDATE utilisateur SET president = ? WHERE utilisateur_id=? ";
+    public void isPres(Integer id) {
+    LOGGER.debug("method isPres called");
+    String sqlQuery = "UPDATE utilisateur SET president = ? WHERE utilisateur_id=? ";
 
-        Boolean pres = UserService.getInstance().getUser(Integer.parseInt(id)).getPresident();
-        System.out.println("is Pres ? : " + pres);
-        try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
+    Boolean pres = UserService.getInstance().getUser(id).getPresident();
+    System.out.println("is Pres ? : " + pres);
+    try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
+        try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setBoolean(1, !pres);
-                statement.setString(2, id);
+                statement.setInt(2, id);
                 LOGGER.info("Modifying access for user id=" + id + " | pseudo=" + getUtilisateur(Integer.valueOf(id)).getPseudo() + ", user is now president=" + !pres);
 
                 statement.executeUpdate();
             } catch (UtilisateurNotFoundException UserException) {
-                LOGGER.error("User not found exception for " + id + " in isPres");
+                LOGGER.error("User not found exception for " + id.toString() + " in isPres");
             }
         } catch (SQLException e) {
             e.printStackTrace();

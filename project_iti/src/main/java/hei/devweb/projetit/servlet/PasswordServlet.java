@@ -39,7 +39,7 @@ public class PasswordServlet extends GenericServlet{
         boolean flag2 = true;
         boolean flag1 = true;
         PrintWriter out = resp.getWriter();
-        List<Utilisateur> userList = EventService.getInstance().utilisateurList();
+        List<Utilisateur> userList = UserService.getInstance().listUtilisateur();
         for (Utilisateur utilisateur : userList) {
             if (pseudo.equals(utilisateur.getPseudo())) {
                 flag1 = false;
@@ -60,7 +60,7 @@ public class PasswordServlet extends GenericServlet{
         }
         if(flag1){
             out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
-            out.println("alert('User incorrect');");
+            out.println("alert('Pseudo incorrect');");
             out.println("</script>");
         }
 

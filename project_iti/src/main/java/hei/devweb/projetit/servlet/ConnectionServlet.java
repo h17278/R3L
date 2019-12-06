@@ -6,6 +6,7 @@ import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import hei.devweb.projetit.service.UserService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -28,7 +29,7 @@ public class ConnectionServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
-        List<Utilisateur> userList = EventService.getInstance().utilisateurList();
+        List<Utilisateur> userList = UserService.getInstance().listUtilisateur();
         context.setVariable("userList", userList);
 
         templateEngine.process("connection", context, resp.getWriter());
@@ -44,7 +45,7 @@ public class ConnectionServlet extends GenericServlet {
         String mdp = req.getParameter("mdp");
         boolean flag = true;
         PrintWriter out = resp.getWriter();
-        List<Utilisateur> userList = EventService.getInstance().utilisateurList();
+        List<Utilisateur> userList = UserService.getInstance().listUtilisateur();
 
         req.getSession().invalidate();
 
@@ -62,7 +63,7 @@ public class ConnectionServlet extends GenericServlet {
 
         if(flag){
             out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
-            out.println("alert('User or password incorrect');");
+            out.println("alert('Pseudo ou mot de passe incorrect');");
             out.println("window.location.href = 'connection';");
             out.println("</script>");
 
