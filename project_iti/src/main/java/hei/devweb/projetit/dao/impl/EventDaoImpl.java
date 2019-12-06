@@ -81,7 +81,7 @@ public class EventDaoImpl implements EventDao {
                     }
                 }
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception id=" + id +" in updateEvent");
+                EventNF.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,7 +134,7 @@ public class EventDaoImpl implements EventDao {
                 statement.executeUpdate();
 
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception id=" + id +" in updateEvent");
+                EventNF.printStackTrace();
             }
 
         }catch (SQLException e) {
@@ -158,7 +158,7 @@ public class EventDaoImpl implements EventDao {
 
                 statement.executeUpdate();
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception id=" + event.getId() +" in updateEvent");
+                EventNF.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();

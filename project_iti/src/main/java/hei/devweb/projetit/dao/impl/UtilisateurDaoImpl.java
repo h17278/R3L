@@ -17,7 +17,9 @@ import java.util.List;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
+
     static final Logger LOGGER = LogManager.getLogger();
+
 
     @Override
     public Utilisateur getUtilisateur(Integer id) {
@@ -122,8 +124,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 LOGGER.info("Modifying password of user pseudo=" + pseudo);
 
                 statement.executeUpdate();
-            } catch (UtilisateurNotFoundException UtilNotFound) {
-                LOGGER.error("User not found by pseudo for " + pseudo + " in setPassword");
+            } catch (UtilisateurNotFoundException UtilNotFound){
+                UtilNotFound.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,8 +142,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 System.out.println(sqlQuery);
                 LOGGER.info("Deleting user from database id=" + id + " | pseudo=" + getUtilisateur(id).getPseudo());
                 statement.executeUpdate();
-            } catch (UtilisateurNotFoundException UtilNotFound) {
-                LOGGER.error("User not found exception for " + id + " in deleteUtilisateur");
+            } catch (UtilisateurNotFoundException UtilNotFound){
+                UtilNotFound.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -162,8 +164,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 LOGGER.info("Modifying access for user id=" + id + " | pseudo=" + getUtilisateur(Integer.valueOf(id)).getPseudo() + ", user is now president=" + !pres);
 
                 statement.executeUpdate();
-            } catch (UtilisateurNotFoundException UserException) {
-                LOGGER.error("User not found exception for " + id.toString() + " in isPres");
+            } catch (UtilisateurNotFoundException UserException){
+                UserException.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
