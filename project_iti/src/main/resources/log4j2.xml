@@ -5,18 +5,14 @@
         <appender type="Console" name="CONSOLE">
             <layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </appender>
-        <appender type="File" name="FILE" fileName="target/test.log">
+        <appender type="File" name="FILE" fileName="target/application.log">
             <layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </appender>
     </appenders>
 
     <loggers>
-        <logger name="hei.devops" level="warn">
-            <appenderRef ref="CONSOLE"/>
-        </logger>
-        <root level="error">
-            <appenderRef ref="FILE"/>
-            <appenderRef ref="CONSOLE"/>
+        <root level="debug">
+            <appenderRef ref="CONSOLE" level="debug"/>
         </root>
     </loggers>
 
