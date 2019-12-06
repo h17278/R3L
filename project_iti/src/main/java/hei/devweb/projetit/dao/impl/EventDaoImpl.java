@@ -3,12 +3,16 @@ package hei.devweb.projetit.dao.impl;
 import hei.devweb.projetit.dao.EventDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventDaoImpl implements EventDao {
+
+    static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public List<Event> listEvents() {
@@ -68,6 +72,7 @@ public class EventDaoImpl implements EventDao {
                                 resultSet.getString("resume"),
                                 resultSet.getString("details")
                         );
+                        LOGGER.debug("Getting event: title=" + event.getTitle() + " | club=" + event.getClub().getName() + " | event_date=" + event.getEventDate() + " | bureau=" + event.getBureau() + " | resume=" + event.getResume() + " | details=" + event.getDetails() + " | image_link=" + event.getImage_link());
                         return event;
                     }
                 }
@@ -98,6 +103,7 @@ public class EventDaoImpl implements EventDao {
                     if (ids.next()) {
                         int eventId = ids.getInt("event_id");
                         event.setId(eventId);
+                        LOGGER.debug("Adding in data base event: title=" + event.getTitle() + " | club=" + event.getClub().getName() + " | event_date=" + event.getEventDate() + " | bureau=" + event.getBureau() + " | resume=" + event.getResume() + " | details=" + event.getDetails() + " | image_link=" + event.getImage_link());
                         return event;
                     }
                 }
@@ -114,6 +120,8 @@ public class EventDaoImpl implements EventDao {
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setInt(1,id);
+                Event event = getEvent(id);
+                LOGGER.debug("Deleting from data base event: title=" + event.getTitle() + " | club=" + event.getClub().getName() + " | event_date=" + event.getEventDate() );
 
                 statement.executeUpdate();
             }
@@ -133,6 +141,7 @@ public class EventDaoImpl implements EventDao {
                 statement.setString(4, event.getResume());
                 statement.setString(5, event.getDetails() );
                 statement.setInt(6, event.getId());
+                LOGGER.debug("Updating from data base event: title=" + event.getTitle() + " | club=" + event.getClub().getName() + " | event_date=" + event.getEventDate() + " | bureau=" + event.getBureau() + " | resume=" + event.getResume() + " | details=" + event.getDetails() + " | image_link=" + event.getImage_link());
 
                 statement.executeUpdate();
             }

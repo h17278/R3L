@@ -4,6 +4,8 @@ package hei.devweb.projetit.servlet;
 import hei.devweb.projetit.controller.PasswordUtils;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -17,6 +19,8 @@ import java.util.List;
 
 @WebServlet("/connection")
 public class ConnectionServlet extends GenericServlet {
+
+    static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -48,7 +52,8 @@ public class ConnectionServlet extends GenericServlet {
             if (pseudo.equals(utilisateur.getPseudo()) && PasswordUtils.validerMotDePasse(mdp,utilisateur.getMotdepasse())) {
                 flag = false;
                 req.getSession().setAttribute("pseudo", pseudo);
-                System.out.println("j'ai recup" + pseudo);
+                System.out.println("j'ai recup " + pseudo);
+                LOGGER.debug("LOGGER : j'ai récup " + pseudo);
                 req.getSession().setAttribute("president", utilisateur.getPresident());
                 req.getSession().setAttribute("club", utilisateur.getClub());
                 resp.sendRedirect("home");
@@ -60,6 +65,7 @@ public class ConnectionServlet extends GenericServlet {
             out.println("alert('User or password incorrect');");
             out.println("window.location.href = 'connection';");
             out.println("</script>");
+
         }
     }
 
