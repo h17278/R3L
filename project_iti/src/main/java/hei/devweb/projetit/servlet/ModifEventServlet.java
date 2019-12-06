@@ -3,6 +3,8 @@ package hei.devweb.projetit.servlet;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.service.EventService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -18,6 +20,7 @@ import java.util.List;
 @WebServlet("/modifEvent")
 public class ModifEventServlet extends GenericServlet {
 
+    static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,6 +60,7 @@ public class ModifEventServlet extends GenericServlet {
 
         Event updatedEvent = new Event(eventId, title, club, event_date, bureau, image_link, resume, details);
         EventService.getInstance().updateEvent(updatedEvent);
+        LOGGER.info("Updated event id=" + eventId);
 
         // REDIRECT TO EVENTS LIST
         resp.sendRedirect("home");

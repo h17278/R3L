@@ -33,10 +33,13 @@ public class ConnectionServlet extends GenericServlet {
         context.setVariable("userList", userList);
 
         templateEngine.process("connection", context, resp.getWriter());
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        LOGGER.info("A user is trying to connect");
 
         resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         req.setCharacterEncoding(StandardCharsets.UTF_8.name());
@@ -53,8 +56,7 @@ public class ConnectionServlet extends GenericServlet {
             if (pseudo.equals(utilisateur.getPseudo()) && PasswordUtils.validerMotDePasse(mdp,utilisateur.getMotdepasse())) {
                 flag = false;
                 req.getSession().setAttribute("pseudo", pseudo);
-                System.out.println("j'ai recup " + pseudo);
-                LOGGER.debug("LOGGER : j'ai récup " + pseudo);
+                LOGGER.info("User connected as " + pseudo);
                 req.getSession().setAttribute("president", utilisateur.getPresident());
                 req.getSession().setAttribute("club", utilisateur.getClub());
                 resp.sendRedirect("home");
@@ -62,11 +64,11 @@ public class ConnectionServlet extends GenericServlet {
         }
 
         if(flag){
+            LOGGER.info("Wrong pseudo or password");
             out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
             out.println("alert('Pseudo ou mot de passe incorrect');");
             out.println("window.location.href = 'connection';");
             out.println("</script>");
-
         }
     }
 
