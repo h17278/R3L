@@ -6,6 +6,8 @@ import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
 import hei.devweb.projetit.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -20,6 +22,8 @@ import java.util.List;
 
 @WebServlet("/register")
 public class RegisterServlet extends GenericServlet {
+
+    static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,6 +50,7 @@ public class RegisterServlet extends GenericServlet {
         Boolean president = Boolean.parseBoolean(req.getParameter("status"));
         club_id = Integer.valueOf(req.getParameter("club_id"));
         String mdpHash = PasswordUtils.genererMotDePasse(motdepasse);
+        LOGGER.info("A new user is trying to register");
 
         List<Utilisateur> userList = UserService.getInstance().listUtilisateur();
         boolean flag = true;
@@ -60,6 +65,7 @@ public class RegisterServlet extends GenericServlet {
             //CREATE USER
             Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, president, club_id);
             Utilisateur createdUser = UserService.getInstance().addUtilisateur(newUser);
+            LOGGER.info("User added to database, pseudo=" + pseudo);
             // REDIRECT TO EVENTS LIST
             System.out.println(req.getSession().getAttributeNames());
             if (req.getSession().getAttribute("pseudo") != null) {
@@ -68,6 +74,7 @@ public class RegisterServlet extends GenericServlet {
                 resp.sendRedirect("connection");
             }
         } else{
+            LOGGER.info("This pseudo already exists. Aborting register");
             out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
             out.println("alert('Pseudo déjà utilisé');");
             out.println("window.location.href = 'register';");
