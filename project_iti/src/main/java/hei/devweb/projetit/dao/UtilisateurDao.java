@@ -14,7 +14,7 @@ public interface UtilisateurDao {
 
     public void setPassword (String pseudo, String newPassword);
 
-    public void deleteUtilisateur(String id);
+    public void deleteUtilisateur(Integer id);
 
-    public void isPres(String id);
+    public void isPres(Integer id);
 }

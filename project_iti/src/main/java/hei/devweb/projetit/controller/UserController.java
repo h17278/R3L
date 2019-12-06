@@ -22,7 +22,7 @@ public class UserController {
     @DELETE
     @Path("/{userId}")
     public void deleteCity(
-            @PathParam("userId") String userId) {
+            @PathParam("userId") Integer userId) {
         UserService.getInstance().deleteUser(userId);
     }
 
@@ -30,7 +30,7 @@ public class UserController {
     @Path("/{userId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void updateUser(
-            @PathParam("userId") String userId) {
+            @PathParam("userId") Integer userId) {
         UserService.getInstance().updateUser(userId);
     }
 }
