@@ -1,5 +1,8 @@
 package hei.devweb.projetit.filters;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,9 @@ import java.nio.charset.StandardCharsets;
 
 @WebFilter(filterName = "AdminFilter", urlPatterns = "/AdminFilter")
 public class AdminFilter implements Filter {
+
+    static final Logger LOGGER = LogManager.getLogger();
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {   }
 
@@ -24,13 +30,10 @@ public class AdminFilter implements Filter {
 
         PrintWriter out = resp.getWriter();
 
-        System.out.println("Voici : " + pseudo + ", il est " + president );
+        LOGGER.info("The user pseudo=" + pseudo + " is trying to access the page " + httpRequest.getServletPath());
 
         if(pseudo == null){
-            System.out.println("Il faut être connecté pour accéder à cette page !");
-
-
-            System.out.println("passe par le if president");
+            LOGGER.info("You need to be registered to access this page");
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Il faut se connecter et être président pour accéder à cette page !');");
             out.println("window.location.href = 'connection';");
@@ -40,9 +43,7 @@ public class AdminFilter implements Filter {
         }
 
         if (!president)  {
-                System.out.println("Il faut être connecté et président pour accéder à cette page !");
-
-                System.out.println("passe par le if president");
+                LOGGER.info("This page requires to be registered as a president");
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Il faut être président pour accéder à cette page !');");
                 out.println("window.location.href = 'home';");
@@ -51,7 +52,7 @@ public class AdminFilter implements Filter {
                 return;
         }
 
-
+        LOGGER.info("The user meets the requirements to access to this page");
         chain.doFilter(req, resp);
     }
 
