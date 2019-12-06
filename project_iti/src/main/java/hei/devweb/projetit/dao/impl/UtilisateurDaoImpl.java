@@ -2,19 +2,16 @@ package hei.devweb.projetit.dao.impl;
 
 import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.entities.Club;
-import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.entities.Utilisateur;
-import hei.devweb.projetit.exception.PasswordDontMatch;
+import hei.devweb.projetit.exception.PasswordDontMatchException;
 import hei.devweb.projetit.exception.PseudoAlreadyExistException;
 import hei.devweb.projetit.exception.UtilisateurNotFoundException;
 import hei.devweb.projetit.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.invoke.SerializedLambda;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
@@ -188,7 +185,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     public void passwordMatch(String password1, String password2) {
         LOGGER.debug("Test password matching");
         if(password1 != password2){
-            throw new PasswordDontMatch();
+            throw new PasswordDontMatchException();
         }
     }
 
