@@ -6,13 +6,13 @@ import hei.devweb.projetit.dao.impl.EventDaoImpl;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.service.EventService;
-import org.assertj.core.groups.Tuple;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.Month;
@@ -110,6 +110,35 @@ public class EventServiceTestCase {
         assertThat(club.getName()).isEqualTo("Saturne");
         assertThat(club.getLien()).isEqualTo("lien1");
     }
+
+    @Test
+    public void shouldAddEvent() throws Exception {
+        //GIVEN
+        Club club = EventService.getInstance().getClub(2);
+        Event eventToCreate = new Event(null, "Afterwork Raid", club, LocalDate.of(2020, Month.FEBRUARY, 12), "BDS", "url4", "Afterwork à la garderie", "details4");
+        //WHEN
+        Event eventCreated = eventDao.addEvent(eventToCreate);
+        //THEN
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM event WHERE event_id = ?")) {
+            stmt.setInt(1, eventCreated.getId());
+            try (ResultSet rs = stmt.executeQuery()) {
+                assertThat(rs.next()).isTrue();
+                assertThat(rs.getInt("event_id")).isEqualTo(eventCreated.getId());
+                assertThat(rs.getString("title")).isEqualTo("Afterwork Raid");
+                assertThat(rs.getInt("club_id")).isEqualTo(2);
+                assertThat(rs.getDate("event_date").toLocalDate()).isEqualTo(LocalDate.of(2020, Month.FEBRUARY, 12));
+                assertThat(rs.getString("bureau")).isEqualTo("BDS");
+                assertThat(rs.getString("image_link")).isEqualTo("url4");
+                assertThat(rs.getString("resume")).isEqualTo("Afterwork à la garderie");
+                assertThat(rs.getString("details")).isEqualTo("details4");
+                assertThat(rs.next()).isFalse();
+            }
+        }
+    }
+
+
+
 
 
 
