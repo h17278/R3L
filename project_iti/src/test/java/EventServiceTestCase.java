@@ -9,6 +9,11 @@ import hei.devweb.projetit.service.EventService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,10 +26,17 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
+@RunWith(MockitoJUnitRunner.class)
 public class EventServiceTestCase {
 
     private EventDao eventDao = new EventDaoImpl();
     private ClubDao clubDao = new ClubDaoImpl();
+
+    @Mock
+    private EventDao eventDaoMock;
+
+    @InjectMocks
+    private EventService eventService;
 
     @Before
     public void initDb() throws Exception {
@@ -137,6 +149,17 @@ public class EventServiceTestCase {
         }
     }
 
+    @Test
+    public void shouldDeleteEvent() {
+        //GIVEN
+        Integer event_id = 4;
+
+        //WHEN
+        eventService.deleteEvent(event_id);
+
+        //THEN
+        Mockito.verify(eventDaoMock, Mockito.times(1)).deleteEvent(event_id);
+    }
 
 
 

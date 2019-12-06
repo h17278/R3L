@@ -5,18 +5,19 @@ import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.exception.EventNotFoundException;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class EventDaoImpl implements EventDao {
 
-    static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
+    static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public List<Event> listEvents() {
+        LOGGER.debug("method listEvents called");
         List<Event> events = new ArrayList<>();
         String sqlQuery = "SELECT * FROM event   JOIN club ON event.club_id = club.club_id  ORDER BY event_date DESC";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
@@ -38,20 +39,22 @@ public class EventDaoImpl implements EventDao {
                                 resultSet.getString("resume"),
                                 resultSet.getString("details")
                         );
+                        LOGGER.debug("Adding to event list event id=" + event.getId());
                         events.add(event);
                     }
-
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        LOGGER.debug("listEvent completed");
         return events;
     }
 
 
     @Override
     public Event getEvent(Integer id) {
+        LOGGER.debug("method getEvent called");
         String sqlQuery = "SELECT * FROM event JOIN club ON event.club_id = club.club_id  WHERE event_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
@@ -73,11 +76,12 @@ public class EventDaoImpl implements EventDao {
                                 resultSet.getString("resume"),
                                 resultSet.getString("details")
                         );
+                        LOGGER.debug("Getting event: id=" + event.getId()+ " | title=" + event.getTitle() + " | club=" + event.getClub().getName() + " | event_date=" + event.getEventDate() + " | bureau=" + event.getBureau() + " | resume=" + event.getResume() + " | details=" + event.getDetails() + " | image_link=" + event.getImage_link());
                         return event;
                     }
                 }
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception" + id +" in updateEvent");
+                LOGGER.error("Event Not Found Exception id=" + id +" in updateEvent");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,6 +91,7 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public Event addEvent(Event event) {
+        LOGGER.debug("method addEvent called");
         String sqlQuery = "INSERT INTO event(title, club_id, event_date, bureau, image_link, resume, details) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
@@ -105,6 +110,7 @@ public class EventDaoImpl implements EventDao {
                     if (ids.next()) {
                         int eventId = ids.getInt("event_id");
                         event.setId(eventId);
+                        LOGGER.info("Adding in data base event: id=" + event.getId()+ " | title=" + event.getTitle() + " | club=" + event.getClub().getName() + " | event_date=" + event.getEventDate() + " | bureau=" + event.getBureau() + " | resume=" + event.getResume() + " | details=" + event.getDetails() + " | image_link=" + event.getImage_link());
                         return event;
                     }
                 }
@@ -117,14 +123,18 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public void deleteEvent(Integer id) {
+        LOGGER.debug("method deleteEvent called");
         String sqlQuery = "DELETE FROM event WHERE event_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
-                statement.setInt(1, id);
+                statement.setInt(1,id);
+                Event event = getEvent(id);
+                LOGGER.info("Deleting from data base event: id=" + event.getId() + " | title=" + event.getTitle() + " | club=" + event.getClub().getName());
+
                 statement.executeUpdate();
 
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception" + id +" in updateEvent");
+                LOGGER.error("Event Not Found Exception id=" + id +" in updateEvent");
             }
 
         }catch (SQLException e) {
@@ -134,6 +144,7 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public Event updateEvent(Event event) {
+        LOGGER.debug("method updateEvent called");
         String sqlQuery = "UPDATE event SET title = ? , event_date = ?, image_link = ?, resume = ?, details = ?  WHERE event_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
@@ -143,10 +154,11 @@ public class EventDaoImpl implements EventDao {
                 statement.setString(4, event.getResume());
                 statement.setString(5, event.getDetails() );
                 statement.setInt(6, event.getId());
+                LOGGER.info("Updating from data base event: title=" + event.getTitle() + " | club=" + event.getClub().getName() + " | event_date=" + event.getEventDate() + " | bureau=" + event.getBureau() + " | resume=" + event.getResume() + " | details=" + event.getDetails() + " | image_link=" + event.getImage_link());
 
                 statement.executeUpdate();
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception" + event.getId() +" in updateEvent");
+                LOGGER.error("Event Not Found Exception id=" + event.getId() +" in updateEvent");
             }
         }catch (SQLException e) {
             e.printStackTrace();
