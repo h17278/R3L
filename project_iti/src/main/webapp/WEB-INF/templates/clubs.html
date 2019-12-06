@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Clubs</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="css/Associations.css" rel="stylesheet" type="text/css"/>
     <link href="css/MainFile.css" rel="stylesheet" type="text/css"/>
+    <link href="css/Clubs.css" rel="stylesheet" type="text/css"/>
     <script src="js/searchBar.js" type="application/javascript" charset="UTF-8"></script>
     <script src="js/navBarPosition.js" type="application/javascript" charset="UTF-8"></script>
 </head>
@@ -18,31 +18,65 @@
     <input type="search" id="searchEvent" onkeyup="searchEvent()" placeholder="Rechercher une association...">
 </div>
 
-<article id="event" th:each="club : ${clubList}">
-    <figure>
-        <img alt="image de l association" th:src="${club.lien}" width="150">
-        <figcaption>
-            <h1 class = "titre_assos" th:text="${club.name}"></h1>
-            <table>
-                <tr>
-                    <th> Administrateurs :</th>
-                </tr>
-                <tr th:each="admin : ${userList}" th:if="${admin.getPresident() and admin.getClub() == club.id}">
-                    <td th:text="${admin.getPseudo()}"></td>
-                </tr>
+<main>
+    <div id="left">
+        <article th:each="club, state : ${clubList}" th:if="${state.odd}">
+            <figure>
+                <img alt="image de l association" th:src="${club.lien}" width="150">
+                <figcaption>
+                    <h1 class="titre_assos" th:text="${club.name}"></h1>
+                    <table>
+                        <tr>
+                            <th> Administrateurs :</th>
+                        </tr>
+                        <tr th:each="admin : ${userList}"
+                            th:if="${admin.getPresident() and admin.getClub() == club.id}">
+                            <td th:text="${admin.getPseudo()}"></td>
+                        </tr>
 
-                <tr>
-                    <th> Membres :</th>
-                </tr>
-                <tr th:each="admin : ${userList}" th:if="${!admin.getPresident() and admin.getClub() == club.id}">
-                    <td th:text="${admin.getPseudo()}"></td>
-                </tr>
-            </table>
-        </figcaption>
+                        <tr>
+                            <th> Membres :</th>
+                        </tr>
+                        <tr th:each="admin : ${userList}"
+                            th:if="${!admin.getPresident() and admin.getClub() == club.id}">
+                            <td th:text="${admin.getPseudo()}"></td>
+                        </tr>
+                    </table>
+                </figcaption>
 
-    </figure>
-</article>
+            </figure>
+        </article>
+    </div>
 
+    <div id="right">
+        <article th:each="club, stat : ${clubList}" th:if="${stat.even}">
+            <figure>
+                <img alt="image de l association" th:src="${club.lien}" width="150">
+                <figcaption>
+                    <h1 class="titre_assos" th:text="${club.name}"></h1>
+                    <table>
+                        <tr>
+                            <th> Administrateurs :</th>
+                        </tr>
+                        <tr th:each="admin : ${userList}"
+                            th:if="${admin.getPresident() and admin.getClub() == club.id}">
+                            <td th:text="${admin.getPseudo()}"></td>
+                        </tr>
+
+                        <tr>
+                            <th> Membres :</th>
+                        </tr>
+                        <tr th:each="admin : ${userList}"
+                            th:if="${!admin.getPresident() and admin.getClub() == club.id}">
+                            <td th:text="${admin.getPseudo()}"></td>
+                        </tr>
+                    </table>
+                </figcaption>
+
+            </figure>
+        </article>
+    </div>
+</main>
 
 </body>
 </html>
