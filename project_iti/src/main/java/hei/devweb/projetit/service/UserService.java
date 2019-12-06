@@ -72,4 +72,5 @@ public class UserService {
 
     public void pseudoAlreadyExist(String pseudo){ utilisateurDao.pseudoAlreadyExist(pseudo);}
 
+    public  void passwordMatch(String password1, String password2){ utilisateurDao.passwordMatch(password1, password2);}
 }

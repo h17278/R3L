@@ -3,6 +3,7 @@ package hei.devweb.projetit.servlet;
 
 import hei.devweb.projetit.controller.PasswordUtils;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.exception.PasswordDontMatch;
 import hei.devweb.projetit.service.EventService;
 import hei.devweb.projetit.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -44,6 +45,13 @@ public class PasswordServlet extends GenericServlet{
         boolean flag1 = true;
         PrintWriter out = resp.getWriter();
         List<Utilisateur> userList = UserService.getInstance().listUtilisateur();
+
+        try{
+            UserService.getInstance().passwordMatch(mdp,mdp2);
+        } catch (PasswordDontMatch password){
+            password.printStackTrace();
+        }
+
         for (Utilisateur utilisateur : userList) {
             if (pseudo.equals(utilisateur.getPseudo())) {
                 flag1 = false;
