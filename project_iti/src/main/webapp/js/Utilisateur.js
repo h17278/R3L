@@ -66,16 +66,6 @@ let createCell = function(text){
     return cellElement;
 };
 
-let gerenerateLine = function(users){
-    let table = document.getElementById("listUsers");
-
-    for (const user of users){
-        let newLine = createLine(user);
-        table.appendChild(newLine);
-    }
-
-};
-
 let deleteUser = function (user) {
     let userName = document.getElementById("userName").innerText;
     console.log("pseudo de l utilisateur : " + userName);
@@ -142,10 +132,10 @@ let refreshClubTable = function (clubs) {
     }
 
     tableElement.parentNode.replaceChild(newTableElement, tableElement);
+    listUsers();
 };
 
 
 window.onload = function(){
     listClubs();
-    listUsers();
 };
