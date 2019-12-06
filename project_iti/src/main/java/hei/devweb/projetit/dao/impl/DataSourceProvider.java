@@ -66,5 +66,5 @@ public class DataSourceProvider {
             throw new RuntimeException("Problem when reading the properties file.", e);
         }
     }
-    
+
 }

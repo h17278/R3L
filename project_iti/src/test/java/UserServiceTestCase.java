@@ -121,35 +121,27 @@ public class UserServiceTestCase {
         Mockito.verify(userDaoMock,Mockito.times(1)).deleteUtilisateur(userid);
     }
 
-
+    @Test
+    public void shouldUdpateUtilisateur(){
+        //GIVEN
+        Integer userid = 5;
+        //WHEN
+        userService.updateUser(userid);
+        //THEN
+        Mockito.verify(userDaoMock,Mockito.times(1)).isPres(userid);
+    }
 
     @Test
-    public void shouldUpdateUtilisateur() throws Exception{
+    public void shouldSetPassword(){
         //GIVEN
-        Utilisateur user1 = new Utilisateur(1,"pseudo_test","mdp_test","mail@mail.com",true,1);
-        Utilisateur user2 = new Utilisateur(2,"pseudo","mdp","mail@gmail.fr",true,5);
-
+        String pseudo = "Gautier";
+        String newPassword = "viveLeRaid";
         //WHEN
-        userDao.addUtilisateur(user1);
-        userDao.addUtilisateur(user2);
-        userDao.isPres(2);
-
+        userService.setPassword(pseudo,newPassword);
         //THEN
-        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM utilisateur WHERE utilisateur_id = ?")) {
-            stmt.setInt(2, user2.getIdutilisateur());
-            try (ResultSet rs = stmt.executeQuery()) {
-                assertThat(rs.next()).isTrue();
-                assertThat(rs.getInt("utilisateur_id")).isEqualTo(user2.getIdutilisateur());
-                assertThat(rs.getString("pseudo")).isEqualTo("pseudo");
-                assertThat(rs.getString("motdepasse")).isEqualTo("mdp");
-                assertThat(rs.getString("mail")).isEqualTo("mail@gmail.fr");
-                assertThat(rs.getBoolean("president")).isEqualTo(true);
-                assertThat(rs.getInt("club_id")).isEqualTo(5);
-                assertThat(rs.next()).isFalse();
-            }
-        }
+        Mockito.verify(userDaoMock,Mockito.times(1)).setPassword(pseudo,newPassword);
     }
+
 
 
     @After
