@@ -18,4 +18,7 @@ public interface UtilisateurDao {
 
     public void isPres(Integer id);
 
+    public void pseudoAlreadyExist(String pseudo);
+
+    public void passwordMatch(String password1, String password2);
 }

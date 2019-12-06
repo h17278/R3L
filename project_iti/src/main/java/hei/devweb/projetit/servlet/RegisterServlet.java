@@ -4,6 +4,7 @@ package hei.devweb.projetit.servlet;
 import hei.devweb.projetit.controller.PasswordUtils;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.exception.PseudoAlreadyExistException;
 import hei.devweb.projetit.service.EventService;
 import hei.devweb.projetit.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -38,7 +39,7 @@ public class RegisterServlet extends GenericServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         req.setCharacterEncoding(StandardCharsets.UTF_8.name());
@@ -55,12 +56,13 @@ public class RegisterServlet extends GenericServlet {
         List<Utilisateur> userList = UserService.getInstance().listUtilisateur();
         boolean flag = true;
         PrintWriter out = resp.getWriter();
-
-        for(Utilisateur user : userList){
-            if(pseudo.equals(user.getPseudo())){
-                flag = false;
-            }
+        try {
+            UserService.getInstance().pseudoAlreadyExist(pseudo);
+        } catch (PseudoAlreadyExistException Pseudo){
+            flag = false;
+            Pseudo.printStackTrace();
         }
+
         if(flag) {
             //CREATE USER
             Utilisateur newUser = new Utilisateur(null, pseudo, mdpHash, mail, president, club_id);
@@ -77,6 +79,7 @@ public class RegisterServlet extends GenericServlet {
             LOGGER.info("This pseudo already exists. Aborting register");
             out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
             out.println("alert('Pseudo déjà utilisé');");
+
             out.println("window.location.href = 'register';");
             out.println("</script>");
         }
