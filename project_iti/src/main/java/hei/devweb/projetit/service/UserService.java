@@ -3,6 +3,8 @@ package hei.devweb.projetit.service;
 import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.exception.PasswordDontMatchException;
+import hei.devweb.projetit.exception.PseudoAlreadyExistException;
 import hei.devweb.projetit.exception.UtilisateurNotFoundException;
 
 import java.util.List;
@@ -55,22 +57,21 @@ public class UserService {
 
     }
 
-    public void deleteUser(Integer userId) {
-        if (userId == null) {
-            throw new IllegalArgumentException("Pas d'id utilisateur spécifié");
-        }
-
+    public void deleteUser(Integer userId) throws UtilisateurNotFoundException {
         if (utilisateurDao.getUtilisateur(userId) == null) {
             throw new UtilisateurNotFoundException();
         }
         utilisateurDao.deleteUtilisateur(userId);
     }
 
-    public void updateUser(Integer id){
+    public void updateUser(Integer id) throws UtilisateurNotFoundException{
+        if (utilisateurDao.getUtilisateur(id) == null) {
+            throw new UtilisateurNotFoundException();
+        }
         utilisateurDao.isPres(id);
     }
 
-    public void pseudoAlreadyExist(String pseudo){ utilisateurDao.pseudoAlreadyExist(pseudo);}
+    public void pseudoAlreadyExist(String pseudo) throws PseudoAlreadyExistException { utilisateurDao.pseudoAlreadyExist(pseudo);}
 
-    public  void passwordMatch(String password1, String password2){ utilisateurDao.passwordMatch(password1, password2);}
+    public  void passwordMatch(String password1, String password2) throws PasswordDontMatchException { utilisateurDao.passwordMatch(password1, password2);}
 }

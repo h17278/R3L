@@ -2,7 +2,11 @@ import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.dao.impl.DataSourceProvider;
 import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.exception.PasswordDontMatchException;
+import hei.devweb.projetit.exception.PseudoAlreadyExistException;
+import hei.devweb.projetit.exception.UtilisateurNotFoundException;
 import hei.devweb.projetit.service.UserService;
+import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +24,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.assertj.core.api.Fail.fail;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTestCase {
@@ -121,6 +126,16 @@ public class UserServiceTestCase {
         Mockito.verify(userDaoMock,Mockito.times(1)).deleteUtilisateur(userid);
     }
 
+    @Test(expected = UtilisateurNotFoundException.class)
+    public void shouldDeleteUserNotFoundException() throws UtilisateurNotFoundException{
+        //GIVEN
+        Integer userid = 4;
+        //WHEN
+        userService.deleteUser(userid);
+        //THEN
+        fail("UtilisateurNotFoundException");
+    }
+
     @Test
     public void shouldUdpateUtilisateur(){
         //GIVEN
@@ -130,6 +145,59 @@ public class UserServiceTestCase {
         //THEN
         Mockito.verify(userDaoMock,Mockito.times(1)).isPres(userid);
     }
+
+    @Test(expected = UtilisateurNotFoundException.class)
+    public void shouldUpdateUserNotFoundException() throws UtilisateurNotFoundException{
+        //GIVEN
+        Integer userid = 5;
+        //WHEN
+        userService.updateUser(userid);
+        //THEN
+        fail("UtilisateurNotFoundException");
+    }
+
+    @Test
+    public void shouldPseudoAlreadyExists(){
+        //GIVEN
+        String pseudo = "Victor";
+        //WHEN
+        userService.pseudoAlreadyExist(pseudo);
+        //THEN
+        Mockito.verify(userDaoMock,Mockito.times(1)).pseudoAlreadyExist(pseudo);
+    }
+
+    @Test(expected = PseudoAlreadyExistException.class)
+    public void shouldPseudoAlreadyExistsException() throws PseudoAlreadyExistException {
+        //GIVEN
+        String pseudo = "Victor";
+        //WHEN
+        userService.pseudoAlreadyExist(pseudo);
+        //THEN
+        fail("PseudoAlreadyExistException");
+    }
+
+    @Test
+    public void shouldPasswordMatch(){
+        //GIVEN
+        String pw1 = "password1";
+        String pw2 = "password2";
+        //WHEN
+        userService.passwordMatch(pw1,pw2);
+        //THEN
+        Mockito.verify(userDaoMock,Mockito.times(1)).passwordMatch(pw1,pw2);
+    }
+
+    @Test(expected = PasswordDontMatchException.class)
+    public void shouldPasswordMatchException() throws PasswordDontMatchException {
+        //GIVEN
+        String pw1 = "password1";
+        String pw2 = "password2";
+        //WHEN
+        userService.passwordMatch(pw1,pw2);
+        //THEN
+        fail("PasswordDontMatchException");
+    }
+
 
     @Test
     public void shouldSetPassword(){
@@ -141,6 +209,7 @@ public class UserServiceTestCase {
         //THEN
         Mockito.verify(userDaoMock,Mockito.times(1)).setPassword(pseudo,newPassword);
     }
+
 
 
 

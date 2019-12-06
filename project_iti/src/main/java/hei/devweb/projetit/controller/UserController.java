@@ -21,7 +21,7 @@ public class UserController {
 
     @DELETE
     @Path("/{userId}")
-    public void deleteCity(
+    public void deleteUser(
             @PathParam("userId") Integer userId) {
         UserService.getInstance().deleteUser(userId);
     }
