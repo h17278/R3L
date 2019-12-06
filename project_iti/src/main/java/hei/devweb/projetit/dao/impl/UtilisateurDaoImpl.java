@@ -4,7 +4,10 @@ import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.exception.UtilisateurNotFoundException;
 import hei.devweb.projetit.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.invoke.SerializedLambda;
 import java.sql.*;
@@ -14,7 +17,8 @@ import java.util.List;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
-    private List<Utilisateur> users;
+
+    static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public Utilisateur getUtilisateur(Integer id) {
@@ -109,6 +113,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 statement.setString(1, newPassword);
                 statement.setString (2, pseudo);
                 statement.executeUpdate();
+            } catch (UtilisateurNotFoundException UtilNotFound){
+                LOGGER.error("User not found by pseudo for " + pseudo + " in setPassword");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,6 +129,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 statement.setString(1, id);
                 System.out.println(sqlQuery);
                 statement.executeUpdate();
+            } catch (UtilisateurNotFoundException UtilNotFound){
+                LOGGER.error("User not found exception for " + id + " in deleteUtilisateur");
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -140,6 +148,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 statement.setBoolean(1,!pres);
                 statement.setString(2, id);
                 statement.executeUpdate();
+            } catch (UtilisateurNotFoundException UserException){
+                LOGGER.error("User not found exception for " + id + " in isPres");
             }
         }catch (SQLException e) {
             e.printStackTrace();
