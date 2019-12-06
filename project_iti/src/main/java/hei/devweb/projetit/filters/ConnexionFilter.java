@@ -1,5 +1,8 @@
 package hei.devweb.projetit.filters;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,9 @@ import java.nio.charset.StandardCharsets;
 
 @WebFilter(filterName = "ConnexionFilter", urlPatterns = "/ConnexionFilter")
 public class ConnexionFilter implements Filter {
+
+    static final Logger LOGGER = LogManager.getLogger();
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {   }
 
@@ -23,13 +29,12 @@ public class ConnexionFilter implements Filter {
 
         PrintWriter out = resp.getWriter();
 
-        System.out.println("Voici : " + pseudo + ", il est " + president );
+        LOGGER.info("The user pseudo=" + pseudo + " is trying to access the page " + httpRequest.getServletPath());
 
         if(pseudo == null){
-            System.out.println("ConnexionFilter");
             HttpServletResponse httpResponse = (HttpServletResponse) resp;
 
-            System.out.println("passe par le if president");
+            LOGGER.info("You need to be registered to access this page");
             out.println("<script type=\"text/javascript\" charset=\"utf-8\">");
             out.println("alert('Il faut se connecter pour visualiser cette page !');");
             out.println("window.location.href = 'connection';");
@@ -38,6 +43,7 @@ public class ConnexionFilter implements Filter {
             return;
         }
 
+        LOGGER.info("The user meets the requirements to access to this page");
         chain.doFilter(req, resp);
     }
 
