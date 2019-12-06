@@ -3,6 +3,7 @@ package hei.devweb.projetit.service;
 import hei.devweb.projetit.dao.UtilisateurDao;
 import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.exception.UtilisateurNotFoundException;
 
 import java.util.List;
 
@@ -56,12 +57,12 @@ public class UserService {
 
     public void deleteUser(Integer userId) {
         if (userId == null) {
-            throw new IllegalArgumentException("A city code must be provided in order to delete a city.");
+            throw new IllegalArgumentException("Pas d'id utilisateur spécifié");
         }
-        /*
-        if (!utilisateurDao.existsUtilisateur(userId)) {
-            throw new CityNotFoundException(String.format("The city with code %s does not exist and can not be deleted.", cityCode));
-        } */
+
+        if (utilisateurDao.getUtilisateur(userId) == null) {
+            throw new UtilisateurNotFoundException();
+        }
         utilisateurDao.deleteUtilisateur(userId);
     }
 
@@ -69,6 +70,6 @@ public class UserService {
         utilisateurDao.isPres(id);
     }
 
-
+    public void pseudoAlreadyExist(String pseudo){ utilisateurDao.pseudoAlreadyExist(pseudo);}
 
 }

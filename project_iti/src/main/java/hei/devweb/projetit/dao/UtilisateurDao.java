@@ -18,4 +18,5 @@ public interface UtilisateurDao {
 
     public void isPres(Integer id);
 
+    public void pseudoAlreadyExist(String pseudo);
 }
