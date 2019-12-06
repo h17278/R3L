@@ -1,3 +1,0 @@
-hello-world-job:
- image: alpine:latest
- script: echo "Hello world"
