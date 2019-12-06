@@ -18,7 +18,6 @@ import java.util.List;
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
 
-    static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public Utilisateur getUtilisateur(Integer id) {
@@ -114,7 +113,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 statement.setString (2, pseudo);
                 statement.executeUpdate();
             } catch (UtilisateurNotFoundException UtilNotFound){
-                LOGGER.error("User not found by pseudo for " + pseudo + " in setPassword");
+                UtilNotFound.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,7 +129,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 System.out.println(sqlQuery);
                 statement.executeUpdate();
             } catch (UtilisateurNotFoundException UtilNotFound){
-                LOGGER.error("User not found exception for " + id + " in deleteUtilisateur");
+                UtilNotFound.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -149,7 +148,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 statement.setInt(2, id);
                 statement.executeUpdate();
             } catch (UtilisateurNotFoundException UserException){
-                LOGGER.error("User not found exception for " + id.toString() + " in isPres");
+                UserException.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();

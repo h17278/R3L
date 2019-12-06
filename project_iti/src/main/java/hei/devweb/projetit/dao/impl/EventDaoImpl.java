@@ -9,11 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class EventDaoImpl implements EventDao {
-
-    static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     @Override
     public List<Event> listEvents() {
@@ -77,7 +74,7 @@ public class EventDaoImpl implements EventDao {
                     }
                 }
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception" + id +" in updateEvent");
+                EventNF.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,7 +121,7 @@ public class EventDaoImpl implements EventDao {
                 statement.executeUpdate();
 
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception" + id +" in updateEvent");
+                EventNF.printStackTrace();
             }
 
         }catch (SQLException e) {
@@ -146,7 +143,7 @@ public class EventDaoImpl implements EventDao {
 
                 statement.executeUpdate();
             } catch(EventNotFoundException EventNF){
-                LOGGER.error("Event Not Found Exception" + event.getId() +" in updateEvent");
+                EventNF.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();
