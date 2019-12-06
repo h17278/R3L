@@ -122,11 +122,11 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     }
 
     @Override
-    public void deleteUtilisateur(String id) {
+    public void deleteUtilisateur(Integer id) {
         String sqlQuery = "DELETE FROM utilisateur WHERE utilisateur_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
-                statement.setString(1, id);
+                statement.setInt(1, id);
                 System.out.println(sqlQuery);
                 statement.executeUpdate();
             } catch (UtilisateurNotFoundException UtilNotFound){
@@ -138,18 +138,18 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     }
 
     @Override
-    public void isPres(String id) {
+    public void isPres(Integer id) {
         String sqlQuery = "UPDATE utilisateur SET president = ? WHERE utilisateur_id=? ";
 
-        Boolean pres = UserService.getInstance().getUser(Integer.parseInt(id)).getPresident();
+        Boolean pres = UserService.getInstance().getUser(id).getPresident();
         System.out.println("is Pres ? : " + pres);
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setBoolean(1,!pres);
-                statement.setString(2, id);
+                statement.setInt(2, id);
                 statement.executeUpdate();
             } catch (UtilisateurNotFoundException UserException){
-                LOGGER.error("User not found exception for " + id + " in isPres");
+                LOGGER.error("User not found exception for " + id.toString() + " in isPres");
             }
         }catch (SQLException e) {
             e.printStackTrace();
