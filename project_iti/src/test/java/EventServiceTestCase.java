@@ -1,20 +1,109 @@
+import hei.devweb.projetit.dao.ClubDao;
+import hei.devweb.projetit.dao.EventDao;
+import hei.devweb.projetit.dao.impl.ClubDaoImpl;
 import hei.devweb.projetit.dao.impl.DataSourceProvider;
+import hei.devweb.projetit.dao.impl.EventDaoImpl;
+import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.service.EventService;
+import org.assertj.core.groups.Tuple;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 public class EventServiceTestCase {
 
-    private EventService eventService = new EventService();
+    private EventDao eventDao = new EventDaoImpl();
+    private ClubDao clubDao = new ClubDaoImpl();
 
     @Before
     public void initDb() throws Exception {
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             Statement stmt = connection.createStatement()) {
+            stmt.executeUpdate("DELETE FROM event");
+            stmt.executeUpdate("DELETE FROM utilisateur");
+            stmt.executeUpdate("DELETE FROM club");
+            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (1,'Saturne','lien1')");
+            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (2,'Raid','lien2')");
+            stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (3,'Heir Force','lien3')");
+
+            stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (1,'iktro','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','iktro@gmail.com',true,3)");
+            stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (2,'gautrob','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','gautrob@gmail.com',true,2)");
+            stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (3,'hugo','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','hugo@gmail.com',true,1)");
+
+            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (1,'Afterwork Saturne',1,'2019-10-12','BDA','url1','Afterwork à la Garderie','details1')");
+            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (2,'Week-end du Raid',2,'2020-04-12','BDS','url2','Le week-end sportif de HEI','details2')");
+            stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (3,'Lancer d avions en papier',3,'2019-12-25','BES','url3','Concours de lancer pour petits et grands','details3')");
+        }
+    }
+
+    @Test
+    public void shouldEventList() {
+        //WHEN
+        List<Event> events = eventDao.listEvents();
+        //THEN
+        assertThat(events).hasSize(3);
+        assertThat(events).extracting(
+                Event::getId,
+                Event::getTitle,
+                e -> e.getClub().getId(),
+                Event::getEventDate,
+                Event::getBureau,
+                Event::getImage_link,
+                Event::getResume,
+                Event::getDetails).containsExactlyInAnyOrder(
+                tuple(1, "Afterwork Saturne", 1, LocalDate.of(2019, Month.OCTOBER, 12), "BDA", "url1", "Afterwork à la Garderie", "details1"),
+                tuple(2, "Week-end du Raid", 2, LocalDate.of(2020, Month.APRIL, 12), "BDS", "url2", "Le week-end sportif de HEI", "details2"),
+                tuple(3, "Lancer d avions en papier", 3, LocalDate.of(2019, Month.DECEMBER, 25), "BES", "url3", "Concours de lancer pour petits et grands", "details3")
+        );
+    }
+
+    @Test
+    public void shouldGetEvent() {
+        //WHEN
+        Event event = eventDao.getEvent(1);
+        //THEN
+        assertThat(event).isNotNull();
+        assertThat(event.getId()).isEqualTo(1);
+        assertThat(event.getTitle()).isEqualTo("Afterwork Saturne");
+        assertThat(event.getClub().getId()).isEqualTo(1);
+        assertThat(event.getEventDate()).isEqualTo(LocalDate.of(2019, Month.OCTOBER, 12));
+        assertThat(event.getBureau()).isEqualTo("BDA");
+        assertThat(event.getImage_link()).isEqualTo("url1");
+        assertThat(event.getResume()).isEqualTo("Afterwork à la Garderie");
+        assertThat(event.getDetails()).isEqualTo("details1");
+    }
+
+    @Test
+    public void shouldClubList() {
+        //WHEN
+        List<Club> clubs = clubDao.listClubs();
+        //THEN
+        assertThat(clubs).hasSize(3);
+        assertThat(clubs).extracting(
+                Club::getId,
+                Club::getName,
+                Club::getLien).containsExactlyInAnyOrder(
+                tuple(1,"Saturne","lien1"),
+                tuple(2,"Raid","lien2"),
+                tuple(3,"Heir Force","lien3")
+        );
+    }
+
+
+
+    @After
+    public void restoreDb() throws Exception {
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("DELETE FROM event");
@@ -29,7 +118,7 @@ public class EventServiceTestCase {
             stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (7,'Inntrheigers','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/p960x960/69456251_666344297109860_3988740534431645696_o.jpg?_nc_cat=103&_nc_oc=AQnaDshma_DoKi60UheRlzBZlxMsF2lzOR33maMdVreYjL601qtGriRVbMZEDJSSaG0&_nc_ht=scontent-cdg2-1.xx&oh=5af22ec93256647704664eb94ab6083d&oe=5E511345')");
             stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (8,'Athle HEI','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/70090523_1248015648692051_7132180377719799808_o.jpg?_nc_cat=104&_nc_oc=AQnEjQ2yMsLie2u7T1E_7_YrBGCJWildRbizH1OOGk2PAHRAB4tSD0c_0xvukfocsr4&_nc_ht=scontent-cdg2-1.xx&oh=dd109ec1dc65b09d213a54d0dc1f86a6&oe=5E5863C7')");
             stmt.executeUpdate("INSERT INTO `club`(`club_id`,`name`,`lien`) VALUES (9,'Teddy Cap Solidaire','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/74685205_1360080374158531_3532478758348914688_n.jpg?_nc_cat=101&_nc_oc=AQkkvYbDjarNL58D3XEEeFEL486JLwusfUGs21jSx5Q89hZxaGnYc4i3rVGId86B2oo&_nc_ht=scontent-cdg2-1.xx&oh=77c272934ab1183547e3fb8727ea06b5&oe=5E555F10')");
-            
+
             stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (1,'iktro','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','iktro@gmail.com',true,3)");
             stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (2,'samos','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','samos@gmail.com',false,2)");
             stmt.executeUpdate("INSERT INTO `utilisateur`(`utilisateur_id`,`pseudo`,`motdepasse`,`mail`,`president`,`club_id`) VALUES (3,'guerissologue','$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ','guerissologue@gmail.com',false,1)");
@@ -49,10 +138,7 @@ public class EventServiceTestCase {
             stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (7,'Challenges BDS',7,'2019-12-10','BDS','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/76710712_1228060337379012_4900108895013306368_n.jpg?_nc_cat=100&_nc_oc=AQlv2OBs-l8XhIzpqLwuyDZBse7DxlH_zZkDEEppQNNTGNhFmE4T6bJdJ6fy9R7u1-s&_nc_ht=scontent-cdg2-1.xx&oh=bc86427c6013fdf566549a4a96747d4b&oe=5E527FD0','Multiple challenge sur pendant l année','Choisis ton challenge préféré')");
             stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (8,'Challenge bowling',7,'2019-12-25','BDS','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/74982766_1228060420712337_242547690947215360_n.jpg?_nc_cat=103&_nc_oc=AQl6vZhFmEytilX8p7Kfp_lDRSLyKvDpt6IgaKqi0NUShrVC-HoqphZxRSRF8eCyXeo&_nc_ht=scontent-cdg2-1.xx&oh=f45d7d82839b64185b7f62225d6a03fa&oe=5E863CF8','Viens jouer au bowling','Tu vas t amuser entre potes !')");
             stmt.executeUpdate("INSERT INTO `event`(`event_id`,`title`,`club_id`,`event_date`,`bureau`,`image_link`,`resume`,`details`) VALUES (9,'Le Movember de Teddy',9,'2019-12-25','CAP','https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/75375700_1360075290825706_6648652826392133632_o.jpg?_nc_cat=101&_nc_oc=AQmExwhOIiDBAZ7FeusTR5xXZhV5u0lvgEvFa3MZDwl2_GfdPbuyaJ4ws6kKuP2sLdw&_nc_ht=scontent-cdg2-1.xx&oh=e6c7c7e4def5ea7118cc48a5008c4e1b&oe=5E888A3A','Arbore ta plus belle moustache','C est simple non ?')");
+
         }
     }
-
-
-
-
 }
