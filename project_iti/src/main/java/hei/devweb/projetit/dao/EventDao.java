@@ -14,4 +14,6 @@ public interface EventDao {
     public Event addEvent(Event event);
 
     public void deleteEvent(Integer id);
+
+    public Event updateEvent(Event event);
 }

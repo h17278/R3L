@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>S'inscrire</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
+    <link href="css/MainFile.css" rel="stylesheet" type="text/css"/>
+    <link href="css/Forms.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -42,12 +43,9 @@
             </select>
         </div>
 
-        <div>
-            <label for="statut"> Autorisation : </label> <br/>
-            <input checked id="statut" name="statut" type="radio" value="0">
-            <label for="president">Pas president</label> <br/>
-            <input id="president" name="statut" type="radio" value="1">
-            <label for="president">President</label>
+        <div th:if="${session.president}">
+            <input type="radio" name="status" value="false" checked> Utilisateur <br>
+            <input type="radio" name="status" value="true"> President <br>
         </div>
 
         <button type="submit">S'inscrire</button>

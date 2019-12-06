@@ -1,4 +1,4 @@
-package hei.devweb.projetit.controller;
+package hei.devweb.projetit.servlet;
 
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
@@ -40,6 +40,8 @@ public class ModifEventServlet extends GenericServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
         // GET PARAMETERS
         Integer eventId = Integer.valueOf(req.getParameter("id"));
         String title = req.getParameter("title");
@@ -52,9 +54,9 @@ public class ModifEventServlet extends GenericServlet {
 
         // CREATE EVENT
         Club club = EventService.getInstance().getClub(club_id);
-        EventService.getInstance().deleteEvent(eventId);
-        Event newEvent = new Event(null, title, club, event_date, bureau, image_link, resume, details);
-        Event createdEvent = EventService.getInstance().addEvent(newEvent);
+
+        Event updatedEvent = new Event(eventId, title, club, event_date, bureau, image_link, resume, details);
+        EventService.getInstance().updateEvent(updatedEvent);
 
         // REDIRECT TO EVENTS LIST
         resp.sendRedirect("home");

@@ -18,12 +18,18 @@ let createLine = function(user){
     lineElement.id = "user-" + user.idutilisateur;
     lineElement.appendChild(createCell(user.pseudo));
     lineElement.appendChild(createCell(user.mail));
+
+
     if(user.president === true) {
-        lineElement.appendChild(createCell("président"));
+        lineElement.appendChild(createCell("Président"));
     } else {
         lineElement.appendChild(createCell("Membre"));
     }
-    lineElement.appendChild(createCell(user.club));
+
+    let nameClub = document.getElementById("name-" + user.club).innerText;
+    console.log(nameClub);
+    lineElement.appendChild(createCell(nameClub));
+    //lineElement.appendChild(createCell(user.club));
 
     let updateButton = document.createElement("button");
     updateButton.title = "Changer les autorisations de cette utilisateur";
@@ -101,7 +107,45 @@ let updateUser = function (user) {
     saveRequest.send();
 };
 
+let listClubs = function () {
+    let usersRequest = new XMLHttpRequest();
+
+    usersRequest.open("GET", "ws/clubs", true);
+    usersRequest.responseType = "json";
+
+    usersRequest.onload = function () {
+        let clubs = this.response;
+        console.log(clubs);
+        refreshClubTable(clubs);
+    };
+
+    usersRequest.send();
+};
+let createClubLine = function(club){
+    let lineElement = document.createElement("tr");
+
+    lineElement.id = "club-" + club.id;
+
+    lineElement.appendChild(createCell(club.id));
+    cellName = createCell(club.name);
+    cellName.id = "name-" + club.id ;
+    lineElement.appendChild(cellName);
+
+    return lineElement;
+};
+
+let refreshClubTable = function (clubs) {
+    let tableElement = document.getElementById("listClubsBody");
+    var newTableElement = tableElement.cloneNode(false);
+    for (const club of clubs) {
+        newTableElement.appendChild(createClubLine(club));
+    }
+
+    tableElement.parentNode.replaceChild(newTableElement, tableElement);
+};
+
 
 window.onload = function(){
+    listClubs();
     listUsers();
 };

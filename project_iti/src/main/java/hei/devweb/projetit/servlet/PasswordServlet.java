@@ -1,6 +1,7 @@
-package hei.devweb.projetit.controller;
+package hei.devweb.projetit.servlet;
 
 
+import hei.devweb.projetit.controller.PasswordUtils;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.service.EventService;
 import hei.devweb.projetit.service.UserService;
@@ -30,6 +31,7 @@ public class PasswordServlet extends GenericServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String pseudo = req.getParameter("pseudo");
         String mdp2 = req.getParameter("mdp2");
         String mdp = req.getParameter("mdp");
@@ -49,7 +51,7 @@ public class PasswordServlet extends GenericServlet{
                     newmdp = PasswordUtils.genererMotDePasse(mdp2);
                     UserService.getInstance().setPassword(pseudo, newmdp);
 
-                    out.println("<script type=\"text/javascript\">");
+                    out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
                     out.println("alert('Votre mot de passe a bien été mis à jour');");
                     out.println("window.location.href = 'home';");
                     out.println("</script>");
@@ -57,13 +59,13 @@ public class PasswordServlet extends GenericServlet{
             }
         }
         if(flag1){
-            out.println("<script type=\"text/javascript\">");
+            out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
             out.println("alert('User incorrect');");
             out.println("</script>");
         }
 
         if(flag2){
-            out.println("<script type=\"text/javascript\">");
+            out.println("<script type=\"text/javascript\" charset=\"UTF-8\">");
             out.println("alert('Vos mots de passe ne sont pas en accord');");
             out.println("window.location.href = 'password';");
             out.println("</script>");

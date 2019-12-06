@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="css/Event.css" rel="stylesheet" type="text/css"/>
+    <link href="css/MainFile.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -23,9 +24,9 @@
                 </figcaption>
             </figure>
             <p id ="details" th:text="${event.details}"></p>
-            <h4 id="date" th:text="${event.eventDate}"></h4>
+            <h4 id="date" th:text="${#temporals.format(event.eventDate,'d MMMM yyyy')}"></h4>
 
-            <div id="formulaire">
+            <div id="formulaire" th:if="${session.president} and ${session.club.equals(event.club.id)}">
                 <form class = "newinfos" name="modifEvent" action="modifEvent"><button class="bouton" type="submit" name="modifEvent" th:value="${event.id}">Modifier l'événement</button></form>
                 <form class = "newinfos" name="DeleteEvent" action="DeleteEvent"><button class="bouton" type="submit" name="DeleteEvent" th:value="${event.id}">Supprimer l'événement</button></form>
             </div>

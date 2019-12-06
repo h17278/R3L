@@ -1,4 +1,4 @@
-package hei.devweb.projetit.controller;
+package hei.devweb.projetit.servlet;
 
 import hei.devweb.projetit.service.EventService;
 
@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/DeleteEvent")
 public class DeleteEventServlet extends GenericServlet {

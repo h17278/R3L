@@ -4,16 +4,51 @@
     <title> HEIvents </title>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="css/cssFile.css" rel="stylesheet" type="text/css"/>
-    <script src="js/searchBar.js" type="application/javascript"></script>
+    <link href="css/MainFile.css" rel="stylesheet" type="text/css"/>
+    <link href="css/Articles.css" rel="stylesheet" type="text/css"/>
+    <script src="js/searchBar.js" type="application/javascript" charset="UTF-8"></script>
 </head>
 
 <body>
 
+
+<script>
+    document.getElementsByTagName("body")[0].onscroll = function () {
+        navPosition()
+    };
+
+    function navPosition() {
+        if (window.scrollY > 115) {
+            console.log("Scroll limit");
+            let nav = document.getElementsByTagName("nav")[0];
+            let navBarList = nav.getElementsByTagName("div");
+            if (navBarList.length < 3) {
+                let newNavBar = document.getElementById("NavBar").cloneNode(true);
+                nav.appendChild(newNavBar);
+                document.getElementById("NavBar").style.position = 'fixed';
+                document.getElementById("NavBar").style.display = '';
+                document.getElementById("NavBar").style.top = '0';
+                document.getElementById("NavBar").style.left = '0';
+                document.getElementById("NavBar").style.zIndex = '1';
+            }
+        } else {
+            let nav = document.getElementsByTagName("nav")[0];
+            let navBarList = nav.getElementsByTagName("div");
+            let i = navBarList.length - 1;
+            if (navBarList.length > 2) {
+                navBarList[i].remove();
+            }
+            document.getElementById("NavBar").style.position = '';
+            document.getElementById("NavBar").style.display = 'block';
+        }
+    }
+</script>
+
+
 <nav th:replace="~{fragments::menu('home')}"></nav>
 
 <div id="SearchBar">
-    <input type="search" id="searchEventTest" onkeyup="searchEventTest()" placeholder="Rechercher un événement..." >
+    <input type="search" id="searchEvent" onkeyup="searchEvent()" placeholder="Rechercher un événement...">
 </div>
 
 <main>
@@ -40,17 +75,16 @@
                     </figcaption>
                 </section>
 
-                <h4 th:text="${event.eventDate}"></h4>
+                <h4 th:text="${#temporals.format(event.eventDate, 'd MMMM yyyy')}"></h4>
 
-                <!--
-                <img src="../../img/background%20leger.jpg" alt="separator"/>
-                -->
+                <h3 th:text="${event.resume}"></h3>
+                <h3 th:text="${event.bureau}" class="bureau"></h3>
+                <form name="event" action="event">
+                    <button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button>
+                    <img src="img/line.png" class="buttonImage" alt="button"/>
+                </form>
 
-                <section th:id="'infoDiv' + ${event.id}" style="display:none;">
-                    <h3 th:text="${event.resume}"></h3>
-                    <h3 th:text="${event.bureau}" class="bureau"></h3>
-                    <form name="event" action="event"><button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button></form>
-                </section>
+                <img src="img/separator.png" alt="separator" class="separator"/>
             </figure>
         </article>
     </div>
@@ -77,13 +111,15 @@
                     </figcaption>
                 </section>
 
-                <h4 th:text="${event.eventDate}"></h4>
+                <h4 th:text="${#temporals.format(event.eventDate, 'd MMMM yyyy')}"></h4>
+                <h3 th:text="${event.resume}"></h3>
+                <h3 th:text="${event.bureau}" class="bureau"></h3>
+                <form name="event" action="event">
+                    <button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button>
+                    <img src="img/line.png" class="buttonImage" alt="button"/>
+                </form>
 
-                <section th:id="'infoDiv' + ${event.id}" style="display:none;">
-                    <h3 th:text="${event.resume}"></h3>
-                    <h3 th:text="${event.bureau}" class="bureau"></h3>
-                    <form name="event" action="event"><button class="bouton" type="submit" name="event" th:value="${event.id}">Plus d'infos</button></form>
-                </section>
+                <img src="img/separator.png" alt="separator" class="separator"/>
             </figure>
         </article>
     </div>

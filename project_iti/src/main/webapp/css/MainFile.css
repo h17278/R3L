@@ -1,0 +1,235 @@
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url("../fonts/caviardreams-webfont.woff2") format("woff2"),
+    url('../fonts/caviardreams-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "CaviarDreams_Bold";
+    src: url("../fonts/caviardreams_bold-webfont.woff2") format("woff2"),
+    url('../fonts/caviardreams_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* ----------------------------------------------- HEADER ------------------------------------------------------- */
+nav div {
+    display: inline-block;
+    background-color: black;
+    position: center;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+}
+
+section div {
+    text-align: center;
+}
+
+#HEIvents {
+    border-bottom: #aa9168 1px solid;
+}
+
+nav h1 a {
+    text-decoration: none;
+    color: gray;
+}
+
+nav div input {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 1em;
+    width: 135px;
+    height: 41px;
+    font-family: CaviarDreams_Bold, Verdana, sans-serif;
+    color: #aa9168;
+    background: url("../img/frame.png");
+    border: none;
+    background-size: cover;
+    background-position-x: -2px;
+    background-position-y: -1px;
+    cursor: pointer;
+}
+
+nav div#HEIvents {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+nav div p {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 1em;
+    color: #aa9168;
+    font-size: 1.1em;
+}
+
+nav div h1 {
+    margin: 1em;
+}
+
+nav div ul {
+    padding: 0;
+    margin: 0;
+}
+
+nav div ul li {
+    display: inline-block;
+    padding: 1em;
+}
+
+nav div ul li a {
+    text-decoration: none;
+    list-style-type: none;
+    color: gray;
+}
+
+nav li#active {
+    font-size: 1.4em;
+}
+
+nav li img {
+    height: 20px;
+}
+
+/*--------------- SearchBar --------------*/
+
+#SearchBar {
+    position: absolute;
+    right: 10em;
+    top: 2.5em;
+}
+#SearchBar input {
+    background-color: #4c4c4c;
+    color: #aa9168;
+    border: none;
+    font-size: 1.1em;
+    padding-left: 0.7em;
+    font-family: CaviarDreams_Bold, Verdana, sans-serif;
+    border-radius: 50px;
+    width: 6.57em;
+    opacity: 80%;
+    transition: width 1s ease, opacity 0.5s;
+}
+#SearchBar input:focus {
+    outline: none;
+    width: 15em;
+    opacity: 100%;
+}
+input[type=text]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+input[type=text]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}
+
+input[type="button"] {
+    outline: none;
+}
+
+
+/*----------------------------------------------- MAIN -------------------------------------------------------*/
+
+h1 {
+    font-size: 2em;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    font-family: CaviarDreams, Verdana, sans-serif;
+    background-image: url('../img/background leger infinite.jpg');
+    background-repeat: repeat;
+}
+
+main h1 {
+    color: #aa9168;
+}
+
+main h2 {
+    color: #aa9168;
+}
+
+main h3 {
+    color: #aa9168;
+}
+
+main h4 {
+    color: #aa9168;
+}
+
+/* -------------------------------------------- ScrollBar ----------------------------------------------------*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #292929;
+}
+::-webkit-scrollbar-thumb {
+    background: #aa9168;
+    /*border-radius: 30px;*/
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* ------------------------------------------- BOUTONS ---------------------------------------------------- */
+
+.bouton {
+    color: #aa9168;
+    font-size: 15px;
+    font-family: CaviarDreams_Bold, Verdana, sans-serif;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    position: absolute;
+    height: 40px;
+    width: 170px;
+    right: 2.3em;
+    bottom: 1.2em;
+    z-index: 1;
+}
+
+.buttonImage {
+    position: absolute;
+    height: 40px;
+    width: 170px;
+    right: 2em;
+    bottom: 0.2em;
+    background-color: transparent;
+    transition: width 0.5s ease, right 0.5s ease;
+}
+
+
+.bouton:hover + .buttonImage {
+    width: 200px;
+    right: 1em;
+}
+
+
+/* ----------------------------------------- TABLE ------------------------------------------------------- */
+
+table#listUsers, table#listClubs{
+    background-color: whitesmoke;
+}
