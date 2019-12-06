@@ -161,7 +161,16 @@ public class EventServiceTestCase {
         Mockito.verify(eventDaoMock, Mockito.times(1)).deleteEvent(event_id);
     }
 
-
+    @Test
+    public void shouldUpdateEvent(){
+        Club club = EventService.getInstance().getClub(2);
+        //GIVEN
+        Event event = new Event(null, "Afterwork Raid", club, LocalDate.of(2020, Month.FEBRUARY, 12), "BDS", "url4", "Afterwork à la garderie", "details4");
+        //WHEN
+        eventService.updateEvent(event);
+        //THEN
+        Mockito.verify(eventDaoMock, Mockito.times(1)).updateEvent(event);
+    }
 
 
 
