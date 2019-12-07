@@ -172,7 +172,7 @@ public class EventServiceTestCase {
         Mockito.verify(eventDaoMock, Mockito.times(1)).updateEvent(event);
     }
 
-
+    //TODO GESTION DES EXCEPTIONS, AU MOINS UNE OU DEUX, CREER DES EXCEPTIONS SI IL FAUT (sinon deleteEvent(id) a un exception)
 
     @After
     public void restoreDb() throws Exception {
