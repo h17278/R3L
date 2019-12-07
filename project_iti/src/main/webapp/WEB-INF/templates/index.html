@@ -21,7 +21,7 @@
 <main>
 
     <div id="left">
-        <article th:each="event,state : ${eventList}" th:onclick="'showDiv(' + ${event.id} + ')'"
+        <article th:each="event,state : ${eventList}"
                  th:id="'rank-'+${state.count}" class="event left"
                  th:if="${state.odd}">
             <figure>

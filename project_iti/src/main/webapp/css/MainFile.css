@@ -232,4 +232,5 @@ main h4 {
 
 table#listUsers, table#listClubs{
     background-color: whitesmoke;
+    margin: 1em auto auto;
 }

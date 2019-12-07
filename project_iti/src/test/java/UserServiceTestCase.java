@@ -157,7 +157,7 @@ public class UserServiceTestCase {
     }
 
     @Test
-    public void shouldPseudoAlreadyExists(){
+    public void shouldPseudoAlreadyExists(){ //TODO
         //GIVEN
         String pseudo = "Victor";
         //WHEN
@@ -188,7 +188,7 @@ public class UserServiceTestCase {
     }
 
     @Test(expected = PasswordDontMatchException.class)
-    public void shouldPasswordMatchException() throws PasswordDontMatchException {
+    public void shouldPasswordMatchException() throws PasswordDontMatchException { //TODO
         //GIVEN
         String pw1 = "password1";
         String pw2 = "password2";
