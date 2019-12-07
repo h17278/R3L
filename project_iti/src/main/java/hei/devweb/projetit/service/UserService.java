@@ -58,17 +58,19 @@ public class UserService {
     }
 
     public void deleteUser(Integer userId) throws UtilisateurNotFoundException {
-        if (utilisateurDao.getUtilisateur(userId) == null) {
+        if (utilisateurDao.getUtilisateur(userId) != null) {
+            utilisateurDao.deleteUtilisateur(userId);
+        }else{
             throw new UtilisateurNotFoundException();
         }
-        utilisateurDao.deleteUtilisateur(userId);
     }
 
     public void updateUser(Integer id) throws UtilisateurNotFoundException{
-        if (utilisateurDao.getUtilisateur(id) == null) {
+        if (utilisateurDao.getUtilisateur(id) != null) {
+            utilisateurDao.isPres(id);
+        }else{
             throw new UtilisateurNotFoundException();
         }
-        utilisateurDao.isPres(id);
     }
 
     public void pseudoAlreadyExist(String pseudo) throws PseudoAlreadyExistException { utilisateurDao.pseudoAlreadyExist(pseudo);}

@@ -116,8 +116,8 @@ public class UserServiceTestCase {
         }
     }
 
-    @Test
-    public void shouldDeleteUser() {
+    @Test(expected = UtilisateurNotFoundException.class)
+    public void shouldDeleteUser()throws UtilisateurNotFoundException{
         //GIVEN
         Integer userid = 4;
         //WHEN
@@ -136,8 +136,8 @@ public class UserServiceTestCase {
         fail("UtilisateurNotFoundException");
     }
 
-    @Test
-    public void shouldUdpateUtilisateur(){
+    @Test(expected = UtilisateurNotFoundException.class)
+    public void shouldUdpateUtilisateur() throws UtilisateurNotFoundException{
         //GIVEN
         Integer userid = 5;
         //WHEN
