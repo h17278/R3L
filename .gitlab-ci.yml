@@ -23,7 +23,7 @@ variables:
   MYSQL_ROOT_PASSWORD: root
 
 connect:
-  stage: job
+  stage: connect
   image: mysql
   script:
     - echo "SELECT 'OK';" | mysql --user=root --password="root" --host=mysql "eventlist"
