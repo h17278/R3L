@@ -19,8 +19,8 @@ services:
 
 variables:
   # Configure mysql service (https://hub.docker.com/_/mysql/)
-  MYSQL_DATABASE: eventlist
-  MYSQL_ROOT_PASSWORD: root
+  MYSQL_DATABASE: "eventlist"
+  MYSQL_ROOT_PASSWORD: "root"
 
 
 test-job:
