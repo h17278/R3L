@@ -2,7 +2,6 @@ stages:
   - hello-world
   - connect
   - test
-  - package
 
 cache:
   key: my-cache
@@ -21,12 +20,6 @@ variables:
   # Configure mysql service (https://hub.docker.com/_/mysql/)
   MYSQL_DATABASE: eventlist
   MYSQL_ROOT_PASSWORD: root
-
-connect:
-  stage: connect
-  image: mysql
-  script:
-    - echo "SELECT 'OK';" | mysql --user=root --password="root" --host=mysql "eventlist"
 
 
 test-job:
