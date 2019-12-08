@@ -1,6 +1,12 @@
 stages:
   - hello-world
   - test
+  - package
+
+cache:
+  key: my-cache
+  paths:
+    - .m2/repository/
 
 hello-world-job:
  image: alpine:latest
@@ -10,5 +16,15 @@ test-job:
   image: maven:3.6-jdk-11
   stage: test
   script:
-   - mvn clean tomcat:run
    - mvn test
+
+package-job:
+  image: maven:3.6-jdk-11
+  stage: package
+  script:
+    - mvn package -DskipTests
+  artifacts:
+    paths:
+    - target.*.jar
+    expire_in: 2 hour
+
