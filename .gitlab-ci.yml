@@ -7,7 +7,7 @@ hello-world-job:
  script: echo "Hello world"
 
 test-job:
-  image: maven:3.3-jdk-11
+  image: maven:3.6-jdk-11
   stage: test
   script:
    - mvn test
