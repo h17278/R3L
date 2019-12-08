@@ -10,6 +10,7 @@ cache:
 
 hello-world-job:
  image: alpine:latest
+ stage: hello-world
  script: echo "Hello world"
 
 test-job:
