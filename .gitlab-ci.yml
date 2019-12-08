@@ -1,5 +1,6 @@
 stages:
   - hello-world
+  - deploy
   - test
   - package
 
@@ -12,6 +13,13 @@ hello-world-job:
  image: alpine:latest
  stage: hello-world
  script: echo "Hello world"
+
+deploy_to_tomcat:
+  stage: deploy
+  script:
+    - sudo /opt/apache-tomcat-7.0.77-dbservice/bin/startup.sh &
+    - disown
+
 
 test-job:
   image: maven:3.6-jdk-11
