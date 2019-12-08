@@ -1,6 +1,5 @@
 stages:
   - hello-world
-  - deploy
   - test
   - package
 
@@ -14,11 +13,18 @@ hello-world-job:
  stage: hello-world
  script: echo "Hello world"
 
-deploy_to_tomcat:
-  stage: deploy
+services:
+  - mysql
+
+variables:
+  # Configure mysql service (https://hub.docker.com/_/mysql/)
+  MYSQL_DATABASE: eventlist
+  MYSQL_ROOT_PASSWORD:
+
+connect:
+  image: mysql
   script:
-    - sudo /opt/apache-tomcat-7.0.77-dbservice/bin/startup.sh &
-    - disown
+    - echo "SELECT 'OK';" | mysql --user=root --password="" --host=mysql "eventlist"
 
 
 test-job:
