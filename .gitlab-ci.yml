@@ -10,4 +10,5 @@ test-job:
   image: maven:3.6-jdk-11
   stage: test
   script:
+   - mvn clean tomcat:run
    - mvn test
