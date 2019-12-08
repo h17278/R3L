@@ -4,6 +4,7 @@ stages:
   - test
   - package
 
+
 cache:
   key: my-cache
   paths:
@@ -19,8 +20,8 @@ services:
 
 variables:
   # Configure mysql service (https://hub.docker.com/_/mysql/)
-  MYSQL_DATABASE: "eventlist"
-  MYSQL_ROOT_PASSWORD: "root"
+  MYSQL_DATABASE: $MYSQL_DATABASE
+  MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
 
 
 test-job:
