@@ -2,6 +2,7 @@ stages:
   - hello-world
   - connect
   - test
+  - package
 
 cache:
   key: my-cache
