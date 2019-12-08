@@ -19,12 +19,12 @@ services:
 variables:
   # Configure mysql service (https://hub.docker.com/_/mysql/)
   MYSQL_DATABASE: eventlist
-  MYSQL_ROOT_PASSWORD:
+  MYSQL_ROOT_PASSWORD: root
 
 connect:
   image: mysql
   script:
-    - echo "SELECT 'OK';" | mysql --user=root --password="" --host=mysql "eventlist"
+    - echo "SELECT 'OK';" | mysql --user=root --password="root" --host=mysql "eventlist"
 
 
 test-job:
