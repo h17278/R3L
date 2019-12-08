@@ -1,3 +1,13 @@
+stages:
+  - hello-world
+  - test
+
 hello-world-job:
  image: alpine:latest
  script: echo "Hello world"
+
+test-job:
+  image: maven:3.3-jdk-8
+  stage: test
+  script:
+    - mvn test
