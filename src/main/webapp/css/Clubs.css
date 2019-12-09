@@ -28,6 +28,7 @@ article figure {
     margin: 0.4em 0 0;
     padding: 0.4em;
     position: relative;
+    display: flex;
 }
 
 article figure form {
@@ -58,4 +59,8 @@ article h4 {
     position: absolute;
     top: -0.5em;
     right: 1em;
+}
+
+table {
+    text-align: center;
 }
