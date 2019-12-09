@@ -2,6 +2,7 @@ import hei.devweb.projetit.dao.ClubDao;
 import hei.devweb.projetit.dao.EventDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
+import hei.devweb.projetit.exception.ClubNotFoundException;
 import hei.devweb.projetit.exception.EventNotFoundException;
 import hei.devweb.projetit.service.EventService;
 import org.assertj.core.api.Assertions;
@@ -97,7 +98,7 @@ public class EventServiceTestCase {
     }
 
     @Test
-    public void shouldDeletetEvent(){ //TODO
+    public void shouldDeleteEvent(){
         //GIVEN
         Integer event_id = 4;
         //WHEN
@@ -122,6 +123,38 @@ public class EventServiceTestCase {
         eventService.updateEvent(null);
         //THEN
         fail("EventNotFoundException");
+    }
+
+    @Test(expected = EventNotFoundException.class)
+    public void shouldAddEventThrowEventNotFound() throws EventNotFoundException{
+        //GIVEN
+        Club club = new Club(1, "Saturne", "lien1");
+        Event event1 = new Event(null, "Afterwork Raid", club, LocalDate.of(2020, Month.FEBRUARY, 12), "BDS", "url4", "Afterwork à la garderie", "details4");
+        //WHEN
+        eventService.addEvent(null);
+        //THEN
+        fail("EventNotFoundException");
+    }
+
+    @Test(expected = EventNotFoundException.class)
+    public void shouldGetEventThrowEventNotFound() throws EventNotFoundException{
+        //GIVEN
+        Club club = new Club(1, "Saturne", "lien1");
+        Event event1 = new Event(null, "Afterwork Raid", club, LocalDate.of(2020, Month.FEBRUARY, 12), "BDS", "url4", "Afterwork à la garderie", "details4");
+        //WHEN
+        eventService.getEvent(null);
+        //THEN
+        fail("EventNotFoundException");
+    }
+
+    @Test(expected = ClubNotFoundException.class)
+    public void shouldGetClubThrowEventNotFound() throws ClubNotFoundException{
+        //GIVEN
+        Club club = new Club(null, "Saturne", "lien1");
+        //WHEN
+        eventService.getClub(null);
+        //THEN
+        fail("ClubNotFoundException");
     }
 
     @Test

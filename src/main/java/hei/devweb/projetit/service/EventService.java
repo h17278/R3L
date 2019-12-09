@@ -35,9 +35,6 @@ public class EventService {
     }
 
     public Event getEvent(Integer id) throws EventNotFoundException {
-        if(id==null){
-            throw new EventNotFoundException();
-        }
         if(eventDao.getEvent(id) == null){
             throw new EventNotFoundException();
         }
@@ -49,9 +46,6 @@ public class EventService {
     }
 
     public Club getClub(Integer id) throws ClubNotFoundException {
-        if(id==null){
-            throw new ClubNotFoundException();
-        }
         if(clubDao.getClub(id) == null){
             throw new ClubNotFoundException();
         }
@@ -67,9 +61,6 @@ public class EventService {
 
     public void deleteEvent(Integer eventID) throws EventNotFoundException{
         if(eventID==null){
-            throw new EventNotFoundException();
-        }
-        if(eventDao.getEvent(eventID) == null){
             throw new EventNotFoundException();
         }
         eventDao.deleteEvent(eventID);

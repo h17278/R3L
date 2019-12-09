@@ -1,12 +1,9 @@
 import hei.devweb.projetit.dao.UtilisateurDao;
-import hei.devweb.projetit.dao.impl.DataSourceProvider;
-import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.exception.PasswordDontMatchException;
 import hei.devweb.projetit.exception.PseudoAlreadyExistException;
 import hei.devweb.projetit.exception.UtilisateurNotFoundException;
 import hei.devweb.projetit.service.UserService;
-import jdk.jshell.execution.Util;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
