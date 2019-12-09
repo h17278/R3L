@@ -28,6 +28,7 @@ a {
 
 #newEvent div {
     background-color: transparent;
+    color: #aa9168;
 }
 
 input[type=text], select, input[type=number], input[type=date] {
