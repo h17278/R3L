@@ -1,6 +1,5 @@
 stages:
   - hello-world
-  - connect
   - test
   - package
 
