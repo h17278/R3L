@@ -127,9 +127,6 @@ public class EventServiceTestCase {
 
     @Test(expected = EventNotFoundException.class)
     public void shouldAddEventThrowEventNotFound() throws EventNotFoundException{
-        //GIVEN
-        Club club = new Club(1, "Saturne", "lien1");
-        Event event1 = new Event(null, "Afterwork Raid", club, LocalDate.of(2020, Month.FEBRUARY, 12), "BDS", "url4", "Afterwork à la garderie", "details4");
         //WHEN
         eventService.addEvent(null);
         //THEN
@@ -138,9 +135,6 @@ public class EventServiceTestCase {
 
     @Test(expected = EventNotFoundException.class)
     public void shouldGetEventThrowEventNotFound() throws EventNotFoundException{
-        //GIVEN
-        Club club = new Club(1, "Saturne", "lien1");
-        Event event1 = new Event(null, "Afterwork Raid", club, LocalDate.of(2020, Month.FEBRUARY, 12), "BDS", "url4", "Afterwork à la garderie", "details4");
         //WHEN
         eventService.getEvent(null);
         //THEN
@@ -149,8 +143,6 @@ public class EventServiceTestCase {
 
     @Test(expected = ClubNotFoundException.class)
     public void shouldGetClubThrowEventNotFound() throws ClubNotFoundException{
-        //GIVEN
-        Club club = new Club(null, "Saturne", "lien1");
         //WHEN
         eventService.getClub(null);
         //THEN
