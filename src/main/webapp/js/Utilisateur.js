@@ -71,7 +71,7 @@ let deleteUser = function (user) {
     console.log("pseudo de l utilisateur : " + userName);
     console.log("pseudo utilisateur à supprimer : " + user.pseudo);
     if(userName !== user.pseudo) {
-        if (confirm("Are you sure you want to delete " + user.pseudo + " ?")) {
+        if (confirm("Etes-vous sûr de supprimer " + user.pseudo + " ?")) {
             let deleteRequest = new XMLHttpRequest();
             deleteRequest.open("DELETE", "ws/users/" + user.idutilisateur, true);
 

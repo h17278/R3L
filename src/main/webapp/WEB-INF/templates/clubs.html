@@ -15,31 +15,31 @@
 <nav th:replace="~{fragments::menu('clubs')}"></nav>
 
 <div id="SearchBar">
-    <input type="search" id="searchEvent" onkeyup="searchEvent()" placeholder="Rechercher une association...">
+    <input type="search" id="searchEvent" onkeyup="searchClub()" placeholder="Rechercher une association...">
 </div>
 
 <main>
     <div id="left">
-        <article th:each="club, state : ${clubList}" th:if="${state.odd}">
+        <article th:each="club, state : ${clubList}" th:if="${state.odd}" th:id="'rank-'+${state.count}">
             <figure>
                 <img alt="image de l association" th:src="${club.lien}" width="150">
                 <figcaption>
                     <h1 class="titre_assos" th:text="${club.name}"></h1>
                     <table>
                         <tr>
-                            <th> Administrateurs :</th>
+                            <th>Administrateurs</th>
                         </tr>
-                        <tr th:each="admin : ${userList}"
+                        <tr th:each="admin,rank : ${userList}" th:id="'member-'+${state.count} + ${rank.count} +'0'"
                             th:if="${admin.getPresident() and admin.getClub() == club.id}">
                             <td th:text="${admin.getPseudo()}"></td>
                         </tr>
 
                         <tr>
-                            <th> Membres :</th>
+                            <th>Membres</th>
                         </tr>
-                        <tr th:each="admin : ${userList}"
-                            th:if="${!admin.getPresident() and admin.getClub() == club.id}">
-                            <td th:text="${admin.getPseudo()}"></td>
+                        <tr th:each="user, rank2 : ${userList}" th:id="'member-'+${state.count} + '0' + ${rank2.count}"
+                            th:if="${!user.getPresident() and user.getClub() == club.id}">
+                            <td th:text="${user.getPseudo()}"></td>
                         </tr>
                     </table>
                 </figcaption>
@@ -49,14 +49,14 @@
     </div>
 
     <div id="right">
-        <article th:each="club, stat : ${clubList}" th:if="${stat.even}">
+        <article th:each="club, stat : ${clubList}" th:if="${stat.even}" th:id="'rank-'+${stat.count}">
             <figure>
                 <img alt="image de l association" th:src="${club.lien}" width="150">
                 <figcaption>
                     <h1 class="titre_assos" th:text="${club.name}"></h1>
                     <table>
                         <tr>
-                            <th> Administrateurs :</th>
+                            <th>Administrateurs</th>
                         </tr>
                         <tr th:each="admin : ${userList}"
                             th:if="${admin.getPresident() and admin.getClub() == club.id}">
@@ -64,11 +64,11 @@
                         </tr>
 
                         <tr>
-                            <th> Membres :</th>
+                            <th>Membres</th>
                         </tr>
-                        <tr th:each="admin : ${userList}"
-                            th:if="${!admin.getPresident() and admin.getClub() == club.id}">
-                            <td th:text="${admin.getPseudo()}"></td>
+                        <tr th:each="user : ${userList}"
+                            th:if="${!user.getPresident() and user.getClub() == club.id}">
+                            <td th:text="${user.getPseudo()}"></td>
                         </tr>
                     </table>
                 </figcaption>

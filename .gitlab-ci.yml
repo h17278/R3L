@@ -3,7 +3,6 @@ stages:
   - test
   - package
 
-
 cache:
   key: my-cache
   paths:
@@ -13,14 +12,6 @@ hello-world-job:
  image: alpine:latest
  stage: hello-world
  script: echo "Hello world"
-
-services:
-  - mysql
-
-variables:
-  # Configure mysql service (https://hub.docker.com/_/mysql/)
-  MYSQL_DATABASE: $MYSQL_DATABASE
-  MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
 
 
 test-job:

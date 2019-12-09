@@ -35,6 +35,9 @@ public class UserService {
         if(userid == null){
             throw new IllegalArgumentException("Utilisateur  id est nul");
         }
+        if(utilisateurDao.getUtilisateur(userid) == null){
+            throw new UtilisateurNotFoundException();
+        }
         return utilisateurDao.getUtilisateur(userid);
     }
 
@@ -58,19 +61,23 @@ public class UserService {
     }
 
     public void deleteUser(Integer userId) throws UtilisateurNotFoundException {
-        if (utilisateurDao.getUtilisateur(userId) != null) {
-            utilisateurDao.deleteUtilisateur(userId);
-        }else{
+        if(userId == null){
+            throw new IllegalArgumentException("Utilisateur  id est nul");
+        }
+        if(utilisateurDao.getUtilisateur(userId) == null){
             throw new UtilisateurNotFoundException();
         }
+        utilisateurDao.deleteUtilisateur(userId);
     }
 
     public void updateUser(Integer id) throws UtilisateurNotFoundException{
-        if (utilisateurDao.getUtilisateur(id) != null) {
-            utilisateurDao.isPres(id);
-        }else{
+        if(id == null){
+            throw new IllegalArgumentException("Utilisateur  id est nul");
+        }
+        if(utilisateurDao.getUtilisateur(id) == null){
             throw new UtilisateurNotFoundException();
         }
+        utilisateurDao.isPres(id);
     }
 
     public void pseudoAlreadyExist(String pseudo) throws PseudoAlreadyExistException { utilisateurDao.pseudoAlreadyExist(pseudo);}
