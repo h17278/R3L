@@ -48,11 +48,11 @@ public class EventService {
         return clubDao.listClubs();
     }
 
-    public Club getClub(Integer id){
+    public Club getClub(Integer id) throws ClubNotFoundException {
         if(id==null){
             throw new ClubNotFoundException();
         }
-        if(eventDao.getEvent(id) == null){
+        if(clubDao.getClub(id) == null){
             throw new ClubNotFoundException();
         }
         return clubDao.getClub(id);
@@ -65,7 +65,7 @@ public class EventService {
         return eventDao.addEvent(event);
     }
 
-    public void deleteEvent(Integer eventID) {
+    public void deleteEvent(Integer eventID) throws EventNotFoundException{
         if(eventID==null){
             throw new EventNotFoundException();
         }
@@ -75,7 +75,7 @@ public class EventService {
         eventDao.deleteEvent(eventID);
     }
 
-    public Event updateEvent(Event event){
+    public Event updateEvent(Event event) throws EventNotFoundException{
         if(event ==null){
             throw new EventNotFoundException();
         }

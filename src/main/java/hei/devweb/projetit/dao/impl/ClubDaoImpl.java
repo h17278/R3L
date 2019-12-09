@@ -2,6 +2,7 @@ package hei.devweb.projetit.dao.impl;
 
 import hei.devweb.projetit.dao.ClubDao;
 import hei.devweb.projetit.entities.Club;
+import hei.devweb.projetit.exception.ClubNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +43,7 @@ public class ClubDaoImpl implements ClubDao {
 
 
     @Override
-    public Club getClub(Integer id) {
+    public Club getClub(Integer id) throws ClubNotFoundException {
         LOGGER.debug("method getClub called");
         String sqlQuery = "SELECT * FROM club WHERE club_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
