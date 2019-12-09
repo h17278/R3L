@@ -3,6 +3,7 @@ package hei.devweb.projetit.dao.impl;
 import hei.devweb.projetit.dao.EventDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
+import hei.devweb.projetit.exception.EventNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -119,7 +120,7 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public void deleteEvent(Integer id) {
+    public void deleteEvent(Integer id) throws EventNotFoundException {
         LOGGER.debug("method deleteEvent called");
         String sqlQuery = "DELETE FROM event WHERE event_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
@@ -137,7 +138,7 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public Event updateEvent(Event event) {
+    public Event updateEvent(Event event) throws EventNotFoundException{
         LOGGER.debug("method updateEvent called");
         String sqlQuery = "UPDATE event SET title = ? , event_date = ?, image_link = ?, resume = ?, details = ?  WHERE event_id=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {

@@ -34,16 +34,13 @@ public class UserServiceTestCase {
 
     @Test
     public void shouldGetUser() {
+        //GIVEN
+        Utilisateur user = new Utilisateur(1,"iktro","mdp","iktro@mail",true,3);
+        Mockito.when(userDaoMock.getUtilisateur(1)).thenReturn(user);
         // WHEN
-        Utilisateur utilisateur = userDao.getUtilisateur(1);
+        Utilisateur result = userService.getUser(1);
         // THEN
-        assertThat(utilisateur).isNotNull();
-        assertThat(utilisateur.getIdutilisateur()).isEqualTo(1);
-        assertThat(utilisateur.getPseudo()).isEqualTo("iktro");
-        assertThat(utilisateur.getMotdepasse()).isEqualTo("$argon2i$v=19$m=65536,t=5,p=1$4PX9TnEJf923OAmVQClDxJRJsz9pzk8d+L6NF26ZAELraQywpXHHJ9LMIVq5XI4ZbTNt9c2LcDU+B0L7+Yj81HApGXhuHgo0yOcVsidjxuG3rHYHi7Zi+x/59kilOmHUeHPNPqpd4UdxdqIhhlYcAeGSFiO3ENgYhIqyfT16kbY$uP4orIdOlXnKj2Wrn2Sacvp2MYw8puFhtIfeA0NS/ZO4DrB0DC1u8wGteaK9zzUEvLR0OfyYT9kewEshiqSfdhYpFHBxr5iIME1OF524gJXHD5rquYHdQ1/M5W8tINh55RyK+NPBA52PCjloWGGR24QSP4aViiVHucsWsgFU7HQ");
-        assertThat(utilisateur.getMail()).isEqualTo("iktro@gmail.com");
-        assertThat(utilisateur.getPresident()).isEqualTo(true);
-        assertThat(utilisateur.getClub()).isEqualTo(3);
+        Assertions.assertThat(result).isEqualTo(user);
     }
 
     @Test
