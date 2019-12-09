@@ -112,7 +112,7 @@ public class EventServiceTestCase {
         Integer event_id = null;
         //WHEN
         eventService.deleteEvent(event_id);
-        //THEN TODO
+        //THEN
         fail("EventNotFoundException");
     }
 
