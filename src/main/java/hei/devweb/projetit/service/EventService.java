@@ -9,6 +9,8 @@ import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
 import hei.devweb.projetit.entities.Utilisateur;
+import hei.devweb.projetit.exception.ClubNotFoundException;
+import hei.devweb.projetit.exception.EventNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -24,7 +26,6 @@ public class EventService {
     }
 
     private EventDao eventDao = new EventDaoImpl();
-    private UtilisateurDao utilisateurDao = new UtilisateurDaoImpl();
     private ClubDao clubDao = new ClubDaoImpl();
     public EventService() {
     }
@@ -33,7 +34,13 @@ public class EventService {
         return eventDao.listEvents();
     }
 
-    public Event getEvent(Integer id) {
+    public Event getEvent(Integer id) throws EventNotFoundException {
+        if(id==null){
+            throw new EventNotFoundException();
+        }
+        if(eventDao.getEvent(id) == null){
+            throw new EventNotFoundException();
+        }
         return eventDao.getEvent(id);
     }
 
@@ -42,12 +49,36 @@ public class EventService {
     }
 
     public Club getClub(Integer id){
+        if(id==null){
+            throw new ClubNotFoundException();
+        }
+        if(eventDao.getEvent(id) == null){
+            throw new ClubNotFoundException();
+        }
         return clubDao.getClub(id);
     }
 
-    public Event addEvent(Event event) {return eventDao.addEvent(event); }
+    public Event addEvent(Event event) throws EventNotFoundException {
+        if(event == null){
+            throw new EventNotFoundException();
+        }
+        return eventDao.addEvent(event);
+    }
 
-    public void deleteEvent(Integer eventID) { eventDao.deleteEvent(eventID);}
+    public void deleteEvent(Integer eventID) {
+        if(eventID==null){
+            throw new EventNotFoundException();
+        }
+        if(eventDao.getEvent(eventID) == null){
+            throw new EventNotFoundException();
+        }
+        eventDao.deleteEvent(eventID);
+    }
 
-    public Event updateEvent(Event event){ return eventDao.updateEvent(event);}
+    public Event updateEvent(Event event){
+        if(event ==null){
+            throw new EventNotFoundException();
+        }
+        return eventDao.updateEvent(event);
+    }
 }

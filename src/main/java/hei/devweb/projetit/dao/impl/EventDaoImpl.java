@@ -3,7 +3,6 @@ package hei.devweb.projetit.dao.impl;
 import hei.devweb.projetit.dao.EventDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
-import hei.devweb.projetit.exception.EventNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -80,8 +79,6 @@ public class EventDaoImpl implements EventDao {
                         return event;
                     }
                 }
-            } catch(EventNotFoundException EventNF){
-                EventNF.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,10 +130,7 @@ public class EventDaoImpl implements EventDao {
 
                 statement.executeUpdate();
 
-            } catch(EventNotFoundException EventNF){
-                EventNF.printStackTrace();
             }
-
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -157,8 +151,6 @@ public class EventDaoImpl implements EventDao {
                 LOGGER.info("Updating from data base event: title=" + event.getTitle() + " | club=" + event.getClub().getName() + " | event_date=" + event.getEventDate() + " | bureau=" + event.getBureau() + " | resume=" + event.getResume() + " | details=" + event.getDetails() + " | image_link=" + event.getImage_link());
 
                 statement.executeUpdate();
-            } catch(EventNotFoundException EventNF){
-                EventNF.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();

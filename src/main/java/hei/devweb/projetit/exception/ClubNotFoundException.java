@@ -8,6 +8,6 @@ public class ClubNotFoundException extends RuntimeException {
 
     @Override
     public void printStackTrace() {
-        LOGGER.error("EventNotFoundException");
+        LOGGER.error("ClubNotFoundException");
     }
 }
