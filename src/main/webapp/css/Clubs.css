@@ -43,10 +43,10 @@ article figure img {
 }
 
 article figure figcaption {
-    text-align: left;
+    text-align: center;
     text-decoration: none;
     position: relative;
-    margin-left: 1em;
+    margin: auto;
     color: #aa9168;
 }
 
@@ -63,4 +63,5 @@ article h4 {
 
 table {
     text-align: center;
+    margin: auto;
 }
