@@ -17,6 +17,8 @@ import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
+import static junit.framework.TestCase.fail;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class EventServiceTestCase {
@@ -105,15 +107,23 @@ public class EventServiceTestCase {
     }
 
     @Test(expected = EventNotFoundException.class)
-    public void shouldUpdateEvent() throws EventNotFoundException{
+    public void shouldUpdateEventThrowEventNotFount() throws EventNotFoundException{
+        //WHEN
+        eventService.updateEvent(null);
+        //THEN
+        fail("EventNotFoundException");
+    }
+
+    @Test
+    public void shouldUpdateEvent() {
         //GIVEN
         Club club = new Club(1, "Saturne", "lien1");
         Event event = new Event(null, "Afterwork Raid", club, LocalDate.of(2020, Month.FEBRUARY, 12), "BDS", "url4", "Afterwork à la garderie", "details4");
+        Mockito.when(eventDaoMock.updateEvent(event)).thenReturn(event);
         //WHEN
-        eventService.updateEvent(event);
+        Event eventModif = eventService.updateEvent(event);
         //THEN
-        Mockito.verify(eventDaoMock, Mockito.times(1)).updateEvent(event);
+        Assertions.assertThat(eventModif).isEqualTo(event);
     }
-
 
 }
