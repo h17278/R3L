@@ -6,6 +6,7 @@ import hei.devweb.projetit.exception.PasswordDontMatchException;
 import hei.devweb.projetit.exception.PseudoAlreadyExistException;
 import hei.devweb.projetit.exception.UtilisateurNotFoundException;
 import hei.devweb.projetit.service.UserService;
+import jdk.jshell.execution.Util;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,13 +18,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTestCase {
-
-    private UtilisateurDao userDao = new UtilisateurDaoImpl();
 
     @Mock
     private UtilisateurDao userDaoMock;
@@ -41,6 +39,27 @@ public class UserServiceTestCase {
         Utilisateur result = userService.getUser(1);
         // THEN
         Assertions.assertThat(result).isEqualTo(user);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldGetUserThrowIllegal(){
+        //GIVEN
+        Integer id = null;
+        //WHEN
+        userService.getUser(id);
+        //THEN
+        fail("IllegalArgumentException");
+    }
+
+    @Test(expected = UtilisateurNotFoundException.class)
+    public void shouldGetUserThrowUtilisateurNotFound(){
+        //GIVEN
+        Integer id = 1;
+        Mockito.when(userDaoMock.getUtilisateur(id)).thenReturn(null);
+        //WHEN
+        userService.getUser(id);
+        //THEN
+        fail("UtilisateurNotFoundException");
     }
 
     @Test
@@ -65,14 +84,15 @@ public class UserServiceTestCase {
         Assertions.assertThat(userCreated).isEqualTo(userToCreate);
     }
 
-    @Test(expected = UtilisateurNotFoundException.class)
-    public void shouldDeleteUser()throws UtilisateurNotFoundException{
+    @Test
+    public void shouldDeleteUser()throws UtilisateurNotFoundException{ //TODO
         //GIVEN
         Integer userid = 4;
         //WHEN
         userService.deleteUser(userid);
         //THEN
         Mockito.verify(userDaoMock,Mockito.times(1)).deleteUtilisateur(userid);
+
     }
 
     @Test(expected = UtilisateurNotFoundException.class)
@@ -85,8 +105,8 @@ public class UserServiceTestCase {
         fail("UtilisateurNotFoundException");
     }
 
-    @Test(expected = UtilisateurNotFoundException.class)
-    public void shouldUdpateUtilisateur() throws UtilisateurNotFoundException{
+    @Test
+    public void shouldUdpateUtilisateur() throws UtilisateurNotFoundException{ //TODO
         //GIVEN
         Integer userid = 5;
         //WHEN
@@ -123,13 +143,11 @@ public class UserServiceTestCase {
         //WHEN
         userService.pseudoAlreadyExist(pseudo);
         //THEN
-        fail("PasswordDontMatchException");
-        //THEN
         fail("PseudoAlreadyExistException");
     }
 
     @Test
-    public void shouldPasswordMatch(){
+    public void shouldPasswordMatch(){ //TODO
         //GIVEN
         String pw1 = "password1";
         String pw2 = "password2";
@@ -153,7 +171,7 @@ public class UserServiceTestCase {
 
 
     @Test
-    public void shouldSetPassword(){
+    public void shouldSetPassword(){ //TODO
         //GIVEN
         String pseudo = "Gautier";
         String newPassword = "viveLeRaid";

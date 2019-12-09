@@ -96,14 +96,24 @@ public class EventServiceTestCase {
         Assertions.assertThat(result).isEqualTo(event1);
     }
 
-    @Test(expected = EventNotFoundException.class)
-    public void shouldDeleteEvent() throws EventNotFoundException{
+    @Test
+    public void shouldDeletetEvent(){ //TODO
         //GIVEN
         Integer event_id = 4;
         //WHEN
         eventService.deleteEvent(event_id);
         //THEN
         Mockito.verify(eventDaoMock, Mockito.times(1)).deleteEvent(event_id);
+    }
+
+    @Test(expected = EventNotFoundException.class)
+    public void shouldDeleteEventThrowEventNotFoundException() throws EventNotFoundException{
+        //GIVEN
+        Integer event_id = null;
+        //WHEN
+        eventService.deleteEvent(event_id);
+        //THEN TODO
+        fail("EventNotFoundException");
     }
 
     @Test(expected = EventNotFoundException.class)

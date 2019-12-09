@@ -29,7 +29,9 @@ public class UserService {
         return utilisateurDao.listUtilisateur();
     }
 
-    public void setPassword(String pseudo, String newPassword) { utilisateurDao.setPassword(pseudo, newPassword); }
+    public void setPassword(String pseudo, String newPassword) throws PseudoAlreadyExistException{
+        utilisateurDao.setPassword(pseudo, newPassword);
+    }
 
     public Utilisateur getUser(Integer userid){
         if(userid == null){
