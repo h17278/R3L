@@ -29,7 +29,9 @@ public class UserService {
         return utilisateurDao.listUtilisateur();
     }
 
-    public void setPassword(String pseudo, String newPassword) { utilisateurDao.setPassword(pseudo, newPassword); }
+    public void setPassword(String pseudo, String newPassword) throws PseudoAlreadyExistException{
+        utilisateurDao.setPassword(pseudo, newPassword);
+    }
 
     public Utilisateur getUser(Integer userid){
         if(userid == null){
@@ -42,29 +44,15 @@ public class UserService {
     }
 
 
-    public Utilisateur addUtilisateur(Utilisateur utilisateur){
+    public Utilisateur addUtilisateur(Utilisateur utilisateur) throws UtilisateurNotFoundException{
         if(utilisateur == null){
-            throw new IllegalArgumentException("Pas d'utilisateurs");
+            throw new UtilisateurNotFoundException();
         }
-        if (utilisateur.getPseudo() == null || "".equals(utilisateur.getPseudo())) {
-            throw new IllegalArgumentException("Pseudo utilisateur null.");
-        }
-        if (utilisateur.getMail() == null || "".equals(utilisateur.getMail())) {
-            throw new IllegalArgumentException("Mail utilisateur null.");
-        }
-        if (utilisateur.getMotdepasse() == null || "".equals(utilisateur.getMotdepasse())) {
-            throw new IllegalArgumentException("Mot de passe utilisateur null.");
-        }
-
         return utilisateurDao.addUtilisateur(utilisateur);
-
     }
 
     public void deleteUser(Integer userId) throws UtilisateurNotFoundException {
         if(userId == null){
-            throw new IllegalArgumentException("Utilisateur  id est nul");
-        }
-        if(utilisateurDao.getUtilisateur(userId) == null){
             throw new UtilisateurNotFoundException();
         }
         utilisateurDao.deleteUtilisateur(userId);
@@ -72,9 +60,6 @@ public class UserService {
 
     public void updateUser(Integer id) throws UtilisateurNotFoundException{
         if(id == null){
-            throw new IllegalArgumentException("Utilisateur  id est nul");
-        }
-        if(utilisateurDao.getUtilisateur(id) == null){
             throw new UtilisateurNotFoundException();
         }
         utilisateurDao.isPres(id);

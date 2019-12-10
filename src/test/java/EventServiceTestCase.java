@@ -2,6 +2,7 @@ import hei.devweb.projetit.dao.ClubDao;
 import hei.devweb.projetit.dao.EventDao;
 import hei.devweb.projetit.entities.Club;
 import hei.devweb.projetit.entities.Event;
+import hei.devweb.projetit.exception.ClubNotFoundException;
 import hei.devweb.projetit.exception.EventNotFoundException;
 import hei.devweb.projetit.service.EventService;
 import org.assertj.core.api.Assertions;
@@ -96,8 +97,8 @@ public class EventServiceTestCase {
         Assertions.assertThat(result).isEqualTo(event1);
     }
 
-    @Test(expected = EventNotFoundException.class)
-    public void shouldDeleteEvent() throws EventNotFoundException{
+    @Test
+    public void shouldDeleteEvent(){
         //GIVEN
         Integer event_id = 4;
         //WHEN
@@ -107,11 +108,45 @@ public class EventServiceTestCase {
     }
 
     @Test(expected = EventNotFoundException.class)
+    public void shouldDeleteEventThrowEventNotFoundException() throws EventNotFoundException{
+        //GIVEN
+        Integer event_id = null;
+        //WHEN
+        eventService.deleteEvent(event_id);
+        //THEN
+        fail("EventNotFoundException");
+    }
+
+    @Test(expected = EventNotFoundException.class)
     public void shouldUpdateEventThrowEventNotFount() throws EventNotFoundException{
         //WHEN
         eventService.updateEvent(null);
         //THEN
         fail("EventNotFoundException");
+    }
+
+    @Test(expected = EventNotFoundException.class)
+    public void shouldAddEventThrowEventNotFound() throws EventNotFoundException{
+        //WHEN
+        eventService.addEvent(null);
+        //THEN
+        fail("EventNotFoundException");
+    }
+
+    @Test(expected = EventNotFoundException.class)
+    public void shouldGetEventThrowEventNotFound() throws EventNotFoundException{
+        //WHEN
+        eventService.getEvent(null);
+        //THEN
+        fail("EventNotFoundException");
+    }
+
+    @Test(expected = ClubNotFoundException.class)
+    public void shouldGetClubThrowEventNotFound() throws ClubNotFoundException{
+        //WHEN
+        eventService.getClub(null);
+        //THEN
+        fail("ClubNotFoundException");
     }
 
     @Test

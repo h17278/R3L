@@ -1,6 +1,4 @@
 import hei.devweb.projetit.dao.UtilisateurDao;
-import hei.devweb.projetit.dao.impl.DataSourceProvider;
-import hei.devweb.projetit.dao.impl.UtilisateurDaoImpl;
 import hei.devweb.projetit.entities.Utilisateur;
 import hei.devweb.projetit.exception.PasswordDontMatchException;
 import hei.devweb.projetit.exception.PseudoAlreadyExistException;
@@ -17,20 +15,16 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTestCase {
-
-    private UtilisateurDao userDao = new UtilisateurDaoImpl();
 
     @Mock
     private UtilisateurDao userDaoMock;
 
     @InjectMocks
     private UserService userService;
-
 
     @Test
     public void shouldGetUser() {
@@ -41,6 +35,27 @@ public class UserServiceTestCase {
         Utilisateur result = userService.getUser(1);
         // THEN
         Assertions.assertThat(result).isEqualTo(user);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldGetUserThrowIllegal(){
+        //GIVEN
+        Integer id = null;
+        //WHEN
+        userService.getUser(id);
+        //THEN
+        fail("IllegalArgumentException");
+    }
+
+    @Test(expected = UtilisateurNotFoundException.class)
+    public void shouldGetUserThrowUtilisateurNotFound(){
+        //GIVEN
+        Integer id = 1;
+        Mockito.when(userDaoMock.getUtilisateur(id)).thenReturn(null);
+        //WHEN
+        userService.getUser(id);
+        //THEN
+        fail("UtilisateurNotFoundException");
     }
 
     @Test
@@ -55,7 +70,7 @@ public class UserServiceTestCase {
     }
 
     @Test
-    public void shouldAddUser() throws Exception {
+    public void shouldAddUser() {
         //GIVEN
         Utilisateur userToCreate = new Utilisateur(null,"pseudo_test","mdp_test","mail@mail.com",true,1);
         Mockito.when(userDaoMock.addUtilisateur(userToCreate)).thenReturn(userToCreate);
@@ -65,48 +80,49 @@ public class UserServiceTestCase {
         Assertions.assertThat(userCreated).isEqualTo(userToCreate);
     }
 
-    @Test(expected = UtilisateurNotFoundException.class)
-    public void shouldDeleteUser()throws UtilisateurNotFoundException{
+    @Test
+    public void shouldDeleteUser() {
         //GIVEN
-        Integer userid = 4;
+        Integer user_id = 4;
         //WHEN
-        userService.deleteUser(userid);
+        userService.deleteUser(user_id);
         //THEN
-        Mockito.verify(userDaoMock,Mockito.times(1)).deleteUtilisateur(userid);
+        Mockito.verify(userDaoMock,Mockito.times(1)).deleteUtilisateur(user_id);
+
     }
 
     @Test(expected = UtilisateurNotFoundException.class)
     public void shouldDeleteUserNotFoundException() throws UtilisateurNotFoundException{
         //GIVEN
-        Integer userid = 4;
+        Integer user_id = null;
         //WHEN
-        userService.deleteUser(userid);
-        //THEN
-        fail("UtilisateurNotFoundException");
-    }
-
-    @Test(expected = UtilisateurNotFoundException.class)
-    public void shouldUdpateUtilisateur() throws UtilisateurNotFoundException{
-        //GIVEN
-        Integer userid = 5;
-        //WHEN
-        userService.updateUser(userid);
-        //THEN
-        Mockito.verify(userDaoMock,Mockito.times(1)).isPres(userid);
-    }
-
-    @Test(expected = UtilisateurNotFoundException.class)
-    public void shouldUpdateUserNotFoundException() throws UtilisateurNotFoundException{
-        //GIVEN
-        Integer userid = 5;
-        //WHEN
-        userService.updateUser(userid);
+        userService.deleteUser(user_id);
         //THEN
         fail("UtilisateurNotFoundException");
     }
 
     @Test
-    public void shouldPseudoAlreadyExists(){ //TODO
+    public void shouldUdpateUtilisateur() {
+        //GIVEN
+        Integer user_id = 5;
+        //WHEN
+        userService.updateUser(user_id);
+        //THEN
+        Mockito.verify(userDaoMock,Mockito.times(1)).isPres(user_id);
+    }
+
+    @Test(expected = UtilisateurNotFoundException.class)
+    public void shouldUpdateUserNotFoundException() throws UtilisateurNotFoundException{
+        //GIVEN
+        Integer user_id = null;
+        //WHEN
+        userService.updateUser(user_id);
+        //THEN
+        fail("UtilisateurNotFoundException");
+    }
+
+    @Test
+    public void shouldPseudoAlreadyExists(){
         //GIVEN
         String pseudo = "Victor";
         //WHEN
@@ -123,8 +139,6 @@ public class UserServiceTestCase {
         //WHEN
         userService.pseudoAlreadyExist(pseudo);
         //THEN
-        fail("PasswordDontMatchException");
-        //THEN
         fail("PseudoAlreadyExistException");
     }
 
@@ -132,7 +146,7 @@ public class UserServiceTestCase {
     public void shouldPasswordMatch(){
         //GIVEN
         String pw1 = "password1";
-        String pw2 = "password2";
+        String pw2 = "password1";
         //WHEN
         userService.passwordMatch(pw1,pw2);
         //THEN
@@ -140,7 +154,7 @@ public class UserServiceTestCase {
     }
 
     @Test(expected = PasswordDontMatchException.class)
-    public void shouldPasswordMatchException() throws PasswordDontMatchException { //TODO
+    public void shouldPasswordDontMatchException() throws PasswordDontMatchException {
         //GIVEN
         String pw1 = "password1";
         String pw2 = "password2";

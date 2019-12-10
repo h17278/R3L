@@ -114,7 +114,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
     @Override
     public void setPassword(String pseudo, String newPassword) {
-        LOGGER.debug("method setUtilisateur called");
+        LOGGER.debug("method setPassword called");
         String sqlQuery = "UPDATE utilisateur SET motdepasse = ? WHERE pseudo = ?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
@@ -123,8 +123,6 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
                 LOGGER.info("Modifying password of user pseudo=" + pseudo);
 
                 statement.executeUpdate();
-            } catch (UtilisateurNotFoundException UtilNotFound){
-                UtilNotFound.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
