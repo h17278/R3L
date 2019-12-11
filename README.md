@@ -6,8 +6,8 @@
 Un pour lister les associations et l'autre pour lister les événements.</p>
 <p> On peut cliquer sur "plus d'infos" sur chacun des événements si on est connecté.</p>
 
-<p> On peut aussi se connecter avec un bouton en haut à droite qui change en déconnexion si une session est déjà ouverte</p>
-<p> Si l'utilisateur connecté est président d'une association, il aura accès à l'onglet Ajout d'événement et gestion utilisateur</p>
+<p> On peut aussi se connecter avec un bouton en haut à droite qui change en déconnexion si une session est déjà ouverte.</p>
+<p> Si l'utilisateur connecté est président d'une association, il aura accès à l'onglet Ajout d'événement et gestion utilisateur.</p>
 
 <h2> Accès président </h2>
 
@@ -15,7 +15,7 @@ Un pour lister les associations et l'autre pour lister les événements.</p>
 
 <br>
 
-<p> Un président peut ajouter une événement de son association seulement. Il peut accéder facilement à la suppression et à la modification des événements de son association. Les autres présidents peuvent y accéder en tapant le bon URL.</p>
+<p> Un président peut ajouter un événement de son association seulement. Il peut accéder facilement à la suppression et à la modification des événements de son association. Les autres présidents peuvent y accéder en tapant le bon URL.</p>
 
 <p> La gestion utilisateurs est un onglet des présidents. Il sert à modifier les accès des autres utilisateurs (président ou non) et à supprimer tous les utilisateurs sauf soi-même. </p>
 
@@ -34,7 +34,7 @@ Un pour lister les associations et l'autre pour lister les événements.</p>
     <li>polo est membre de Athle Hei</li>
     <li>samos est membre du Raid</li>
 </ul>
-<p> D'autres membres peuvent être créé dans l'onglet utilisateur, ils peuvent être créé avec ou sans autorisation pour les présidents</p>
+<p> D'autres membres peuvent être créés dans l'onglet utilisateur, ils peuvent être créés avec ou sans autorisation pour les présidents</p>
 
 <p> Pour la base de données, il suffit de lancer creationTables puis populateTables dans une base de données nommé eventlist </p>
 
