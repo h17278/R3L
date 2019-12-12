@@ -1,7 +1,3 @@
-DROP TABLE `event`;
-DROP TABLE `utilisateur`;
-DROP TABLE `club`;
-
 CREATE TABLE `club` (
   `club_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
