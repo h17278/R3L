@@ -54,6 +54,12 @@ article p {
 .bouton {
     position: unset;
     margin-right: 1em;
+    background: url("../img/line.png");
+    background-size: cover;
+    background-position-y: 12px;
+    margin-bottom: 1em;
+    padding-bottom: 3em;
+    width: 162px;
 }
 
 section div {
