@@ -1,6 +1,6 @@
 <h2>Bienvenue sur HEIvents</h2>
 
-<h2> Le but de ce site est de lister de manière lisible et pratique les futurs événement des associations HEI </h2>
+<h2> Le but de ce site est de lister de manière lisible et pratique les futurs événements des associations HEI </h2>
 
 <p> A l'ouverture du Tomcat, il y a deux onglets. 
 Un pour lister les associations et l'autre pour lister les événements.</p>
