@@ -88,13 +88,21 @@ let deleteUser = function (user) {
 };
 
 let updateUser = function (user) {
-    let saveRequest = new XMLHttpRequest();
-    saveRequest.open("PATCH", "ws/users/" + user.idutilisateur, true);
+    let userName = document.getElementById("userName").innerText;
+    console.log("pseudo de l utilisateur : " + userName);
+    console.log("pseudo utilisateur à update : " + user.pseudo);
+    if(userName !== user.pseudo) {
+        let saveRequest = new XMLHttpRequest();
+        saveRequest.open("PATCH", "ws/users/" + user.idutilisateur, true);
 
-    saveRequest.onload = function () {
-        listUsers();
-    };
-    saveRequest.send();
+        saveRequest.onload = function () {
+            listUsers();
+        };
+        saveRequest.send();
+    }
+    else{
+        alert("Vous ne pouvez pas modifier vos droits, demandez à un autre président");
+    }
 };
 
 let listClubs = function () {
