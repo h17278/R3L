@@ -33,7 +33,7 @@ a {
     color: #aa9168;
 }
 
-input[type=text], select, input[type=number], input[type=date] {
+input[type=text], select, input[type=number], input[type=date], input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin-top: 1px;
