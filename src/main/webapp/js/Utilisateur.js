@@ -83,7 +83,7 @@ let deleteUser = function (user) {
         }
     }
     else{
-        alert("Vous ne pouvez pas supprimer vous supprimer");
+        alert("Vous ne pouvez pas vous supprimer");
     }
 };
 
